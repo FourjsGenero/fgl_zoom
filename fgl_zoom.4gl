@@ -1306,6 +1306,8 @@ DEFINE l_event STRING
                         END IF
                         LET m_mode = "accept"
                         EXIT WHILE
+                    WHEN "AFTER ROW"
+                        -- do nothing
                     OTHERWISE   
                         DISPLAY "Event not handled ", l_event
                 END CASE
@@ -1578,6 +1580,8 @@ DEFINE grw om.saxDocumentHandler
 DEFINE i INTEGER
 
     #TODO check this now generic fields in use
+    CALL FGL_WINMESSAGE("Info","Not implemented yet","stop")
+    RETURN
  
    IF fgl_report_loadCurrentSettings("") THEN
       CALL fgl_report_setCallbackLocalization(TRUE)
@@ -1620,6 +1624,7 @@ FUNCTION report_getFieldCaption(matchName,fieldName)
 DEFINE matchName, fieldName STRING
 
    CASE 
+    -- TODO this code is wrong now I'm using dynamic dialog
       WHEN fieldName MATCHES "*field1*" RETURN m_zoom.column[1].title
       WHEN fieldName MATCHES "*field2*" RETURN m_zoom.column[2].title
       WHEN fieldName MATCHES "*field3*" RETURN m_zoom.column[3].title
