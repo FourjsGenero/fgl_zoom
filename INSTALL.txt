@@ -1,0 +1,21 @@
+To incorporate fgl_zoom into your own application.
+
+Place fgl_zoom.42m, fgl_zoom.42s where they will be
+found by FGLLDPATH, FGLRESOURCEPATH, DBPATH as used by your application.
+
+Merge the contents of fgl_zoom_test.4st into your applications own style file.
+You may wish to amend the styles used in fgl_zoom_test.4st so that it matches 
+your own applications look and feel.
+
+Merge the contents of fgl_zoom.str into your own string localization mechanism.
+You could do as the test program does and simple add fgl_zoom.42s to the list of
+specified files by the fglrun.localization.file settings in FGLPROFILE
+
+Refer to fgl_zoom_example.4gl for examples of intended structure
+
+Refer to fgl_zoom_sample.4gl for ideas on what each option can be used for.
+Also refer to documentation in fgl_zoom.4gl for details on each options and
+methods available.
+
+Refer to fgl_zoom_custom.4gl for a sandbox where you can try other various
+options with your data.

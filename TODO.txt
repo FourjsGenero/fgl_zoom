@@ -1,0 +1,45 @@
+TODO 
+
+Test against SQLLite database shipped with Studio
+
+Add comments to fgl_zoom.4gl so that docgen generates the necessary docs
+
+Training Video
+
+Add initialisation routine so that images can be customized rather than coded
+into form etc.
+
+Test against other databases, in particular dates etc
+
+Add an option that allows use of ON FILL BUFFER
+
+Add a wizard for use with the QBE
+
+Add an option that automatically selects all rows to begin with
+
+Add an option that allows use of coverFlow
+
+Allow columns to be other WIDGETS e.g. CHECKBOX, RADIOBUTTON, COMBOBOX, IMAGE
+
+Add an options that allows a QBE default and the user can't edit that default e.g. username=their name
+
+Add ability to execute a command based on the selected row e.g. maint program, drilldown.  Pass selected row as argument
+
+Allow QBE parameters to be saved/restored/reused etc.
+
+Add ability to re-use functionality to return TRUE/FALSE if value entered is in the QBE
+
+Add ability to re-use functionality to get description label (actually its there show in examples how to do)
+
+Add ability to use for COMBOBOX
+
+Add option to run from XML configuration file
+
+Add option to read configuration from database table(s)
+
+See if this technique allows to copy entire table in Web Env
+function copyToClipboard (text) {
+  window.prompt ("Copy to clipboard: Ctrl+C, Enter", text);
+}
+
+Any other suggestions, please send to rb@4js.com

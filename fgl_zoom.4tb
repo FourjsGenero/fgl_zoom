@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ANSI_X3.4-1968"?>
+
+ <ToolBar name="toolbar1" buttonTextHidden="1">
+    <ToolBarItem name="qbe"/>
+    <ToolBarItem name="list"/>
+    <ToolBarSeparator name="toolbarseparator1"/>
+    <ToolBarItem name="copy"/>
+    <ToolBarItem name="copyall"/>
+    <ToolBarSeparator name="toolbarseparator2"/>
+    <ToolBarItem name="selectnone"/>
+    <ToolBarItem name="selectall"/>
+    <ToolBarSeparator name="toolbarseparator2"/>
+    <ToolBarItem name="find"/>
+    <ToolBarItem name="print" image="fa-print"/>
+  </ToolBar>

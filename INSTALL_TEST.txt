@@ -1,0 +1,59 @@
+Using Genero Studio
+-------------------
+
+Open the .4pw file
+
+Rebuild fgl_zoom project
+Rebuild fgl_zoom_test project
+Execute fgl_zoom_test application
+
+
+
+Using command line
+------------------
+
+Extract from the .zip file
+
+(If you are more comfortable with .per than .4fd then
+cp fgl_zoom_test_orig.per fgl_zoom_test.per
+and use .per instead of .4fd in the fglform statements below)
+
+fglcomp fgl_zoom.4gl
+
+fglmkstr fgl_zoom.str
+
+fglcomp fgl_zoom_custom.4gl
+fglcomp fgl_zoom_example.4gl
+fglcomp fgl_zoom_sample.4gl
+fglcomp fgl_zoom_testdata.4gl
+
+fglcomp fgl_zoom_test.4gl
+fglform fgl_zoom_test.4fd
+
+export FGLPROFILE=fgl_zoom_test.prf  (Unix/Mac)
+
+fglrun fgl_zoom_test
+
+
+
+Run the test
+------------
+
+On the sample tab, click each of the BUTTONEDIT icons and observe the zoom 
+window that appears.  This tab illustrates some expected real-time usage
+of fgl_zoom
+
+On the example tab, click each of the BUTTONEDIT icons and observe the zoom 
+window that appears.  Each BUTTONEDIT illustrates one different parameter
+associated with fgl_zoom
+
+On the custom tab, click the Execute button and observe the zoom window that
+appears.  Change any of the parameters and again click the execute button.
+Click the clear button to clear the default parameters and enter your own,
+click the restore button to restore the default parameters.  Using this tab
+the user can do trial and error with their own data.
+
+
+
+
+

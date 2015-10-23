@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ANSI_X3.4-1968"?>
+  <ActionDefaultList>
+    <ActionDefault name="copy" text="fgl_zoom.action.copy.text" image="fa-copy" comment="fgl_zoom.action.copy.comment" acceleratorName="control-c">
+      <LStr text="fgl_zoom.action.copy.text" comment="fgl_zoom.action.copy.comment"/>
+    </ActionDefault>
+    <ActionDefault name="copyall" text="fgl_zoom.action.copyall.text" image="fa-database" comment="fgl_zoom.action.copyall.comment" acceleratorName="control-shift-c" defaultView="auto">
+      <LStr text="fgl_zoom.action.copyall.text" comment="fgl_zoom.action.copyall.comment"/>
+    </ActionDefault>
+    <ActionDefault name="find" text="fgl_zoom.action.find.text" image="fa-search" comment="fgl_zoom.action.find.comment" acceleratorName="control-f">
+      <LStr text="fgl_zoom.action.find.text" comment="fgl_zoom.action.find.comment"/>
+    </ActionDefault>
+    <ActionDefault name="list" text="fgl_zoom.action.list.text" image="fa-table" comment="fgl_zoom.action.list.comment" acceleratorName="control-l">
+      <LStr text="fgl_zoom.action.list.text" comment="fgl_zoom.action.list.comment"/>
+    </ActionDefault>
+    <ActionDefault name="qbe" text="fgl_zoom.action.qbe.text" image="fa-question" comment="fgl_zoom.action.qbe.comment" acceleratorName="control-q">
+      <LStr text="fgl_zoom.action.qbe.text" comment="fgl_zoom.action.qbe.comment"/>
+    </ActionDefault>
+    <ActionDefault name="selectnone" text="fgl_zoom.action.selectnone.text" image="fa-minus" comment="fgl_zoom.action.selectnone.comment" acceleratorName="control-shift-a">
+      <LStr text="fgl_zoom.action.selectnone.text" comment="fgl_zoom.action.selectnone.comment"/>
+    </ActionDefault>
+    <ActionDefault name="selectall" text="fgl_zoom.action.selectall.text" image="fa-plus" comment="fgl_zoom.action.selectall.comment" acceleratorName="control-a">
+      <LStr text="fgl_zoom.action.selectall.text" comment="fgl_zoom.action.selectall.comment"/>
+    </ActionDefault>
+
+    <ActionDefault name="accept" defaultView="yes">
+    </ActionDefault>
+    <ActionDefault name="cancel" defaultView="yes">
+    </ActionDefault>
+  </ActionDefaultList>

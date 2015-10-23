@@ -1,0 +1,107 @@
+LAYOUT
+GRID 
+{
+ <G group1                                           >
+  [label18   ][defau]     [label19   ][qbede]
+  [label20   ][strai]     [label21   ][noqbe]
+  [label22   ][autos]     [label23   ][auto1]
+  [label24   ][maxro]
+  [label25   ][choosecolumn                 ]
+  [label34   ][qbefo]     [label35   ][qbef1]
+ <                                                   >
+ <G group2                                           >
+  [label26   ][exclu]     [label27   ][excl1]
+ <                                                   >
+ <G group3                                           >
+  [label28   ][twoco][twocolumn2         ][two]
+ <                                                   >
+ <G group4                                           >
+  [label29   ] [nolist                       ] [mai]
+               [                             ]
+               [                             ]
+  [label30   ] [qb1                          ] [ma1]
+               [                             ]
+               [                             ]
+ <                                                   >
+ <G group5                                           >
+  [label31   ][union]     [label32   ][subqu]
+ <                                                   >
+ <G group6><G group7                                 >
+  <T tabl>  <T table3                               >
+  [id  ]    [id2 |desc                             ]
+  [id  ]    [id2 |desc                             ]
+  [id  ]    [id2 |desc                             ]
+  [id  ]    [id2 |desc                             ]
+  [id  ]    [id2 |desc                             ]
+  <      >  <                                       >
+  [sing  ]  [multiple                               ]
+ <        ><                                         >                                             
+}
+END -- Grid2
+END
+
+ATTRIBUTES
+
+GROUP group1:Group1, TEXT="Simple Cases";
+LABEL label18:Label18, TEXT="Default Settings";
+LABEL label19:Label19, TEXT="Specify QBE Defaults";
+LABEL label20:Label20, TEXT="Straight to List";
+LABEL label21:Label21, TEXT="QBE Disabled";
+LABEL label22:Label22, TEXT="AutoSelect (1)";
+LABEL label23:Label23, TEXT="AutoSelect (2)";
+LABEL label24:Label24, TEXT="Max Row Count";
+LABEL label25:Label25, TEXT="Choose Column";
+LABEL label34:Label34, TEXT="Force QBE";
+LABEL label35:Label35, TEXT="Force QBE (column)";
+
+BUTTONEDIT defau=formonly.default, ACTION=zoom, COMMENT="Zoom illustrating default settings";
+BUTTONEDIT qbede=formonly.qbedefault, ACTION=zoom, COMMENT="Zoom with defaults in the QBE Window";
+BUTTONEDIT strai=formonly.straight2list, ACTION=zoom, COMMENT="Zoom going straight to the list window";
+BUTTONEDIT noqbe=formonly.noqbe, ACTION=zoom, COMMENT="Zoom with the QBE disabled";
+BUTTONEDIT autos=formonly.autoselect1, ACTION=zoom, COMMENT="Zoom where if one row is selected after the QBE it will be returned";
+BUTTONEDIT auto1=formonly.autoselect2, ACTION=zoom, COMMENT="Zoom where if one row is selected and there is no QBE it will be returned straight away";
+BUTTONEDIT maxro=formonly.maxrow20, ACTION=zoom, COMMENT="Zoom where the maximum number of rows returned is limited";
+BUTTONEDIT choosecolumn=formonly.choosecolumn, ACTION=zoom, COMMENT="Zoom where the value returned isn\'t in the first column";
+BUTTONEDIT qbefo=formonly.qbeforce3, ACTION=zoom;
+BUTTONEDIT qbef1=formonly.qbeforce4, ACTION=zoom;
+
+GROUP group2:Group2, TEXT="Exclude columns from output";
+LABEL label26:Label26, TEXT="Exclude QBE";
+LABEL label27:Label27, TEXT="Exclude List";
+BUTTONEDIT exclu=formonly.excludeqbe, ACTION=zoom, COMMENT="Zoom where a column is omitted from the QBE";
+BUTTONEDIT excl1=formonly.excludelist, ACTION=zoom,  COMMENT="Zoom where a column is omitted from the Result List";
+
+GROUP group3:Group3, TEXT="Return two columns";
+LABEL label28:Label28, TEXT="Two column";
+EDIT twoco=formonly.twocolumn1, COMMENT="Zoom where two column values are returned";
+EDIT twocolumn2=formonly.twocolumn2, COMMENT="Zoom where two column values are returned";
+BUTTON two:twocolumn.zoom, COMMENT="Zoom where two column values are returned";
+
+GROUP group4:Group4, TEXT="Return complex values";
+LABEL label29:Label29, TEXT="Return Where Clause Example";
+LABEL label30:Label30, TEXT="Return for QBE Example";
+TEXTEDIT nolist=formonly.nolist, COMMENT="Zoom where the QBE where clause is returned";
+BUTTON mai:main.nolist.zoom, COMMENT="Zoom where the QBE where clause is returned";
+TEXTEDIT qb1=formonly.qbe, COMMENT="Zoom that has been called from a CONSTRUCT";
+BUTTON ma1:main.qbe.zoom, COMMENT="Zoom that has been called from a CONSTRUCT";
+
+GROUP group5:Group5, TEXT="Complex SQL Statements";
+LABEL label31:Label31, TEXT="Union";
+LABEL label32:Label32, TEXT="Subquery";
+BUTTONEDIT union=formonly.union, ACTION=zoom, COMMENT="Zoom with an SQL clause that had a UNION";
+BUTTONEDIT subqu=formonly.subquery, ACTION=zoom, COMMENT="Zoom with an SQL clause that ahd a subquery";
+
+GROUP group6:Group6, TEXT="Return Multiple Rows, One Column";
+TABLE tabl:Table2;
+EDIT id=formonly.id;
+BUTTON sing:single.zoom, COMMENT="Zoom returning multiple rows";
+
+GROUP group7:Group7, TEXT="Return Multiple Rows, Multiple Columns";
+TABLE table3:Table3;
+EDIT id2=formonly.id2;
+EDIT desc=formonly.desc;
+BUTTON multiple:multiple.zoom, COMMENT="Zoom returning multiple rows and columns";
+
+INSTRUCTIONS
+SCREEN RECORD single(formonly.id)
+SCREEN RECORD multiple(formonly.id2,formonly.desc)

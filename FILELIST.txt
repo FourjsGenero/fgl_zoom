@@ -1,0 +1,14 @@
+fgl_zoom.4gl - Generic zoom window routines
+fgl_zoom.str - Localized string file for generic zoom window
+
+fgl_zoom_custom.4gl - Custom Tests for fgl_zoom
+fgl_zoom_example.4gl - Tests that involve real life example of fgl_zoom
+fgl_zoom_functionaltest.4gl - Tests that sample every possible option of fgl_zoom
+fgl_zoom_test.4fd - Form for testing of fgl_zoom
+fgl_zoom_test.4gl - MAIN test program for fgl_zoom
+fgl_zoom_test.4st - Stylesheet for testing of fgl_zoom
+fgl_zoom_test.log - Any errors with testing of fgl_zoom written here
+fgl_zoom_test.prf - FGLPROFILE for use when testing fgl_zoom to incorporate strings and to point to a database
+
+fgl_zoom_test_orig.per - .per equivalent of above .4fd at time changed to using 4fd
+

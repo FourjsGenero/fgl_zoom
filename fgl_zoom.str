@@ -1,0 +1,87 @@
+#       (c) Copyright 2011, Four Js AsiaPac - www.4js.com.au/local
+#
+#       MIT License (http://www.opensource.org/licenses/mit-license.php)
+#
+#       Permission is hereby granted, free of charge, to any person
+#       obtaining a copy of this software and associated documentation
+#       files (the "Software"), to deal in the Software without restriction,
+#       including without limitation the rights to use, copy, modify, merge,
+#       publish, distribute, sublicense, and/or sell copies of the Software,
+#       and to permit persons to whom the Software is furnished to do so,
+#       subject to the following conditions:
+#
+#       The above copyright notice and this permission notice shall be
+#       included in all copies or substantial portions of the Software.
+#
+#       THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+#       EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+#       OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+#       NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+#       BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+#       ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+#       CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+#       THE SOFTWARE.
+#
+#       fgl_zoom.str
+#
+#       January 2011 Reuben Barclay reuben@4js.com.au
+
+fgl_zoom.before_construct="Enter the selection criteria"
+fgl_zoom.no_records_found="No records meet the selected criteria"
+fgl_zoom.max_rows_hit="Only first %1 rows will be displayed"
+fgl_zoom.x_of_y="%1 of %2"
+fgl_zoom.window.title="Zoom"
+
+fgl_zoom.validate.sql_must_be_defined = "SQL must be defined"
+fgl_zoom.validate.max_row_must_be_positive = "Maximum number of rows allowed must be positive"
+fgl_zoom.validate.freezeleft_range = "Number of frozen columns must be in range 0-8"
+fgl_zoom.validate.freezeright_range = "Number of frozen columns must be in range 0-8"
+fgl_zoom.validate.column_defined_min = "At least one column must be defined"
+fgl_zoom.validate.column_defined_max = "Maximum number of columns that can be defined is 9"
+fgl_zoom.validate.column_X_defined = "Column %1 needs to be defined"
+fgl_zoom.validate.column_X_width_valid = "Column %1 width must be greater than zero"
+fgl_zoom.validate.column_X_datatype_valid = "datatype parameter for column %1 must be valid"
+fgl_zoom.validate.column_X_justify_valid = "justify parameter for column %1 must be valid"
+fgl_zoom.validate.wrapper = "Error with fgl_zoom parameters\n%1\nContact your local support"
+
+fgl_zoom.error.qbeforce = "QBE Criteria must be entered into at least one field"
+fgl_zoom.error.column.qbeforce = "QBE Criteria must be entered into this field"
+
+fgl_zoom.window.title.error = "Error"
+fgl_zoom.window.title.info = "Info"
+fgl_zoom.window.title.zoom = "Zoom"
+
+fgl_zoom.field.search_string.prompt = "Search Expression"
+fgl_zoom.field.case_sensitive.prompt = "Case Sensitive"
+fgl_zoom.field.wholeword.prompt = "Exact Match"
+fgl_zoom.field.current_sort_column.prompt = "Current Sort Column"
+
+fgl_zoom.field.search_string.comment = "Enter the search expression"
+fgl_zoom.field.case_sensitive.comment = "Check to make the search case sensitive"
+fgl_zoom.field.wholeword.comment = "Check to search for an exact match"
+fgl_zoom.field.current_sort_column.comment = "Restrict search to the current sort column"
+
+
+fgl_zoom.action.copy.text = "Copy"
+fgl_zoom.action.copyall.text = "Copy" 
+fgl_zoom.action.find.text = "Find"
+fgl_zoom.action.findhide.text = "Hide Find"
+fgl_zoom.action.findnext.text = "Find Next"
+fgl_zoom.action.findprev.text = "Find Previous"
+fgl_zoom.action.list.text = "List"
+fgl_zoom.action.qbe.text = "QBE"
+fgl_zoom.action.selectnone.text = "Select None"
+fgl_zoom.action.selectall.text = "Select All"
+fgl_zoom.action.accept.text.alternate = "Search"
+
+
+fgl_zoom.action.copy.comment = "Copy selected row(s)"
+fgl_zoom.action.copyall.comment = "Copy all rows"
+fgl_zoom.action.find.comment = "Find entered value"
+fgl_zoom.action.findhide.comment = "Hide the Find Box"
+fgl_zoom.action.findnext.comment = "Find next value"
+fgl_zoom.action.findprev.comment = "Find previous value"
+fgl_zoom.action.list.comment="Go back to list of values"
+fgl_zoom.action.qbe.comment = "Re-enter the search criteria"
+fgl_zoom.action.selectnone.comment = "Clear Selection"
+fgl_zoom.action.selectall.comment = "Select All Rows"

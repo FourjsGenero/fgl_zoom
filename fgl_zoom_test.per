@@ -1,0 +1,24 @@
+---------------------------------------------------------------------------------- 
+-- File created from /Volumes/Daily/Work/2_1/Source/Project/SimpleZoom/fgl_zoom_test.4fd by Genero Studio
+-- WARNING! All changes made in this file will be lost!
+----------------------------------------------------------------------------------
+
+SCHEMA formonly
+
+ACTION DEFAULTS
+  ACTION zoom(TEXT=%"Zoom", IMAGE="find", COMMENT=%"Zoom")
+END -- ACTION DEFAULTS
+
+LAYOUT (TEXT=%"fgl_zoom() Test")
+FOLDER 
+    PAGE pagecustom(ACTION=custom, TEXT=%"Custom")
+        FORM "fgl_zoom_test_custom"
+    END -- PAGE
+    PAGE pagefunctionaltest(ACTION=functionaltest, TEXT=%"Functional Test")
+        FORM "fgl_zoom_test_functiontest"
+    END -- PAGE
+    PAGE pageexample(ACTION=example, TEXT=%"Example")
+        FORM "fgl_zoom_test_example"
+    END -- PAGE
+END -- FOLDER
+END -- LAYOUT

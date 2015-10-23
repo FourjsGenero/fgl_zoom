@@ -1,0 +1,7 @@
+Inteneded to be compatible with versions of Genero 3.0 and above
+
+Tested against SQLite database, in theory should work against other database
+types but haven't added these to test plan as yet.
+(was originally tested against Informix so should still work against this)
+
+

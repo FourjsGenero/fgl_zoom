@@ -1,0 +1,49 @@
+- create form in memory, no fgl_zoom.per
+
+- rewrite to use Genero 3.0 features, in particular dynamic dialogs
+
+- removed find and goto actions, and use those built into front-end clients instead
+
+- changed test program to use SQLite and an in memory database, simplified distribution of this test program, removed create testdata page
+
+- added print option
+
+- added freeze column options
+
+- added qbeforce options
+
+- renamed sample to functionaltest
+
+- change accept text to Search when in the Construct
+
+- added View Source option to Custom test
+
+- ensure allowfind defaults to 2
+
+- testdata had some Multi-byte characters hidden there
+
+- corrected bug in fgl_zoom_testdata.4gl, needed to add IMPORT FGL fgldialog
+
+Release 03/02/2011 - fgl_zoom_2_30_01 - compiled with 2.30.06
+
+- converted fgl_zoom_test.per to fgl_zoom_test.4fd
+
+- converted fgl_zoom.per to fgl_zoom.4fd
+
+- created 5 test tables fgl_zoom_test, fgl_zoom_state, fgl_zoom_country,
+  fgl_zoom_store, fgl_zoom_customer.  Reworked test suite to use these 5 tables
+  and have no reference to systables.  Added functionality to test suite to
+  create, populate, truncate, drop these 5 tables
+
+- removed hard-coded test database reference and replaced with database
+  specified by FGLPROFILE
+
+- changed default length of form to 15 lines
+
+- set Find in examples to hidden (2)
+
+- added Hide Find button
+
+--------------------------------------------------------------------------------
+Release 06/01/2011 - fgl_zoom_2_30_00 - compiled with 2.30.06
+Initial soft-release to sourcefourjs

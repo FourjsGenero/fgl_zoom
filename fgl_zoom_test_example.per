@@ -1,0 +1,21 @@
+ACTION DEFAULTS 
+ACTION view_source (TEXT="View Source")
+END 
+
+LAYOUT
+GRID 
+{
+State    [e1  ]    
+Customer [e2     ] 
+Store    [e3     ] 
+Country  [e4   ]   
+}
+END -- GRID
+END --LAYOUT
+
+ATTRIBUTES
+BUTTONEDIT e1=formonly.state_code, ACTION=zoom, COMMENT="State Example";
+BUTTONEDIT e2=formonly.customer_code, ACTION=zoom, COMMENT="Customer Example";
+BUTTONEDIT e3=formonly.store_code, ACTION=zoom, COMMENT="Store Example";
+BUTTONEDIT e4=formonly.country_code, ACTION=zoom, COMMENT="Country Example";
+

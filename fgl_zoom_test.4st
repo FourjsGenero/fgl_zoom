@@ -1,0 +1,118 @@
+<!-- 
+(c) Copyright 2011, Four Js AsiaPac - www.4js.com.au/local
+
+MIT License (http://www.opensource.org/licenses/mit-license.php)
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+fgl_zoom_test.4st
+
+January 2011 Reuben Barclay reuben@4js.com.au
+-->
+
+<StyleList>
+    <!-- - First two entries are copied from latest version of FGLDIR/lib/default.4st -->
+  <Style name="Window">
+     <StyleAttribute name="windowType" value="normal" />
+  </Style>
+  <Style name="Window.dialog">
+     <StyleAttribute name="windowType" value="modal" />
+     <StyleAttribute name="sizable" value="no" />
+     <StyleAttribute name="position" value="center" />
+     <StyleAttribute name="actionPanelPosition" value="bottom" />
+     <StyleAttribute name="ringMenuPosition" value="bottom" />
+     <StyleAttribute name="toolBarPosition" value="none" />
+     <StyleAttribute name="statusBarType" value="none" />
+     <StyleAttribute name="errorMessagePosition" value="popup" />
+  </Style>
+  
+   <!-- - These entries are those that have been added -->
+   <Style name="Window.fgl_zoom">
+      <StyleAttribute name="windowType" value="modal" />
+      <StyleAttribute name="sizable" value="yes" />
+      <StyleAttribute name="position" value="field" />
+      <StyleAttribute name="forceDefaultSettings" value="yes" />
+      <StyleAttribute name="actionPanelPosition" value="bottom" />
+      <StyleAttribute name="ringMenuPosition" value="bottom" />
+   </Style>
+   <Style name="Table.fgl_zoom">
+      <StyleAttribute name="tableType" value="frozenTable"/>
+      <StyleAttribute name="headerAlignment" value="auto" />
+      <StyleAttribute name="resizeFillsEmptySpace" value="no" />
+      <StyleAttribute name="highlightCurrentRow" value="yes" />
+     <StyleAttribute name="forceDefaultSettings" value="yes" />
+   </Style>
+  
+   <Style name="Table.fgl_zoom:even">
+      <StyleAttribute name="backgroundColor" value="#EEEEEE"/>  <!-- - Ideally replace with system colour -->
+   </Style>
+   <Style name="Table.fgl_zoom:active">
+      <StyleAttribute name="highlightColor" value="highlight"/>
+   </Style>
+   <Style name="Table.fgl_zoom_leftfreeze1">
+      <StyleAttribute name="leftFrozenColumns" value="1"/>
+   </Style>
+   <Style name="Table.fgl_zoom_leftfreeze2">
+      <StyleAttribute name="leftFrozenColumns" value="2"/>
+   </Style>
+   <Style name="Table.fgl_zoom_leftfreeze3">
+      <StyleAttribute name="leftFrozenColumns" value="3"/>
+   </Style>
+   <Style name="Table.fgl_zoom_leftfreeze4">
+      <StyleAttribute name="leftFrozenColumns" value="4"/>
+   </Style>
+   <Style name="Table.fgl_zoom_leftfreeze5">
+      <StyleAttribute name="leftFrozenColumns" value="5"/>
+   </Style>
+    <Style name="Table.fgl_zoom_leftfreeze6">
+      <StyleAttribute name="leftFrozenColumns" value="6"/>
+   </Style>
+    <Style name="Table.fgl_zoom_leftfreeze7">
+      <StyleAttribute name="leftFrozenColumns" value="7"/>
+   </Style>
+    <Style name="Table.fgl_zoom_leftfreeze8">
+      <StyleAttribute name="leftFrozenColumns" value="8"/>
+   </Style>
+   <Style name="Table.fgl_zoom_rightfreeze1">
+      <StyleAttribute name="rightFrozenColumns" value="1"/>
+   </Style>
+   <Style name="Table.fgl_zoom_rightfreeze2">
+      <StyleAttribute name="rightFrozenColumns" value="2"/>
+   </Style>
+   <Style name="Table.fgl_zoom_rightfreeze3">
+      <StyleAttribute name="rightFrozenColumns" value="3"/>
+   </Style>
+   <Style name="Table.fgl_zoom_rightfreeze4">
+      <StyleAttribute name="rightFrozenColumns" value="4"/>
+   </Style>
+   <Style name="Table.fgl_zoom_rightfreeze5">
+      <StyleAttribute name="rightFrozenColumns" value="5"/>
+   </Style>
+   <Style name="Table.fgl_zoom_rightfreeze6">
+      <StyleAttribute name="rightFrozenColumns" value="6"/>
+   </Style>
+   <Style name="Table.fgl_zoom_rightfreeze7">
+      <StyleAttribute name="rightFrozenColumns" value="7"/>
+   </Style>
+   <Style name="Table.fgl_zoom_rightfreeze8">
+      <StyleAttribute name="rightFrozenColumns" value="8"/>
+   </Style>
+</StyleList>

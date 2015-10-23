@@ -1,0 +1,97 @@
+LAYOUT
+GRID 
+{
+ [label1     ][sql                                    ]
+              [                                       ]
+              [                                       ]
+              [                                       ]
+ [label2     ][title2                                 ]
+ [label3     ][cancelvalue                            ]
+ [label4     ][n][label5     ][a]
+ [label6     ][gotolist         ]
+ [label7     ][b][label8     ][m]
+ [label9     ][maxrow           ]
+ [label12    ][freezeleft       ]
+ [label13    ][freezeright      ]
+ [label33    ][q]
+ <T table1                                                                                    >
+ [columnname|title3    |width     |format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
+ [columnname|title3    |width     |format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
+ [columnname|title3    |width     |format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
+ [columnname|title3    |width     |format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
+ [columnname|title3    |width     |format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
+
+ <                                                                                            >
+  [clea:rest:execute                                                 :view:            ]
+  [label14    ][selec]
+  [label15    ][sele1]
+  [label16    ][value                                                                ]
+  [label17    ][where_clause                                                         ]
+               [                                                                     ]
+               [                                                                     ]
+}
+END -- GRID
+END -- LAYOUT
+
+ATTRIBUTES
+LABEL label1:Label1, TEXT="SQL";
+LABEL label2:Label2, TEXT="Window TITLE";
+LABEL label3:Label3, TEXT="Cancel Value";
+LABEL label4:Label4, TEXT="Disable QBE Window";
+LABEL label5:Label5, TEXT="Disable List Window";
+LABEL label6:Label6, TEXT="Select First Window";
+LABEL label7:Label7, TEXT="Autoselect";
+LABEL label8:Label8, TEXT="Multiple Rows Returned";
+LABEL label9:Label9, TEXT="Maximum Rows Returned";
+LABEL label12:Label12, TEXT="Freeze Columns (Left)";
+LABEL label13:Label13, TEXT="Freeze Columns (Right)";
+LABEL label33:Label33, TEXT="Force QBE";
+
+TEXTEDIT sql=formonly.sql, COMMENT="Enter the SQL";
+EDIT title2=formonly.title2, COMMENT="Enter the Window TITLE";
+EDIT cancelvalue=formonly.cancelvalue, COMMENT="Enter the value to return if the user cancels";
+CHECKBOX n=formonly.noqbe2, NOT NULL, VALUECHECKED = 1, VALUEUNCHECKED = 0, COMMENT="Select to disable QBE window";
+CHECKBOX a=formonly.nolist2, NOT NULL, VALUECHECKED = 1, VALUEUNCHECKED = 0, COMMENT="Select disable List window";
+RADIOGROUP gotolist=formonly.gotolist, NOT NULL, ORIENTATION=HORIZONTAL, COMMENT="Select first window", items=(("0", %"QBE"),("1", %"List"));
+CHECKBOX b=formonly.autoselect, NOT NULL, REQUIRED, VALUECHECKED = 1, VALUEUNCHECKED = 0, COMMENT="Select if automatically return if only one value";
+CHECKBOX m=formonly.multiplerow, NOT NULL, REQUIRED, VALUECHECKED = 1, VALUEUNCHECKED = 0, COMMENT="Select if multiple rows returned";
+EDIT maxrow=formonly.maxrow, COMMENT="Enter the maximum number of rows to return";
+SPINEDIT freezeleft=formonly.freezeleft, step=1, COMMENT="Enter the number of columns to freeze from left", VALUEMIN=0, VALUEMAX=8;
+SPINEDIT freezeright=formonly.freezeright, step=1, COMMENT="Enter the number of columns to freeze from right", VALUEMIN=0, VALUEMAX=8;
+CHECKBOX q=formonly.qbeforce, text=%"", NOT NULL, REQUIRED, VALUECHECKED = 1, VALUEUNCHECKED = 0;
+
+
+
+EDIT columnname=formonly.columnname , TITLE="Column", SCROLL, COMMENT="Enter the column name";
+EDIT title3=formonly.title3, TITLE="Title", SCROLL, COMMENT="Enter the column prompt";
+SPINEDIT width=formonly.width, TITLE="Width", COMMENT="Enter the column width", VALUEMIN=0;
+EDIT format=formonly.format, TITLE="Format", SCROLL, COMMENT="Enter the column format";
+COMBOBOX datatypec=formonly.datatypec, TITLE="Datatype", NOT NULL, COMMENT="Select the datatype", ITEMS=(("c", "Char"),("d", "Date"),("i", "Integer"),("f", "Float/Decimal"));
+COMBOBOX justify=formonly.justify, TITLE="Justify", NOT NULL, COMMENT="Select the justification/alignment", ITEMS=(("left", "Left"),("right", "Right"),("center", "Center"));
+CHECKBOX exc=formonly.excludeqbe2, TITLE="Exclude QBE", NOT NULL, VALUECHECKED = 1, VALUEUNCHECKED = 0, COMMENT="Select to exclude column from QBE Window";
+CHECKBOX ex1=formonly.excludelist2, TITLE="Exclude List", NOT NULL, VALUECHECKED = 1, VALUEUNCHECKED = 0, COMMENT="Select to exclude column from List Window";
+CHECKBOX inc=formonly.includeinresult, TITLE="Include in result", NOT NULL, VALUECHECKED = 1, VALUEUNCHECKED = 0, COMMENT="Select to include value in result";
+EDIT qbedefault=formonly.qbedefault2, TITLE="QBE Default", SCROLL, COMMENT="Enter the value to use as default in QBE window";
+CHECKBOX qbe=formonly.qbeforce2, TITLE="Force QBE", NOT NULL,  VALUECHECKED = 1, VALUEUNCHECKED = 0, COMMENT="Select to force QBE criteria to be entered";
+
+
+
+BUTTON clea:clear, text=%"Clear", COMMENT="Clear the custom settings";
+BUTTON rest:restore, text=%"Restore", COMMENT="Restore the custom settings to the default";
+BUTTON execute:execute, text=%"Execute", COMMENT="Run fgl_zoom using the current settings";
+BUTTON view:viewsource, text=%"View Source", COMMENT="View equivalent source";
+
+LABEL label14:Label14, TEXT="Selected Row";
+LABEL label15:Label15, TEXT="Selected Column";
+LABEL label16:Label16, TEXT="Value";
+LABEL label17:Label17, TEXT="Where Clause";
+
+COMBOBOX selec=formonly.selected_row, NOT NULL, COMMENT="Select the selected result row";
+COMBOBOX sele1=formonly.selected_column, NOT NULL, COMMENT="Select the selected result column";
+EDIT value=formonly.value, NOENTRY ;
+TEXTEDIT where_clause=formonly.where_clause, NOENTRY ;
+
+
+INSTRUCTIONS
+SCREEN RECORD custom_scr(formonly.columnname, formonly.title3, formonly.width, formonly.format, formonly.datatypec, formonly.JUSTIFY, formonly.excludeqbe2, formonly.excludelist2, formonly.includeinresult, formonly.qbedefault2, formonly.qbeforce2)
+END
