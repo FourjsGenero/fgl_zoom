@@ -56,8 +56,10 @@
   <PlatformList version="1.0"/>
   <Group label="fgl_zoom" language="Genero" targetDirectory="$(ProjectDir)">
     <Library binaryName="fgl_zoom_lib" id="-155249488" label="fgl_zoom_lib">
-      <File filePath="fgl_zoom.4ad"/>
       <File filePath="fgl_zoom.4gl"/>
+    </Library>
+    <Library binaryName="fgl_zoom_resources" id="-33975760" label="fgl_zoom_resources">
+      <File filePath="fgl_zoom.4ad"/>
       <File filePath="fgl_zoom.4tb"/>
       <File filePath="fgl_zoom.str"/>
       <File filePath="fgl_zoom_webcopy.per"/>
