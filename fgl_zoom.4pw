@@ -66,7 +66,7 @@
     </Library>
   </Group>
   <Group label="fgl_zoom_test" language="Genero" targetDirectory="$(ProjectDir)">
-    <Application binaryName="fgl_zoom_test" environment="value:FGLSQLDEBUG=0||value:FGLPROFILE=fgl_zoom_test.prf" externalDependencies="libgre.42x" id="46209009" label="fgl_zoom_test">
+    <Application binaryName="fgl_zoom_test" dependencies="-33975760" environment="value:FGLSQLDEBUG=0||value:FGLPROFILE=fgl_zoom_test.prf" externalDependencies="libgre.42x" id="46209009" label="fgl_zoom_test">
       <VirtualFolder label="Documentation">
         <File filePath="CHANGES.txt"/>
         <File filePath="COMPATABILITY.txt"/>
