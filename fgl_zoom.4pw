@@ -55,13 +55,13 @@
   </LanguageList>
   <PlatformList version="1.0"/>
   <Group label="fgl_zoom" language="Genero" targetDirectory="$(ProjectDir)">
-    <Application binaryName="fgl_zoom" id="834944128" label="fgl_zoom">
+    <Library binaryName="fgl_zoom_lib" id="-155249488" label="fgl_zoom_lib">
       <File filePath="fgl_zoom.4ad"/>
       <File filePath="fgl_zoom.4gl"/>
       <File filePath="fgl_zoom.4tb"/>
       <File filePath="fgl_zoom.str"/>
       <File filePath="fgl_zoom_webcopy.per"/>
-    </Application>
+    </Library>
   </Group>
   <Group label="fgl_zoom_test" language="Genero" targetDirectory="$(ProjectDir)">
     <Application binaryName="fgl_zoom_test" environment="value:FGLSQLDEBUG=0||value:FGLPROFILE=fgl_zoom_test.prf" externalDependencies="libgre.42x" id="46209009" label="fgl_zoom_test">
