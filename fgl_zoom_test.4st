@@ -33,6 +33,7 @@ January 2011 Reuben Barclay reuben@4js.com.au
   <Style name="Window">
      <StyleAttribute name="windowType" value="normal" />
   </Style>
+  
   <Style name="Window.dialog">
      <StyleAttribute name="windowType" value="modal" />
      <StyleAttribute name="sizable" value="no" />
@@ -42,6 +43,11 @@ January 2011 Reuben Barclay reuben@4js.com.au
      <StyleAttribute name="toolBarPosition" value="none" />
      <StyleAttribute name="statusBarType" value="none" />
      <StyleAttribute name="errorMessagePosition" value="popup" />
+  </Style>
+
+  <!-- - Added so BUTTONEDIT standard size -->
+  <Style name="ButtonEdit">
+     <StyleAttribute name="scaleIcon" value="yes" />
   </Style>
   
    <!-- - These entries are those that have been added -->
