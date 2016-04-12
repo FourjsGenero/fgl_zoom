@@ -42,7 +42,8 @@ DEFINE m_example RECORD
     state_code  CHAR(2),
     store_code INTEGER,
     customer_code INTEGER,
-    country_code CHAR(3)
+    country_code CHAR(3),
+    auto_code INTEGER
 END RECORD
 
 
@@ -65,9 +66,6 @@ END FUNCTION
 FUNCTION test()
 DEFINE l_mode STRING
 
-DEFINE l_country_code CHAR(3)
-DEFINE l_country_name CHAR(30)
-
     DIALOG ATTRIBUTES(UNBUFFERED)
         INPUT BY NAME m_example.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
             ON ACTION zoom INFIELD state_code
@@ -81,6 +79,10 @@ DEFINE l_country_name CHAR(30)
 
             ON ACTION zoom INFIELD country_code
                 LET m_example.country_code = zoom_country(FGL_DIALOG_GETBUFFER())
+
+            ON ACTION zoom INFIELD auto_code
+                LET m_example.auto_code = zoom_auto(FGL_DIALOG_GETBUFFER())
+                
               
             ON ACTION functionaltest
                 LET l_mode = "functionaltest"
@@ -101,6 +103,9 @@ DEFINE l_country_name CHAR(30)
 
             ON ACTION view_source INFIELD country_code
                 CALL show_function_source("zoom_country")
+
+            ON ACTION view_source INFIELD auto_code
+                CALL show_function_source("zoom_auto")
 
             ON ACTION CLOSE ATTRIBUTES(TEXT="view Source") 
                 LET l_mode = "exit"
@@ -209,6 +214,25 @@ END FUNCTION
 
 
 
+#+ A zoom window to select the state code
+#+
+#+ This example displays only the sname field and returns the state code
+#+ It is ordered sname before code so that the visible sname column is used by 
+#+ the goto functionality
+PRIVATE FUNCTION zoom_auto(l_current_value)
+DEFINE l_current_value STRING
+
+    CALL fgl_zoom.init()
+    CALL fgl_zoom.cancelvalue_set(l_current_value)
+    CALL fgl_zoom.title_set("Select Value")
+    CALL fgl_zoom.sql_set("SELECT id, desc, date_created, time_created, quantity, price FROM fgl_zoom_test WHERE %1 ORDER BY id")
+    CALL fgl_zoom.column_auto_set()
+    
+    RETURN fgl_zoom.call()
+END FUNCTION
+
+
+
 #+ show the source in each function
 PRIVATE FUNCTION show_function_source(l_function)
 DEFINE l_function STRING
@@ -245,5 +269,8 @@ DEFINE l_read BOOLEAN
 
     CALL FGL_WINMESSAGE("Info", sb.toString(),"")
 END FUNCTION
+
+
+
         
     

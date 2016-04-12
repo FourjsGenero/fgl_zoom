@@ -1,5 +1,7 @@
 TODO 
 
+Refine values and tidyup code in the new column_auto_set functoion.  See if can include on first two tabs
+
 Test against SQLLite database shipped with Studio
 
 Add comments to fgl_zoom.4gl so that docgen generates the necessary docs

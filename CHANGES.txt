@@ -1,3 +1,5 @@
+- added column_auto_set() function
+
 - create form in memory, no fgl_zoom.per
 
 - rewrite to use Genero 3.0 features, in particular dynamic dialogs
