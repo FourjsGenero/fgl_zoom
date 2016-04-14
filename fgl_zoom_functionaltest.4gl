@@ -158,7 +158,7 @@ DEFINE l_mode STRING
          CALL fgl_zoom.title_set("Force QBE in first column")
          LET m_functionaltest.qbeforce4 = fgl_zoom.call()
 
-      -- A zoom that derivces the columns from the SQL string
+      -- A zoom that derives the columns from the SQL string
       ON ACTION zoom INFIELD auto2
         CALL fgl_zoom.init()
         CALL fgl_zoom.cancelvalue_set(FGL_DIALOG_GETBUFFER())
