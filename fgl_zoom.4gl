@@ -33,7 +33,6 @@
 #+
 
 IMPORT FGL fgldialog
-IMPORT xml
 
 DEFINE m_zoom RECORD             -- The parameters controlling the behaviour of the zoom window
    sql STRING,                   -- SQL string
@@ -705,10 +704,10 @@ END FUNCTION
 #+ CALL column_quick_set(1,"tabid", "i", 4, "Table ID")
 #+ 
 #+ @param i INTEGER The index of the column (value=1 for the first column)
-#+ @param column_name STRING The name of the column in the database
-#+ @param datatypec CHAR(1) The datatype of the column, values are (c)har, (i)nteger, (f)loat, (d)ate
-#+ @param width INTEGER The width of the column.  Use 0 to use a default value.
-#+ @param title STRING The column heading
+#+ @param l_column_name STRING The name of the column in the database
+#+ @param l_datatypec CHAR(1) The datatype of the column, values are (c)har, (i)nteger, (f)loat, (d)ate
+#+ @param l_width INTEGER The width of the column.  Use 0 to use a default value.
+#+ @param l_title STRING The column heading
 #+
 FUNCTION column_quick_set(i, l_column_name, l_datatypec, l_width, l_title) 
 DEFINE i INTEGER
@@ -729,22 +728,30 @@ DEFINE l_title STRING
    END IF
 END FUNCTION
 
+
+
+#+ Automatically define the columns based on the SQL parameter
+#+
+#+ Rather than explicitly defining each column, use this method to quickly
+#+ define the columns based on the SQL parameter.  You can still override any
+#+ column parameter after this function using the normal functions.
+#+ 
+#+ @code
+#+ CALL column_auto_set()
+#+
 FUNCTION column_auto_set()
 DEFINE l_sqlh base.SqlHandle
 DEFINE l_sql STRING
-DEFINE i,j INTEGER
+DEFINE i INTEGER
 DEFINE l_name STRING
-DEFINE l_title base.StringBuffer
 DEFINE l_datatype STRING
 DEFINE l_datatypec CHAR(1)
 DEFINE l_width INTEGER
-DEFINE l_upper BOOLEAN
-DEFINE l_char STRING
-DEFINE l_pos1, l_pos2, l_pos3 INTEGER 
-DEFINE l_d1, l_d2 INTEGER
+DEFINE l_title STRING
 
     LET l_sqlh = base.SqlHandle.create()
-    
+
+    -- assumes SQL has been set, uses 1=0 to avoid returning rows
     LET l_sql = SFMT(m_zoom.sql, "1=0")
    
     LET l_sqlh = base.SqlHandle.create()
@@ -755,95 +762,178 @@ DEFINE l_d1, l_d2 INTEGER
     FOR i = 1 TO l_sqlh.getResultCount()
         LET l_name = l_sqlh.getResultName(i)
         LET l_datatype = l_sqlh.getResultType(i)
-        # TODO test all possibilities, refine width values, shift off to a seperate function
-        CASE
-            WHEN l_datatype = "TINYINT"
-                LET l_datatypec = "i"
-                LET l_width = 4
-            WHEN l_datatype = "SMALLINT"
-                LET l_datatypec = "i"
-                LET l_width = 6
-            WHEN l_datatype = "INTEGER"
-                LET l_datatypec = "i"
-                LET l_width = 11
-            WHEN l_datatype = "BIGINT"
-                LET l_datatypec = "i"
-                LET l_width = 11
-            WHEN l_datatype = "DATE"
-                LET l_datatypec = "d"
-                LET l_width = 10
-            WHEN l_datatype MATCHES "DECIMAL*"
-                LET l_datatypec = "f"
-                LET l_pos1 = l_datatype.getIndexOf("(",1)
-                IF l_pos1 > 0 THEN
-                    LET l_pos2 = l_datatype.getIndexOf(",",l_pos1)
-                    IF l_pos2 = 0 THEN
-                        LET l_pos2 = l_datatype.getIndexOf(")", l_pos1)
-                        LET l_d1 = l_datatype.subString(l_pos1+1, l_pos2-1)
-                        LET l_width = l_d1 + 1
-                    ELSE
-                        LET l_pos3 = l_datatype.getIndexOf(")", l_pos2)
-                        LET l_d1 = l_datatype.subString(l_pos1+1, l_pos2-1)
-                        LET l_d2 = l_datatype.subString(l_pos2+1, l_pos3-1)
-                        LET l_width = l_d1 + l_d2 + 2
-                    END IF
-                ELSE
-                    LET l_width = 10
-                END IF
-            WHEN l_datatype MATCHES "FLOAT"
-                LET l_datatypec = "f"
-                LET l_width = 15
-            WHEN l_datatype MATCHES "DATETIME*"
-                LET l_datatypec = "c"
-                LET l_width = 19
-            WHEN l_datatype MATCHES "*CHAR*"
-                LET l_datatypec = "c"
-                LET l_pos1 = l_datatype.getIndexOf("(",1)
-                IF l_pos1 > 0 THEN
-                    LET l_pos2 = l_datatype.getIndexOf(")",l_pos1)
-                    LET l_width = l_datatype.subString(l_pos1+1, l_pos2-1)
-                ELSE
-                    LET l_width = 1
-                END IF
-                
-            OTHERWISE
-                LET l_datatypec = "c"
-                LET l_width = 15
-        END CASE
-        LET l_title = base.StringBuffer.create()
-        CALL l_title.append(l_name)
+        CALL datatype_to_columnparam(l_datatype) RETURNING l_datatypec, l_width
+        CALL columnname_to_title(l_name) RETURNING l_title
 
-        # TODO move this to a seperate function
-        # replace _ with space e.g. state_code becaomes state code
-        CALL l_title.replace("_"," ",0)
-        LET l_upper = TRUE
-
-        # where there is upper character already, insert a space e.g StateCode becomes State Code
-        # TODO test this bit
-        FOR j = 2 TO l_title.getLength()
-            IF l_title.getCharAt(j) MATCHES "[A-Z]" AND l_title.getCharAt(j-1) NOT MATCHES "[A-Z]" THEN
-                CALL l_title.insertAt(" ",j)
-                LET j = j + 1
-            END IF
-        END FOR
-
-        # where there is space, make upper the next character e.g. State code becomes State Code
-        FOR j = 1 TO l_title.getLength()
-            LET l_char = l_title.getCharAt(j)
-            IF l_upper THEN
-                CALL l_title.replaceAt(j,1,l_char.toUpperCase())
-                LET l_upper = FALSE
-            END IF
-            IF l_char = " " THEN
-                LET l_upper = TRUE
-            END IF
-        END FOR
-
-        #DISPLAY i,l_name, l_datatypec, l_width, l_title.toString(), l_datatype
-        CALL column_quick_set(i,l_name, l_datatypec, l_width, l_title.toString())
+        CALL column_quick_set(i,l_name, l_datatypec, l_width, l_title)
     END FOR
     CALL l_sqlh.close()
+END FUNCTION
 
+
+
+PRIVATE FUNCTION datatype_to_columnparam(l_datatype)
+DEFINE l_datatype STRING
+
+DEFINE l_datatypec CHAR(1)
+DEFINE l_width INTEGER
+
+DEFINE i INTEGER
+DEFINE l_pos1, l_pos2, l_pos3 INTEGER 
+DEFINE l_d1, l_d2 INTEGER
+DEFINE l_part1, l_part2 STRING
+DEFINE l_on BOOLEAN
+
+    # TODO test all possibilities, refine width values
+    CASE
+        WHEN l_datatype = "TINYINT"
+            LET l_datatypec = "i"
+            LET l_width = 4
+        WHEN l_datatype = "SMALLINT"
+            LET l_datatypec = "i"
+            LET l_width = 6
+        WHEN l_datatype = "INTEGER"
+            LET l_datatypec = "i"
+            LET l_width = 11
+        WHEN l_datatype = "BIGINT"
+            LET l_datatypec = "i"
+            LET l_width = 11
+        WHEN l_datatype = "DATE"
+            LET l_datatypec = "d"
+            LET l_width = 10
+        WHEN l_datatype MATCHES "DECIMAL*"
+            LET l_datatypec = "f"
+            LET l_pos1 = l_datatype.getIndexOf("(",1)
+            IF l_pos1 > 0 THEN
+                LET l_pos2 = l_datatype.getIndexOf(",",l_pos1)
+                IF l_pos2 = 0 THEN
+                    LET l_pos2 = l_datatype.getIndexOf(")", l_pos1)
+                    LET l_d1 = l_datatype.subString(l_pos1+1, l_pos2-1)
+                    LET l_width = l_d1 + 1
+                ELSE
+                    LET l_pos3 = l_datatype.getIndexOf(")", l_pos2)
+                    LET l_d1 = l_datatype.subString(l_pos1+1, l_pos2-1)
+                    LET l_d2 = l_datatype.subString(l_pos2+1, l_pos3-1)
+                    LET l_width = l_d1 + l_d2 + 2
+                END IF
+            ELSE
+                LET l_width = 10
+            END IF
+        WHEN l_datatype MATCHES "FLOAT"
+            LET l_datatypec = "f"
+            
+            LET l_width = 15
+        WHEN l_datatype MATCHES "DATETIME*" 
+            LET l_datatypec = "c"
+            LET l_pos1 = l_datatype.getIndexOf(" ", 1)
+            LET l_pos2 = l_datatype.getIndexOf(" ",l_pos1+1)
+            LET l_pos3 = l_datatype.getIndexOf(" ",l_pos2+1)
+            IF l_pos3 > 0 THEN
+                LET l_part1 = l_datatype.subString(l_pos1+1, l_pos2-1)
+                LET l_part2 = l_datatype.subString(l_pos3+1, l_datatype.getLength())
+                LET l_part1 = l_part1.toUpperCase()
+                LET l_part2 = l_part2.toUpperCase()
+                LET l_width = 0
+                LET l_on = FALSE
+                FOR i = 1 TO 7
+                    CASE 
+                        WHEN i = 1 AND l_part1 = "YEAR" LET l_on = TRUE
+                        WHEN i = 2 AND l_part1 = "MONTH" LET l_on = TRUE
+                        WHEN i = 3 AND l_part1 = "DAY" LET l_on = TRUE
+                        WHEN i = 4 AND l_part1 = "HOUR" LET l_on = TRUE
+                        WHEN i = 5 AND l_part1 = "MINUTE" LET l_on = TRUE
+                        WHEN i = 6 AND l_part1 = "SECOND" LET l_on = TRUE
+                        WHEN i = 7 AND l_part1 MATCHES "FRACTION*" LET l_on = TRUE 
+                    END CASE
+
+                    IF l_on THEN
+                        CASE 
+                            WHEN i = 1 -- Year has 4 characters + 1 for delimiter
+                                LET l_width = l_width + 5
+                            WHEN i = 7 -- Fraction has characters determined by arg
+                                LET l_pos1 = l_part2.getIndexOf("(",1)
+                                LET l_pos2 = l_part2.getIndexOf(")",l_pos1+1)
+                                IF l_pos2 > 0 THEN
+                                    LET l_d1 = l_part2.subString(l_pos1+1, l_pos2-1)
+                                    LET l_width = l_width + l_d1 + 1
+                                ELSE
+                                    LET l_width = l_width + 3
+                                END IF
+                            OTHERWISE -- Month, Day, Hour, Minute, Second have 2 characters + 1 for delimiter
+                                LET l_width = l_width + 3
+                        END CASE
+                    END IF
+                    
+                    CASE 
+                        WHEN i = 1 AND l_part2 = "YEAR" LET l_on = FALSE
+                        WHEN i = 2 AND l_part2 = "MONTH" LET l_on = FALSE
+                        WHEN i = 3 AND l_part2 = "DAY" LET l_on = FALSE
+                        WHEN i = 4 AND l_part2 = "HOUR" LET l_on = FALSE
+                        WHEN i = 5 AND l_part2 = "MINUTE" LET l_on = FALSE
+                        WHEN i = 6 AND l_part2 = "SECOND" LET l_on =  FALSE
+                        WHEN i = 7 AND l_part2 MATCHES "FRACTION*" LET l_on = FALSE 
+                    END CASE
+                END FOR
+                LET l_width = l_width - 1  # subtract 1 for unused delimitere
+            ELSE
+                LET l_width = 19
+            END IF
+        WHEN l_datatype MATCHES "*CHAR*"
+            LET l_datatypec = "c"
+            LET l_pos1 = l_datatype.getIndexOf("(",1)
+            IF l_pos1 > 0 THEN
+                LET l_pos2 = l_datatype.getIndexOf(")",l_pos1)
+                LET l_width = l_datatype.subString(l_pos1+1, l_pos2-1)
+            ELSE
+                LET l_width = 1
+            END IF
+            
+        OTHERWISE
+            LET l_datatypec = "c"
+            LET l_width = 15
+    END CASE
+
+    RETURN l_datatypec, l_width
+END FUNCTION
+
+
+
+PRIVATE FUNCTION columnname_to_title(l_name)
+DEFINE l_name STRING
+
+DEFINE sb base.StringBuffer
+DEFINE l_upper BOOLEAN
+DEFINE i INTEGER
+DEFINE l_char STRING
+
+    LET sb = base.StringBuffer.create()
+    CALL sb.append(l_name)
+    
+    # replace _ with space e.g. state_code becaomes state code
+    CALL sb.replace("_"," ",0)
+
+    # where there is upper character already, insert a space e.g StateCode becomes State Code
+    # TODO test this bit
+    FOR i = 2 TO sb.getLength()
+        IF sb.getCharAt(i) MATCHES "[A-Z]" AND sb.getCharAt(i-1) NOT MATCHES "[A-Z]" THEN
+            CALL sb.insertAt(" ",i)
+            LET i = i + 1
+        END IF
+    END FOR
+
+    # where there is space, make upper the next character e.g. State code becomes State Code
+    LET l_upper = TRUE
+    FOR i = 1 TO sb.getLength()
+        LET l_char = sb.getCharAt(i)
+        IF l_upper THEN
+            CALL sb.replaceAt(i,1,l_char.toUpperCase())
+            LET l_upper = FALSE
+        END IF
+        IF l_char = " " THEN
+            LET l_upper = TRUE
+        END IF
+    END FOR
+    RETURN sb.toString()
 END FUNCTION
       
 
