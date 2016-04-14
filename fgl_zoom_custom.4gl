@@ -37,6 +37,7 @@ IMPORT FGL fgl_zoom
 
 DEFINE m_custom_rec RECORD
    sql STRING,
+   auto BOOLEAN,
    title2 STRING,
    cancelvalue STRING,
    noqbe2 BOOLEAN,
@@ -81,6 +82,7 @@ FUNCTION init()
 
    INITIALIZE m_custom_rec.* TO NULL
    LET m_custom_rec.sql = "SELECT %2 FROM fgl_zoom_test WHERE %1"
+   LET m_custom_rec.auto = FALSE
    LET m_custom_rec.title2= "fgl_zoom() Custom Test"
    LET m_custom_rec.noqbe2 = FALSE
    LET m_custom_rec.nolist2 = FALSE
@@ -168,6 +170,12 @@ DEFINE l_new_row_idx INTEGER
 
    DIALOG ATTRIBUTES(UNBUFFERED)
       INPUT BY NAME m_custom_rec.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
+        ON CHANGE auto
+            IF m_custom_rec.auto AND m_custom_arr.getLength() > 0 THEN
+                IF FGL_WINQUESTION("Question","Do you want to clear column array values?","yes","yes|no","fa-quest",0) = "yes" THEN
+                    CALL m_custom_arr.clear()
+                END IF
+            END IF
       END INPUT
       
       INPUT ARRAY m_custom_arr FROM custom_scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
@@ -192,6 +200,9 @@ DEFINE l_new_row_idx INTEGER
       ON ACTION execute
          CALL fgl_zoom.init()
          CALL fgl_zoom.sql_set(m_custom_rec.sql)
+         IF m_custom_rec.auto THEN
+                CALL fgl_zoom.column_auto_set()
+         END IF
          CALL fgl_zoom.title_set(m_custom_rec.title2)
          CALL fgl_zoom.cancelvalue_set(m_custom_rec.cancelvalue)
          CALL fgl_zoom.noqbe_set(m_custom_rec.noqbe2)
@@ -272,6 +283,9 @@ DEFINE l_continue SMALLINT
    CALL sb.append("\n\n--Setter")
    IF m_custom_rec.sql.getLength() > 0 THEN
       CALL sb.append(SFMT("\nCALL fgl_zoom.sql_set(\"%1\")", m_custom_rec.sql))
+   END IF
+   IF m_custom_rec.auto THEN
+    CALL sb.append("\nCALL fgl_zoom.column_auto_set()")
    END IF
    IF m_custom_rec.title2.getLength() > 0 THEN
       CALL sb.append(SFMT("\nCALL fgl_zoom.title_set(\"%1\")", m_custom_rec.title2))

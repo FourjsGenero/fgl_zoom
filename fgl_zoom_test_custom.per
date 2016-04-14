@@ -1,10 +1,11 @@
 LAYOUT
 GRID 
 {
- [label1     ][sql                                    ]
+ [label0     ][sql                                    ]
               [                                       ]
               [                                       ]
               [                                       ]
+ [label1     ][auto                                   ]
  [label2     ][title2                                 ]
  [label3     ][cancelvalue                            ]
  [label4     ][n][label5     ][a]
@@ -34,7 +35,8 @@ END -- GRID
 END -- LAYOUT
 
 ATTRIBUTES
-LABEL label1:Label1, TEXT="SQL";
+LABEL label0:Label0, TEXT="SQL";
+LABEL label1:Label1, TEXT="Derive Columns From SQL (Auto)";
 LABEL label2:Label2, TEXT="Window TITLE";
 LABEL label3:Label3, TEXT="Cancel Value";
 LABEL label4:Label4, TEXT="Disable QBE Window";
@@ -48,6 +50,7 @@ LABEL label13:Label13, TEXT="Freeze Columns (Right)";
 LABEL label33:Label33, TEXT="Force QBE";
 
 TEXTEDIT sql=formonly.sql, COMMENT="Enter the SQL";
+CHECKBOX auto=formonly.auto, NOT NULL, VALUECHECKED=1, VALUEUNCHECKED=0, COMMENT="Select to derive column parameter values automatically from the SQL";
 EDIT title2=formonly.title2, COMMENT="Enter the Window TITLE";
 EDIT cancelvalue=formonly.cancelvalue, COMMENT="Enter the value to return if the user cancels";
 CHECKBOX n=formonly.noqbe2, NOT NULL, VALUECHECKED = 1, VALUEUNCHECKED = 0, COMMENT="Select to disable QBE window";

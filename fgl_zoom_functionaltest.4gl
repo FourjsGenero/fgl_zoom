@@ -36,7 +36,7 @@
 IMPORT FGL fgl_zoom
 
 DEFINE m_functionaltest RECORD
-   default, qbedefault, straight2list, noqbe, excludeqbe, excludelist, union, subquery, autoselect1, autoselect2, maxrow20, qbeforce3, qbeforce4 INTEGER,
+   default, qbedefault, straight2list, noqbe, excludeqbe, excludelist, union, subquery, autoselect1, autoselect2, maxrow20, qbeforce3, qbeforce4, auto2 INTEGER,
    nolist, qbe, choosecolumn STRING
 END RECORD
 DEFINE m_functionaltest_twocolumn RECORD
@@ -157,6 +157,15 @@ DEFINE l_mode STRING
          CALL fgl_zoom.column_qbeforce_set(1, TRUE)
          CALL fgl_zoom.title_set("Force QBE in first column")
          LET m_functionaltest.qbeforce4 = fgl_zoom.call()
+
+      -- A zoom that derivces the columns from the SQL string
+      ON ACTION zoom INFIELD auto2
+        CALL fgl_zoom.init()
+        CALL fgl_zoom.cancelvalue_set(FGL_DIALOG_GETBUFFER())
+        CALL fgl_zoom.sql_set("SELECT id, desc, date_created, time_created, quantity, price FROM fgl_zoom_test WHERE %1 ORDER BY id")
+        CALL fgl_zoom.column_auto_set()
+        CALL fgl_zoom.title_set("Derive columns from SQL")
+        LET m_functionaltest.auto2 = fgl_zoom.call()
 
       -- Control what column is returned
       ON ACTION zoom INFIELD choosecolumn
