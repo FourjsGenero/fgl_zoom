@@ -63,7 +63,7 @@ DEFINE l_mode STRING
         CALL fgl_zoom_test_error()
         EXIT PROGRAM 1
     END IF
-  
+
     CLOSE WINDOW SCREEN
 
     CALL fgl_zoom_custom.init()

@@ -52,7 +52,7 @@ January 2011 Reuben Barclay reuben@4js.com.au
   
    <!-- - These entries are those that have been added -->
    <Style name="Window.fgl_zoom">
-      <StyleAttribute name="windowType2" value="modal" />
+      <StyleAttribute name="windowType" value="modal" />
       <StyleAttribute name="sizable" value="yes" />
       <StyleAttribute name="position" value="field" />
       <StyleAttribute name="forceDefaultSettings" value="yes" />
