@@ -90,7 +90,7 @@ END FUNCTION
 
 #+ Return the version number
 PRIVATE FUNCTION version()
-   RETURN "3.00.00"
+   RETURN "3.10.00"
 END FUNCTION
 
 
@@ -1241,7 +1241,7 @@ DEFINE d_c ui.Dialog
 
     WHILE TRUE
         CASE d_c.nextEvent()
-            WHEN "BEFORE INPUT" -- BUG Change to BEFORE CONSTRUCT when fixed
+            WHEN "BEFORE CONSTRUCT" 
                 IF m_zoom.nolist THEN
                     -- Leave the accept text as OK
                 ELSE
@@ -1352,6 +1352,7 @@ DEFINE l_row, l_column INTEGER
 
 DEFINE d_da ui.Dialog
 DEFINE l_event STRING
+DEFINE l_frontend STRING
 
     LET d_da = NULL
     CALL m_data.clear()
@@ -1441,7 +1442,6 @@ DEFINE l_event STRING
                         
                     WHEN "ON ACTION copyall"
                         -- if selectionmode=1 have to store away current values and reset
-                        -- otherwise if can do this
                         IF m_zoom.multiplerow THEN
                             -- save away current selected rows
                             CALL l_selected.clear()
@@ -1454,11 +1454,14 @@ DEFINE l_event STRING
                         CALL d_da.setSelectionRange("data",1,-1,1)
                         LET l_datatocopy =  d_da.selectionToString("data")
 
-                        CASE ui.Interface.getFrontEndName() 
-                            WHEN "GDC"
-                                -- For GDC, display to GWC TextEdit
+                        LET l_frontend = ui.Interface.getFrontEndName()
+                        CASE
+                            WHEN l_frontend = "GDC"
+                                -- For GDC, use frontcall to populate clipboard
                                 CALL ui.Interface.frontCall("standard","cbset",l_datatocopy,ok)
-                            WHEN "GWC"
+                            WHEN l_frontend = "GWC" OR l_frontend = "GBC"
+                                -- For GWC can't write to clipboard, use the technique of putting 
+                                -- in an editable textedit where user can select and copy
                                 OPEN WINDOW clip WITH FORM "fgl_zoom_webcopy" ATTRIBUTES(STYLE="fgl_zoom", TEXT="Select All and Copy to Clipboard")
                                 INPUT BY NAME l_datatocopy ATTRIBUTES(WITHOUT DEFAULTS=TRUE, ACCEPT=FALSE)
                                 LET int_flag = 0
@@ -1467,7 +1470,7 @@ DEFINE l_event STRING
                 
                         CALL d_da.setSelectionRange("data",1,-1,0)
                         IF m_zoom.multiplerow THEN
-                            -- restore previoulsy selected rows
+                            -- restore previously selected rows
                             FOR i = 1 TO l_row_count
                                 CALL d_da.setSelectionRange("data",i,i,l_selected[i])
                             END FOR
@@ -1789,7 +1792,7 @@ DEFINE i INTEGER
     #TODO check this now generic fields in use
     CALL FGL_WINMESSAGE("Info","Not implemented yet","stop")
     RETURN
- 
+ {
    IF fgl_report_loadCurrentSettings("") THEN
       CALL fgl_report_setCallbackLocalization(TRUE)
       CALL fgl_report_setAutoformatType("FLAT LIST")
@@ -1809,10 +1812,11 @@ DEFINE i INTEGER
       END FOR
       FINISH REPORT zoom_rpt
    END IF
+   }
 END FUNCTION
 
 
-
+{
 REPORT zoom_rpt(l_row)
 DEFINE l_row INTEGER
 DEFINE l_column INTEGER
@@ -1866,7 +1870,7 @@ DEFINE first BOOLEAN
    RETURN sb.toString()
 END FUNCTION
 
-
+}
 
 
 
