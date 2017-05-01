@@ -109,7 +109,7 @@ FUNCTION init()
    LET m_custom_arr[2].justify = "left"
    LET m_custom_arr[2].excludeqbe2 = FALSE
    LET m_custom_arr[2].excludelist2 = FALSE
-   LET m_custom_arr[2].includeinresult = TRUE
+   LET m_custom_arr[2].includeinresult = FALSE
    LET m_custom_arr[2].qbeforce2 = FALSE
    
    LET m_custom_arr[3].columnname = "date_created"
@@ -120,7 +120,7 @@ FUNCTION init()
    LET m_custom_arr[3].justify = "center"
    LET m_custom_arr[3].excludeqbe2 = FALSE
    LET m_custom_arr[3].excludelist2 = FALSE
-   LET m_custom_arr[3].includeinresult = TRUE
+   LET m_custom_arr[3].includeinresult = FALSE
    LET m_custom_arr[3].qbeforce2 = FALSE
 
    LET m_custom_arr[4].columnname = "time_created"
@@ -131,7 +131,7 @@ FUNCTION init()
    LET m_custom_arr[4].justify = "center"
    LET m_custom_arr[4].excludeqbe2 = FALSE
    LET m_custom_arr[4].excludelist2 = FALSE
-   LET m_custom_arr[4].includeinresult = TRUE
+   LET m_custom_arr[4].includeinresult = FALSE
    LET m_custom_arr[4].qbeforce2 = FALSE
 
    LET m_custom_arr[5].columnname = "quantity"
@@ -142,7 +142,7 @@ FUNCTION init()
    LET m_custom_arr[5].justify = "right"
    LET m_custom_arr[5].excludeqbe2 = FALSE
    LET m_custom_arr[5].excludelist2 = FALSE
-   LET m_custom_arr[5].includeinresult = TRUE
+   LET m_custom_arr[5].includeinresult = FALSE
    LET m_custom_arr[5].qbeforce2 = FALSE
 
    LET m_custom_arr[6].columnname = "price"
@@ -153,7 +153,7 @@ FUNCTION init()
    LET m_custom_arr[6].justify = "right"
    LET m_custom_arr[6].excludeqbe2 = FALSE
    LET m_custom_arr[6].excludelist2 = FALSE
-   LET m_custom_arr[6].includeinresult = TRUE
+   LET m_custom_arr[6].includeinresult = FALSE
    LET m_custom_arr[6].qbeforce2 = FALSE
 
    INITIALIZE m_custom_result.* TO NULL
