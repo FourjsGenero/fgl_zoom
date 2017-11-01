@@ -16,7 +16,9 @@ The fgl_zoom_test program consists of a form of three tabs
 Illustrates potential uses.  Click on the BUTTONEDIT button and note the window that appears.  To view the 4gl source, the Junior Developer code would require click on the View Source.  In most cases, it is less than a screenfull of 4gl source.  The state code example in the previous screenshot has the following source.
 
 <img alt="State Code Example" src="" width="50%" /><img alt="Source Example" src="" width="50%" />
+
 <img alt="More complex Customer Code Example" src="" width="50%" /><img alt="Source Example" src="" width="50%" />
+
 <img alt="Auto Example" src="" width="50%" /><img alt="Source Example" src="" width="50%" />
 
 ### Functional Test
@@ -27,7 +29,9 @@ fgl_zoom has a number of configuration parameters.  The functional test tab is u
 The custom tab allows you to experiment and create some fgl_zoom code.  Enter the appropriate parameters, click Execute to run the zoom window, click View Source to see the 4gl source required in your program.
 
 <img alt="Example Screen" src="" width="50%" />
+
 <img alt="Example Screen" src="" width="50%" />
+
 <img alt="Example Screen" src="" width="50%" />
 
 ## Options
