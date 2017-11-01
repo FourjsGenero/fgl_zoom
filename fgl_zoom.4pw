@@ -83,9 +83,7 @@
       <VirtualFolder label="Documentation">
         <File filePath="CHANGES.txt"/>
         <File filePath="COMPATABILITY.txt"/>
-        <File filePath="FILELIST.txt"/>
         <File filePath="INSTALL.txt"/>
-        <File filePath="INSTALL_TEST.txt"/>
         <File filePath="README.txt"/>
         <File filePath="TODO.txt"/>
       </VirtualFolder>
