@@ -43,7 +43,8 @@ DEFINE m_example RECORD
     store_code INTEGER,
     customer_code INTEGER,
     country_code CHAR(3),
-    auto_code INTEGER
+    auto_code INTEGER,
+    state_code_label CHAR(2)
 END RECORD
 
 
@@ -65,9 +66,12 @@ END FUNCTION
 #+ Allow the user to run the various examples
 FUNCTION test()
 DEFINE l_mode STRING
+DEFINE l_state_code CHAR(2)
+DEFINE l_state_name CHAR(20)
 
     DIALOG ATTRIBUTES(UNBUFFERED)
         INPUT BY NAME m_example.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
+                    
             ON ACTION zoom INFIELD state_code
                 LET m_example.state_code = zoom_state(FGL_DIALOG_GETBUFFER())
 
@@ -82,6 +86,13 @@ DEFINE l_mode STRING
 
             ON ACTION zoom INFIELD auto_code
                 LET m_example.auto_code = zoom_auto(FGL_DIALOG_GETBUFFER())
+
+            ON ACTION zoom INFIELD state_code_label
+                CALL zoom_state_label() RETURNING l_state_code, l_state_name
+                IF l_state_code IS NOT NULL THEN
+                    LET m_example.state_code_label = l_state_code
+                    DISPLAY l_state_name TO state_name_label
+                END IF
                 
               
             ON ACTION functionaltest
@@ -106,6 +117,9 @@ DEFINE l_mode STRING
 
             ON ACTION view_source INFIELD auto_code
                 CALL show_function_source("zoom_auto")
+
+            ON ACTION view_source INFIELD state_code_label
+                CALL show_function_source("zoom_state_label")
 
             ON ACTION CLOSE ATTRIBUTES(TEXT="view Source") 
                 LET l_mode = "exit"
@@ -233,6 +247,36 @@ END FUNCTION
 
 
 
+#+ A zoom window to select the state code
+#+
+#+ This example displays only the sname field and returns the state code
+#+ It is ordered sname before code so that the visible sname column is used by 
+#+ the goto functionality
+PRIVATE FUNCTION zoom_state_label()
+DEFINE l_state_code CHAR(2)
+DEFINE l_state_name CHAR(20)
+
+    CALL fgl_zoom.init()
+    CALL fgl_zoom.noqbe_set(TRUE)
+    CALL fgl_zoom.title_set("Select State")
+    CALL fgl_zoom.sql_set("SELECT state_code, state_name FROM fgl_zoom_state ORDER BY state_name")
+   
+    CALL fgl_zoom.column_quick_set(1,"state_code","c",2, "Code")
+    CALL fgl_zoom.column_includeinresult_set(1,TRUE)
+   
+    CALL fgl_zoom.column_quick_set(2,"state_name","c", 20, "Name")
+    CALL fgl_zoom.column_includeinresult_set(2,TRUE)
+
+    CALL fgl_zoom.execute()
+    IF fgl_zoom.ok() THEN
+        LET l_state_code = fgl_zoom.result_get(1,1)
+        LET l_state_name = fgl_zoom.result_get(1,2)
+    END IF
+    RETURN l_state_code, l_state_name
+END FUNCTION
+
+
+
 #+ show the source in each function
 PRIVATE FUNCTION show_function_source(l_function)
 DEFINE l_function STRING
@@ -269,6 +313,10 @@ DEFINE l_read BOOLEAN
 
     CALL FGL_WINMESSAGE("Info", sb.toString(),"")
 END FUNCTION
+
+
+
+
 
 
 

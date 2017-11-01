@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <WorkspaceViewState version="1.0">
   <ExpandedNodes>
-    <Node path="/fgl_zoom.4pw" type="pm/main-project"/>
+    <Node path="fgl_zoom.4pw" type="pm/main-project"/>
+    <Node path="fgl_zoom.4pw/fgl_zoom" type="pm/group"/>
+    <Node path="fgl_zoom.4pw/fgl_zoom/fgl_zoom_lib" type="pm/library"/>
+    <Node path="fgl_zoom.4pw/fgl_zoom/fgl_zoom_resources" type="pm/library"/>
+    <Node path="fgl_zoom.4pw/fgl_zoom_test" type="pm/group"/>
+    <Node path="fgl_zoom.4pw/fgl_zoom_test/fgl_zoom_test" type="pm/application"/>
+    <Node path="fgl_zoom.4pw/fgl_zoom_test/fgl_zoom_test/ImportFGL" type="pm/virtual-folder"/>
   </ExpandedNodes>
-  <OpenDocuments/>
+  <OpenDocuments>
+    <Document container="true" filePath="fgl_zoom.4gl" locator="1:1" module="mod-ce3">
+      <Data name="8" value="UTF-8"/>
+    </Document>
+    <Document container="true" filePath="fgl_zoom_custom.4gl" locator="1:1" module="mod-ce3">
+      <Data name="8" value="UTF-8"/>
+    </Document>
+    <Document container="true" filePath="fgl_zoom_example.4gl" locator="1:1" module="mod-ce3">
+      <Data name="8" value="UTF-8"/>
+    </Document>
+    <Document container="true" filePath="fgl_zoom_test_example.per" locator="1:1" module="mod-ce3">
+      <Data name="8" value="UTF-8"/>
+    </Document>
+    <Document container="true" filePath="fgl_zoom_test.4gl" locator="1:1" module="mod-ce3">
+      <Data name="8" value="UTF-8"/>
+    </Document>
+    <Document container="true" filePath="fgl_zoom_test.4st" locator="75:31" module="mod-ce3">
+      <Data name="8" value="UTF-8"/>
+    </Document>
+  </OpenDocuments>
+  <CurrentDocument filePath="fgl_zoom_test.4st" module="mod-ce3"/>
 </WorkspaceViewState>

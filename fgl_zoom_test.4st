@@ -65,6 +65,7 @@ January 2011 Reuben Barclay reuben@4js.com.au
       <StyleAttribute name="resizeFillsEmptySpace" value="no" />
       <StyleAttribute name="highlightCurrentRow" value="yes" />
       <StyleAttribute name="forceDefaultSettings" value="yes" />
+      <StyleAttribute name="allowWebSelection" value="yes" />
    </Style>
   
    <Style name="Table.fgl_zoom:even">

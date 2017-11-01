@@ -5,11 +5,12 @@ END
 LAYOUT
 GRID 
 {
-State    [e1  ]    
-Customer [e2     ] 
-Store    [e3     ] 
-Country  [e4   ]   
-Auto     [e5  ]
+State         [e1  ]    
+Customer      [e2     ] 
+Store         [e3     ] 
+Country       [e4   ]   
+Auto          [e5  ]
+State (Label) [e6  |l6                    ]
 }
 END -- GRID
 END --LAYOUT
@@ -20,3 +21,5 @@ BUTTONEDIT e2=formonly.customer_code, ACTION=zoom, COMMENT="Customer Example";
 BUTTONEDIT e3=formonly.store_code, ACTION=zoom, COMMENT="Store Example";
 BUTTONEDIT e4=formonly.country_code, ACTION=zoom, COMMENT="Country Example";
 BUTTONEDIT e5=formonly.auto_code, ACTION=zoom, COMMENT="Auto Example";
+BUTTONEDIT e6 = formonly.state_code_label, ACTION=zoom, COMMENT="State Example with label", NOTEDITABLE;
+LABEL      l6 = formonly.state_name_label;

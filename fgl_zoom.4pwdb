@@ -1,379 +1,412 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<WorkspaceDatabase fileContentsEncoding="UTF-8" options="3" version="2.0">
-<File m="fgl_zoom" n="fgl_zoom.4gl" ts="20151023153013000">
-<Fct c="10" el="605" l="600" n="column_excludeqbe_set(i INTEGER,l_excludeqbe BOOLEAN)" t="F"/>
-<Fct c="18" el="1316" l="1132" n="zoom_list()" t="F">
-<Call c="43" l="1152" n="columnlist_get" t="F"/>
-<Call c="18" l="1182" n="fgl_winMessage" t="F"/>
-<Call c="18" l="1190" n="zoom_add_row_to_result" t="F"/>
-<Call c="34" l="1224" n="fgl_winMessage" t="F"/>
-<Call c="30" l="1272" n="zoom_print" t="F"/>
-<Call c="46" l="1300" n="zoom_add_row_to_result" t="F"/>
-<Call c="38" l="1304" n="zoom_add_row_to_result" t="F"/>
+<WorkspaceDatabase fileContentsEncoding="UTF-8" version="2.0">
+<File m="fgl_zoom" n="fgl_zoom.4gl" ts="20171102084920004">
+<Fct c="18" el="1946" l="1932" n="init_fields()" t="F"/>
+<Fct c="18" el="1928" l="1848" n="create_form()" t="F">
+<Call c="10" l="1927" n="append_freeze_style" t="F"/>
 </Fct>
-<Fct c="10" el="560" l="555" n="column_datatypec_set(i INTEGER,l_datatypec CHAR(1))" t="F"/>
-<Fct c="10" el="537" l="532" n="column_format_set(i INTEGER,l_format STRING)" t="F"/>
-<Fct c="10" el="496" l="491" n="column_title_set(i INTEGER,l_title STRING)" t="F"/>
-<Fct c="10" el="517" l="512" n="column_width_set(i INTEGER,l_width INTEGER)" t="F"/>
-<Fct c="18" el="1120" l="1011" n="zoom_qbe()" t="F">
-<Call c="26" l="1041" n="action_text_set" t="F"/>
+<Fct c="18" el="1785" l="1757" n="zoom_print()" t="F">
+<Call c="10" i="fgldialog" l="1762" n="fgl_winMessage" t="F"/>
 </Fct>
-<Fct c="18" el="1761" l="1747" n="init_fields()" t="F"/>
-<Fct c="10" el="978" l="972" n="result_rowlength_get(l_row INTEGER)" t="F"/>
-<Fct c="18" el="1743" l="1663" n="create_form()" t="F">
-<Call c="10" l="1742" n="append_freeze_style" t="F"/>
+<Fct c="18" el="1753" l="1740" n="append_freeze_style()" t="F"/>
+<Fct c="18" el="1735" l="1724" n="columnlist_get()" t="F"/>
+<Fct c="18" el="1706" l="1651" n="validate()" t="F"/>
+<Fct c="18" el="1647" l="1557" n="normalise()" t="F"/>
+<Fct c="18" el="1552" l="1537" n="show_hide_columns(l_mode STRING)" t="F"/>
+<Fct c="18" el="1532" l="1520" n="zoom_add_row_to_result(l_row INTEGER)" t="F"/>
+<Fct c="18" el="1516" l="1339" n="zoom_list()" t="F">
+<Call c="43" l="1360" n="columnlist_get" t="F"/>
+<Call c="18" i="fgldialog" l="1390" n="fgl_winMessage" t="F"/>
+<Call c="18" l="1398" n="zoom_add_row_to_result" t="F"/>
+<Call c="34" i="fgldialog" l="1432" n="fgl_winMessage" t="F"/>
+<Call c="30" l="1470" n="zoom_print" t="F"/>
+<Call c="46" l="1498" n="zoom_add_row_to_result" t="F"/>
+<Call c="38" l="1502" n="zoom_add_row_to_result" t="F"/>
 </Fct>
-<Fct c="10" el="476" l="471" n="column_columnname_set(i INTEGER,l_columnname STRING)" t="F"/>
-<Fct c="10" el="1001" l="997" n="ok()" t="F"/>
-<Fct c="10" el="933" l="920" n="result_get(l_row INTEGER,l_col INTEGER)" t="F">
-<Call c="22" l="925" n="result_length_get" t="F"/>
-<Call c="22" l="927" n="result_rowlength_get" t="F"/>
+<Fct c="18" el="1327" l="1218" n="zoom_qbe()" t="F"/>
+<Fct c="10" el="1208" l="1204" n="ok()" t="F"/>
+<Fct c="10" el="1185" l="1179" n="result_rowlength_get(l_row INTEGER)" t="F"/>
+<Fct c="10" el="1160" l="1155" n="result_length_get()" t="F"/>
+<Fct c="10" el="1140" l="1127" n="result_get(l_row INTEGER,l_col INTEGER)" t="F">
+<Call c="22" l="1132" n="result_length_get" t="F"/>
+<Call c="22" l="1134" n="result_rowlength_get" t="F"/>
 </Fct>
-<Fct c="10" el="438" l="434" n="freezeright_set(l_freezeright INTEGER)" t="F"/>
-<Fct c="10" el="953" l="948" n="result_length_get()" t="F"/>
-<Fct c="10" el="455" l="451" n="qbeforce_set(l_qbeforce BOOLEAN)" t="F"/>
-<Fct c="10" el="897" l="882" n="qbe_get()" t="F"/>
-<Fct c="18" el="1655" l="1637" n="create_report_field_string()" t="F"/>
-<Fct c="10" el="402" l="398" n="maxrow_set(l_maxrow INTEGER)" t="F"/>
-<Fct c="10" el="421" l="417" n="freezeleft_set(l_freezeleft INTEGER)" t="F"/>
-<Fct c="10" el="861" l="859" n="where_get()" t="F"/>
-<Fct c="10" el="1635" l="1619" n="report_getFieldCaption(matchName STRING,fieldName STRING)" t="F"/>
-<Fct c="10" el="360" l="356" n="autoselect_set(l_autoselect BOOLEAN)" t="F"/>
-<Fct c="10" el="383" l="379" n="multiplerow_set(l_multiplerow BOOLEAN)" t="F"/>
-<Fct c="10" el="808" l="749" n="execute()" t="F">
-<Call c="10" l="771" n="normalise" t="F"/>
-<Call c="10" l="772" n="validate" t="F"/>
-<Call c="14" l="775" n="fgl_winMessage" t="F"/>
-<Call c="10" l="781" n="create_form" t="F"/>
-<Call c="14" l="801" n="show_hide_columns" t="F"/>
-<Call c="29" l="803" n="zoom_qbe" t="F"/>
-<Call c="30" l="804" n="zoom_list" t="F"/>
+<Fct c="10" el="1104" l="1089" n="qbe_get()" t="F"/>
+<Fct c="10" el="1068" l="1066" n="where_get()" t="F"/>
+<Fct c="10" el="1046" l="1036" n="call()" t="F">
+<Call c="10" l="1039" n="execute" t="F"/>
 </Fct>
-<Fct c="10" el="314" l="310" n="nolist_set(l_nolist BOOLEAN)" t="F"/>
-<Fct c="8" el="1617" l="1605" n="zoom_rpt(l_row INTEGER)" t="R"/>
-<Fct c="10" el="839" l="829" n="call()" t="F">
-<Call c="10" l="832" n="execute" t="F"/>
+<Fct c="10" el="1015" l="956" n="execute()" t="F">
+<Call c="10" l="978" n="normalise" t="F"/>
+<Call c="10" l="979" n="validate" t="F"/>
+<Call c="14" i="fgldialog" l="982" n="fgl_winMessage" t="F"/>
+<Call c="10" l="988" n="create_form" t="F"/>
+<Call c="14" l="1008" n="show_hide_columns" t="F"/>
+<Call c="29" l="1010" n="zoom_qbe" t="F"/>
+<Call c="30" l="1011" n="zoom_list" t="F"/>
 </Fct>
-<Fct c="18" el="1571" l="1558" n="action_text_set(l_action STRING,l_text STRING)" t="F"/>
-<Fct c="10" el="338" l="334" n="gotolist_set(l_gotolist BOOLEAN)" t="F"/>
-<Fct c="10" el="730" l="713" n="column_quick_set(i INTEGER,l_column_name STRING,l_datatypec CHAR(1),l_width INTEGER,l_title STRING)" t="F">
-<Call c="9" l="720" n="column_columnname_set" t="F"/>
-<Call c="9" l="721" n="column_title_set" t="F"/>
-<Call c="9" l="722" n="column_datatypec_set" t="F"/>
-<Call c="12" l="724" n="column_width_set" t="F"/>
-<Call c="9" l="726" n="column_includeinresult_set" t="F"/>
-<Call c="12" l="728" n="column_justify_set" t="F"/>
+<Fct c="18" el="937" l="901" n="columnname_to_title(l_name STRING)" t="F"/>
+<Fct c="18" el="897" l="775" n="datatype_to_columnparam(l_datatype STRING)" t="F"/>
+<Fct c="10" el="771" l="742" n="column_auto_set()" t="F">
+<Call c="14" l="765" n="datatype_to_columnparam" t="F"/>
+<Call c="14" l="766" n="columnname_to_title" t="F"/>
+<Call c="14" l="768" n="column_quick_set" t="F"/>
 </Fct>
-<Fct c="10" el="272" l="268" n="cancelvalue_set(l_cancelvalue STRING)" t="F"/>
-<Fct c="18" el="1601" l="1576" n="zoom_print()" t="F">
-<Call c="7" l="1582" n="fgl_report_loadCurrentSettings" t="F"/>
-<Call c="12" l="1583" n="fgl_report_setCallbackLocalization" t="F"/>
-<Call c="12" l="1584" n="fgl_report_setAutoformatType" t="F"/>
-<Call c="12" l="1585" n="fgl_report_configureAutoformatOutput" t="F"/>
-<Call c="75" l="1585" n="create_report_field_string" t="F"/>
-<Call c="12" l="1586" n="fgl_report_configurePageSize" t="F"/>
-<Call c="12" l="1587" n="fgl_report_configureXLSDevice" t="F"/>
-<Call c="12" l="1588" n="fgl_report_setTitle" t="F"/>
-<Call c="12" l="1590" n="fgl_report_selectDevice" t="F"/>
-<Call c="12" l="1591" n="fgl_report_selectPreview" t="F"/>
-<Call c="17" l="1593" n="fgl_report_commitCurrentSettings" t="F"/>
-<Call c="20" l="1595" n="zoom_rpt" t="R"/>
-<Call c="27" l="1597" n="zoom_rpt" t="R"/>
-<Call c="21" l="1599" n="zoom_rpt" t="R"/>
+<Fct c="10" el="729" l="712" n="column_quick_set(i INTEGER,l_column_name STRING,l_datatypec CHAR(1),l_width INTEGER,l_title STRING)" t="F">
+<Call c="9" l="719" n="column_columnname_set" t="F"/>
+<Call c="9" l="720" n="column_title_set" t="F"/>
+<Call c="9" l="721" n="column_datatypec_set" t="F"/>
+<Call c="12" l="723" n="column_width_set" t="F"/>
+<Call c="9" l="725" n="column_includeinresult_set" t="F"/>
+<Call c="12" l="727" n="column_justify_set" t="F"/>
 </Fct>
-<Fct c="10" el="294" l="290" n="noqbe_set(l_noqbe BOOLEAN)" t="F"/>
-<Fct c="10" el="236" l="232" n="sql_set(l_sql STRING)" t="F"/>
-<Fct c="18" el="1535" l="1524" n="columnlist_get()" t="F"/>
-<Fct c="10" el="253" l="249" n="title_set(l_title STRING)" t="F"/>
-<Fct c="10" el="674" l="669" n="column_qbedefault_set(i INTEGER,l_qbedefault STRING)" t="F"/>
-<Fct c="18" el="1553" l="1540" n="append_freeze_style()" t="F"/>
-<Fct c="10" el="694" l="689" n="column_qbeforce_set(i INTEGER,l_qbeforce BOOLEAN)" t="F"/>
-<Fct c="10" el="207" l="182" n="property_column_set(l_property STRING,i INTEGER,l_value STRING)" t="F">
-<Call c="30" l="193" n="column_columnname_set" t="F"/>
-<Call c="25" l="194" n="column_title_set" t="F"/>
-<Call c="25" l="195" n="column_width_set" t="F"/>
-<Call c="26" l="196" n="column_format_set" t="F"/>
-<Call c="29" l="197" n="column_datatypec_set" t="F"/>
-<Call c="27" l="198" n="column_justify_set" t="F"/>
-<Call c="30" l="199" n="column_excludeqbe_set" t="F"/>
-<Call c="31" l="200" n="column_excludelist_set" t="F"/>
-<Call c="35" l="201" n="column_includeinresult_set" t="F"/>
-<Call c="30" l="202" n="column_qbedefault_set" t="F"/>
-<Call c="28" l="203" n="column_qbeforce_set" t="F"/>
+<Fct c="10" el="693" l="688" n="column_qbeforce_set(i INTEGER,l_qbeforce BOOLEAN)" t="F"/>
+<Fct c="10" el="673" l="668" n="column_qbedefault_set(i INTEGER,l_qbedefault STRING)" t="F"/>
+<Fct c="10" el="653" l="648" n="column_includeinresult_set(i INTEGER,l_includeinresult BOOLEAN)" t="F"/>
+<Fct c="10" el="627" l="622" n="column_excludelist_set(i INTEGER,l_excludelist BOOLEAN)" t="F"/>
+<Fct c="10" el="604" l="599" n="column_excludeqbe_set(i INTEGER,l_excludeqbe BOOLEAN)" t="F"/>
+<Fct c="10" el="580" l="575" n="column_justify_set(i INTEGER,l_justify STRING)" t="F"/>
+<Fct c="10" el="559" l="554" n="column_datatypec_set(i INTEGER,l_datatypec CHAR(1))" t="F"/>
+<Fct c="10" el="536" l="531" n="column_format_set(i INTEGER,l_format STRING)" t="F"/>
+<Fct c="10" el="516" l="511" n="column_width_set(i INTEGER,l_width INTEGER)" t="F"/>
+<Fct c="10" el="495" l="490" n="column_title_set(i INTEGER,l_title STRING)" t="F"/>
+<Fct c="10" el="475" l="470" n="column_columnname_set(i INTEGER,l_columnname STRING)" t="F"/>
+<Fct c="10" el="454" l="450" n="qbeforce_set(l_qbeforce BOOLEAN)" t="F"/>
+<Fct c="10" el="437" l="433" n="freezeright_set(l_freezeright INTEGER)" t="F"/>
+<Fct c="10" el="420" l="416" n="freezeleft_set(l_freezeleft INTEGER)" t="F"/>
+<Fct c="10" el="401" l="397" n="maxrow_set(l_maxrow INTEGER)" t="F"/>
+<Fct c="10" el="382" l="378" n="multiplerow_set(l_multiplerow BOOLEAN)" t="F"/>
+<Fct c="10" el="359" l="355" n="autoselect_set(l_autoselect BOOLEAN)" t="F"/>
+<Fct c="10" el="337" l="333" n="gotolist_set(l_gotolist BOOLEAN)" t="F"/>
+<Fct c="10" el="313" l="309" n="nolist_set(l_nolist BOOLEAN)" t="F"/>
+<Fct c="10" el="293" l="289" n="noqbe_set(l_noqbe BOOLEAN)" t="F"/>
+<Fct c="10" el="271" l="267" n="cancelvalue_set(l_cancelvalue STRING)" t="F"/>
+<Fct c="10" el="252" l="248" n="title_set(l_title STRING)" t="F"/>
+<Fct c="10" el="235" l="231" n="sql_set(l_sql STRING)" t="F"/>
+<Fct c="10" el="206" l="181" n="property_column_set(l_property STRING,i INTEGER,l_value STRING)" t="F">
+<Call c="30" l="192" n="column_columnname_set" t="F"/>
+<Call c="25" l="193" n="column_title_set" t="F"/>
+<Call c="25" l="194" n="column_width_set" t="F"/>
+<Call c="26" l="195" n="column_format_set" t="F"/>
+<Call c="29" l="196" n="column_datatypec_set" t="F"/>
+<Call c="27" l="197" n="column_justify_set" t="F"/>
+<Call c="30" l="198" n="column_excludeqbe_set" t="F"/>
+<Call c="31" l="199" n="column_excludelist_set" t="F"/>
+<Call c="35" l="200" n="column_includeinresult_set" t="F"/>
+<Call c="30" l="201" n="column_qbedefault_set" t="F"/>
+<Call c="28" l="202" n="column_qbeforce_set" t="F"/>
 </Fct>
-<Fct c="18" el="1506" l="1451" n="validate()" t="F"/>
-<Fct c="10" el="654" l="649" n="column_includeinresult_set(i INTEGER,l_includeinresult BOOLEAN)" t="F"/>
-<Fct c="10" el="164" l="142" n="property_set(l_property STRING,l_value STRING)" t="F">
-<Call c="23" l="149" n="sql_set" t="F"/>
-<Call c="25" l="150" n="title_set" t="F"/>
-<Call c="31" l="151" n="cancelvalue_set" t="F"/>
-<Call c="25" l="152" n="noqbe_set" t="F"/>
-<Call c="26" l="153" n="nolist_set" t="F"/>
-<Call c="28" l="154" n="gotolist_set" t="F"/>
-<Call c="30" l="155" n="autoselect_set" t="F"/>
-<Call c="31" l="156" n="multiplerow_set" t="F"/>
-<Call c="26" l="157" n="maxrow_set" t="F"/>
-<Call c="30" l="158" n="freezeleft_set" t="F"/>
-<Call c="31" l="159" n="freezeright_set" t="F"/>
-<Call c="28" l="160" n="qbeforce_set" t="F"/>
+<Fct c="10" el="163" l="141" n="property_set(l_property STRING,l_value STRING)" t="F">
+<Call c="23" l="148" n="sql_set" t="F"/>
+<Call c="25" l="149" n="title_set" t="F"/>
+<Call c="31" l="150" n="cancelvalue_set" t="F"/>
+<Call c="25" l="151" n="noqbe_set" t="F"/>
+<Call c="26" l="152" n="nolist_set" t="F"/>
+<Call c="28" l="153" n="gotolist_set" t="F"/>
+<Call c="30" l="154" n="autoselect_set" t="F"/>
+<Call c="31" l="155" n="multiplerow_set" t="F"/>
+<Call c="26" l="156" n="maxrow_set" t="F"/>
+<Call c="30" l="157" n="freezeleft_set" t="F"/>
+<Call c="31" l="158" n="freezeright_set" t="F"/>
+<Call c="28" l="159" n="qbeforce_set" t="F"/>
 </Fct>
-<Fct c="18" el="1352" l="1337" n="show_hide_columns(l_mode STRING)" t="F"/>
-<Fct c="10" el="628" l="623" n="column_excludelist_set(i INTEGER,l_excludelist BOOLEAN)" t="F"/>
-<Fct c="18" el="1447" l="1357" n="normalise()" t="F"/>
-<Fct c="18" el="88" l="86" n="exception()" t="F"/>
-<Fct c="18" el="95" l="93" n="version()" t="F"/>
-<Fct c="10" el="581" l="576" n="column_justify_set(i INTEGER,l_justify STRING)" t="F"/>
-<Fct c="18" el="1332" l="1320" n="zoom_add_row_to_result(l_row INTEGER)" t="F"/>
-<Fct c="10" el="123" l="106" n="init()" t="F"/>
+<Fct c="10" el="122" l="105" n="init()" t="F"/>
+<Fct c="18" el="94" l="92" n="version()" t="F"/>
+<Fct c="18" el="87" l="85" n="exception()" t="F"/>
+<Todo l="787" t="test all possibilities, refine width values"/>
+<Todo l="916" t="test this bit"/>
+<Todo l="1761" t="check this now generic fields in use"/>
+<Todo l="1938" t="consider removing one character shortcut and force use of full datatype name"/>
 </File>
-<File m="" n="fgl_zoom_webcopy.per" ts="20151023153013000"/>
-<File m="fgl_zoom_custom" n="fgl_zoom_custom.4gl" ts="20151023153013000">
+<File m="fgl_zoom_custom" n="fgl_zoom_custom.4gl" ts="20170714100747371">
 <Dep t="fgl_zoom.4gl"/>
-<Fct c="10" el="160" l="80" n="init()" t="F"/>
-<Fct c="18" el="428" l="418" n="populate_selected_row()" t="F">
-<Call c="28" l="424" n="result_length_get" p="fgl_zoom.4gl" t="F"/>
+<Fct c="10" el="447" l="444" n="abc()" t="F"/>
+<Fct c="18" el="442" l="432" n="populate_selected_row()" t="F">
+<Call c="28" i="fgl_zoom" l="438" n="result_length_get" p="fgl_zoom.4gl" t="F"/>
 </Fct>
-<Fct c="18" el="414" l="400" n="populate_selected_column()" t="F">
-<Call c="16" l="406" n="result_length_get" p="fgl_zoom.4gl" t="F"/>
-<Call c="31" l="407" n="result_rowlength_get" p="fgl_zoom.4gl" t="F"/>
+<Fct c="18" el="428" l="414" n="populate_selected_column()" t="F">
+<Call c="16" i="fgl_zoom" l="420" n="result_length_get" p="fgl_zoom.4gl" t="F"/>
+<Call c="31" i="fgl_zoom" l="421" n="result_rowlength_get" p="fgl_zoom.4gl" t="F"/>
 </Fct>
-<Fct c="18" el="76" l="74" n="exception()" t="F"/>
-<Fct c="18" el="396" l="260" n="viewsource()" t="F"/>
-<Fct c="10" el="257" l="164" n="test()" t="F">
-<Call c="50" l="186" n="result_get" p="fgl_zoom.4gl" t="F"/>
-<Call c="50" l="189" n="result_get" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="193" n="init" t="F"/>
-<Call c="24" l="194" n="sql_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="195" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="196" n="cancelvalue_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="197" n="noqbe_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="198" n="nolist_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="199" n="gotolist_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="200" n="autoselect_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="201" n="multiplerow_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="202" n="maxrow_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="203" n="freezeleft_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="204" n="freezeright_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="205" n="qbeforce_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="208" n="column_columnname_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="209" n="column_title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="210" n="column_width_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="211" n="column_format_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="212" n="column_datatypec_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="213" n="column_justify_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="214" n="column_excludeqbe_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="215" n="column_excludelist_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="216" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="217" n="column_qbedefault_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="218" n="column_qbeforce_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="220" n="execute" p="fgl_zoom.4gl" t="F"/>
-<Call c="47" l="224" n="result_get" p="fgl_zoom.4gl" t="F"/>
-<Call c="54" l="225" n="where_get" p="fgl_zoom.4gl" t="F"/>
-<Call c="15" l="226" n="populate_selected_row" t="F"/>
-<Call c="15" l="227" n="populate_selected_column" t="F"/>
-<Call c="15" l="239" n="viewsource" t="F"/>
-<Call c="15" l="249" n="init" t="F"/>
+<Fct c="18" el="410" l="271" n="viewsource()" t="F"/>
+<Fct c="10" el="268" l="166" n="test()" t="F">
+<Call c="20" l="175" n="FGL_WINQUESTION" t="F"/>
+<Call c="50" i="fgl_zoom" l="194" n="result_get" p="fgl_zoom.4gl" t="F"/>
+<Call c="50" i="fgl_zoom" l="197" n="result_get" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="201" n="init" t="F"/>
+<Call c="24" i="fgl_zoom" l="202" n="sql_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="31" i="fgl_zoom" l="204" n="column_auto_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="206" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="207" n="cancelvalue_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="208" n="noqbe_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="209" n="nolist_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="210" n="gotolist_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="211" n="autoselect_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="212" n="multiplerow_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="213" n="maxrow_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="214" n="freezeleft_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="215" n="freezeright_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="216" n="qbeforce_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="219" n="column_columnname_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="220" n="column_title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="221" n="column_width_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="222" n="column_format_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="223" n="column_datatypec_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="224" n="column_justify_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="225" n="column_excludeqbe_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="226" n="column_excludelist_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="227" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="228" n="column_qbedefault_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="229" n="column_qbeforce_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="231" n="execute" p="fgl_zoom.4gl" t="F"/>
+<Call c="47" i="fgl_zoom" l="235" n="result_get" p="fgl_zoom.4gl" t="F"/>
+<Call c="54" i="fgl_zoom" l="236" n="where_get" p="fgl_zoom.4gl" t="F"/>
+<Call c="15" l="237" n="populate_selected_row" t="F"/>
+<Call c="15" l="238" n="populate_selected_column" t="F"/>
+<Call c="15" l="250" n="viewsource" t="F"/>
+<Call c="15" l="260" n="init" t="F"/>
 </Fct>
+<Fct c="10" el="162" l="81" n="init()" t="F"/>
+<Fct c="18" el="77" l="75" n="exception()" t="F"/>
 </File>
-<File m="fgl_zoom_example" n="fgl_zoom_example.4gl" ts="20151023153013000">
+<File m="fgl_zoom_example" n="fgl_zoom_example.4gl" ts="20170629211910680">
 <Dep t="fgl_zoom.4gl"/>
-<Fct c="18" el="138" l="121" n="zoom_state(l_current_value STRING)" t="F">
-<Call c="19" l="124" n="init" t="F"/>
-<Call c="19" l="125" n="noqbe_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="126" n="cancelvalue_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="127" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="128" n="sql_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="130" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="131" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="133" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="134" n="column_excludelist_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="135" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="21" l="137" n="call" p="fgl_zoom.4gl" t="F"/>
+<Fct c="18" el="315" l="281" n="show_function_source(l_function STRING)" t="F">
+<Call c="10" l="314" n="FGL_WINMESSAGE" t="F"/>
 </Fct>
-<Fct c="18" el="161" l="143" n="zoom_store(l_current_value STRING)" t="F">
-<Call c="19" l="146" n="init" t="F"/>
-<Call c="19" l="147" n="cancelvalue_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="148" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="149" n="sql_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="151" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="152" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="153" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="154" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="155" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="156" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="157" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="158" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="21" l="160" n="call" p="fgl_zoom.4gl" t="F"/>
+<Fct c="18" el="276" l="255" n="zoom_state_label()" t="F">
+<Call c="19" i="fgl_zoom" l="259" n="init" p="fgl_zoom_custom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="260" n="noqbe_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="261" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="262" n="sql_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="264" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="265" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="267" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="268" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="270" n="execute" p="fgl_zoom.4gl" t="F"/>
+<Call c="17" i="fgl_zoom" l="271" n="ok" p="fgl_zoom.4gl" t="F"/>
+<Call c="37" i="fgl_zoom" l="272" n="result_get" p="fgl_zoom.4gl" t="F"/>
+<Call c="37" i="fgl_zoom" l="273" n="result_get" p="fgl_zoom.4gl" t="F"/>
 </Fct>
-<Fct c="18" el="247" l="213" n="show_function_source(l_function STRING)" t="F">
-<Call c="10" l="246" n="FGL_WINMESSAGE" t="F"/>
+<Fct c="18" el="246" l="236" n="zoom_auto(l_current_value STRING)" t="F">
+<Call c="19" i="fgl_zoom" l="239" n="init" p="fgl_zoom_custom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="240" n="cancelvalue_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="241" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="242" n="sql_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="243" n="column_auto_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="21" i="fgl_zoom" l="245" n="call" p="fgl_zoom.4gl" t="F"/>
 </Fct>
-<Fct c="10" el="112" l="65" n="test()" t="F">
-<Call c="44" l="74" n="zoom_state" t="F"/>
-<Call c="47" l="77" n="zoom_customer" t="F"/>
-<Call c="44" l="80" n="zoom_store" t="F"/>
-<Call c="46" l="83" n="zoom_country" t="F"/>
-<Call c="22" l="94" n="show_function_source" t="F"/>
-<Call c="22" l="97" n="show_function_source" t="F"/>
-<Call c="22" l="100" n="show_function_source" t="F"/>
-<Call c="22" l="103" n="show_function_source" t="F"/>
+<Fct c="18" el="227" l="210" n="zoom_country(l_current_value STRING)" t="F">
+<Call c="19" i="fgl_zoom" l="213" n="init" p="fgl_zoom_custom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="214" n="cancelvalue_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="215" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="217" n="sql_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="219" n="gotolist_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="221" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="222" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="223" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="224" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="21" i="fgl_zoom" l="226" n="call" p="fgl_zoom.4gl" t="F"/>
 </Fct>
-<Fct c="18" el="53" l="51" n="exception()" t="F"/>
-<Fct c="10" el="60" l="58" n="init()" t="F"/>
-<Fct c="18" el="187" l="169" n="zoom_customer(l_current_value STRING)" t="F">
-<Call c="19" l="172" n="init" t="F"/>
-<Call c="19" l="173" n="cancelvalue_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="174" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="175" n="sql_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="177" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="178" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="179" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="180" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="181" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="182" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="184" n="freezeleft_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="21" l="186" n="call" p="fgl_zoom.4gl" t="F"/>
+<Fct c="18" el="206" l="188" n="zoom_customer(l_current_value STRING)" t="F">
+<Call c="19" i="fgl_zoom" l="191" n="init" p="fgl_zoom_custom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="192" n="cancelvalue_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="193" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="194" n="sql_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="196" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="197" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="198" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="199" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="200" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="201" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="203" n="freezeleft_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="21" i="fgl_zoom" l="205" n="call" p="fgl_zoom.4gl" t="F"/>
 </Fct>
-<Fct c="18" el="208" l="191" n="zoom_country(l_current_value STRING)" t="F">
-<Call c="19" l="194" n="init" t="F"/>
-<Call c="19" l="195" n="cancelvalue_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="196" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="198" n="sql_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="200" n="gotolist_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="202" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="203" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="204" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="19" l="205" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="21" l="207" n="call" p="fgl_zoom.4gl" t="F"/>
+<Fct c="18" el="180" l="162" n="zoom_store(l_current_value STRING)" t="F">
+<Call c="19" i="fgl_zoom" l="165" n="init" p="fgl_zoom_custom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="166" n="cancelvalue_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="167" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="168" n="sql_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="170" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="171" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="172" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="173" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="174" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="175" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="176" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="177" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="21" i="fgl_zoom" l="179" n="call" p="fgl_zoom.4gl" t="F"/>
 </Fct>
+<Fct c="18" el="157" l="140" n="zoom_state(l_current_value STRING)" t="F">
+<Call c="19" i="fgl_zoom" l="143" n="init" p="fgl_zoom_custom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="144" n="noqbe_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="145" n="cancelvalue_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="146" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="147" n="sql_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="149" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="150" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="152" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="153" n="column_excludelist_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="19" i="fgl_zoom" l="154" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="21" i="fgl_zoom" l="156" n="call" p="fgl_zoom.4gl" t="F"/>
+</Fct>
+<Fct c="10" el="131" l="67" n="test()" t="F">
+<Call c="44" l="76" n="zoom_state" t="F"/>
+<Call c="47" l="79" n="zoom_customer" t="F"/>
+<Call c="44" l="82" n="zoom_store" t="F"/>
+<Call c="46" l="85" n="zoom_country" t="F"/>
+<Call c="43" l="88" n="zoom_auto" t="F"/>
+<Call c="22" l="91" n="zoom_state_label" t="F"/>
+<Call c="22" l="107" n="show_function_source" t="F"/>
+<Call c="22" l="110" n="show_function_source" t="F"/>
+<Call c="22" l="113" n="show_function_source" t="F"/>
+<Call c="22" l="116" n="show_function_source" t="F"/>
+<Call c="22" l="119" n="show_function_source" t="F"/>
+<Call c="22" l="122" n="show_function_source" t="F"/>
+</Fct>
+<Fct c="10" el="62" l="60" n="init()" t="F"/>
+<Fct c="18" el="55" l="53" n="exception()" t="F"/>
 </File>
-<File m="fgl_zoom_functionaltest" n="fgl_zoom_functionaltest.4gl" ts="20151023153013000">
+<File m="fgl_zoom_functionaltest" n="fgl_zoom_functionaltest.4gl" ts="20170321152945230">
 <Dep t="fgl_zoom.4gl"/>
-<Fct c="10" el="284" l="76" n="test()" t="F">
+<Fct c="18" el="325" l="298" n="base_init()" t="F">
+<Call c="18" i="fgl_zoom" l="299" n="init" p="fgl_zoom_custom.4gl" t="F"/>
+<Call c="18" i="fgl_zoom" l="300" n="sql_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="18" i="fgl_zoom" l="301" n="cancelvalue_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="18" i="fgl_zoom" l="304" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="18" i="fgl_zoom" l="307" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="18" i="fgl_zoom" l="310" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="18" i="fgl_zoom" l="311" n="column_format_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="18" i="fgl_zoom" l="312" n="column_justify_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="18" i="fgl_zoom" l="315" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="18" i="fgl_zoom" l="316" n="column_justify_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="18" i="fgl_zoom" l="319" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="18" i="fgl_zoom" l="320" n="column_format_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="18" i="fgl_zoom" l="322" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="18" i="fgl_zoom" l="323" n="column_format_set" p="fgl_zoom.4gl" t="F"/>
+</Fct>
+<Fct c="10" el="293" l="76" n="test()" t="F">
 <Call c="15" l="85" n="base_init" t="F"/>
-<Call c="24" l="86" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="50" l="87" n="call" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="86" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="50" i="fgl_zoom" l="87" n="call" p="fgl_zoom.4gl" t="F"/>
 <Call c="15" l="93" n="base_init" t="F"/>
-<Call c="24" l="94" n="column_qbedefault_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="95" n="column_qbedefault_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="96" n="column_qbedefault_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="97" n="column_qbedefault_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="98" n="column_qbedefault_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="99" n="column_qbedefault_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="100" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="53" l="101" n="call" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="94" n="column_qbedefault_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="95" n="column_qbedefault_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="96" n="column_qbedefault_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="97" n="column_qbedefault_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="98" n="column_qbedefault_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="99" n="column_qbedefault_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="100" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="53" i="fgl_zoom" l="101" n="call" p="fgl_zoom.4gl" t="F"/>
 <Call c="15" l="106" n="base_init" t="F"/>
-<Call c="24" l="107" n="gotolist_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="108" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="56" l="109" n="call" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="107" n="gotolist_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="108" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="56" i="fgl_zoom" l="109" n="call" p="fgl_zoom.4gl" t="F"/>
 <Call c="15" l="113" n="base_init" t="F"/>
-<Call c="24" l="114" n="noqbe_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="115" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="48" l="116" n="call" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="114" n="noqbe_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="115" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="48" i="fgl_zoom" l="116" n="call" p="fgl_zoom.4gl" t="F"/>
 <Call c="15" l="121" n="base_init" t="F"/>
-<Call c="24" l="122" n="autoselect_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="123" n="column_qbedefault_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="124" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="54" l="125" n="call" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="122" n="autoselect_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="123" n="column_qbedefault_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="124" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="54" i="fgl_zoom" l="125" n="call" p="fgl_zoom.4gl" t="F"/>
 <Call c="15" l="130" n="base_init" t="F"/>
-<Call c="24" l="131" n="autoselect_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="132" n="noqbe_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="133" n="sql_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="134" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="54" l="135" n="call" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="131" n="autoselect_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="132" n="noqbe_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="133" n="sql_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="134" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="54" i="fgl_zoom" l="135" n="call" p="fgl_zoom.4gl" t="F"/>
 <Call c="15" l="140" n="base_init" t="F"/>
-<Call c="24" l="141" n="maxrow_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="142" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="51" l="143" n="call" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="141" n="maxrow_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="142" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="51" i="fgl_zoom" l="143" n="call" p="fgl_zoom.4gl" t="F"/>
 <Call c="15" l="148" n="base_init" t="F"/>
-<Call c="24" l="149" n="qbeforce_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="150" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="52" l="151" n="call" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="149" n="qbeforce_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="150" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="52" i="fgl_zoom" l="151" n="call" p="fgl_zoom.4gl" t="F"/>
 <Call c="15" l="156" n="base_init" t="F"/>
-<Call c="24" l="157" n="column_qbeforce_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="158" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="52" l="159" n="call" p="fgl_zoom.4gl" t="F"/>
-<Call c="15" l="163" n="base_init" t="F"/>
-<Call c="24" l="164" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="165" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="166" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="55" l="167" n="call" p="fgl_zoom.4gl" t="F"/>
-<Call c="15" l="171" n="base_init" t="F"/>
-<Call c="24" l="172" n="column_excludeqbe_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="173" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="53" l="174" n="call" p="fgl_zoom.4gl" t="F"/>
-<Call c="15" l="178" n="base_init" t="F"/>
-<Call c="24" l="179" n="column_excludelist_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="180" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="54" l="181" n="call" p="fgl_zoom.4gl" t="F"/>
-<Call c="15" l="185" n="base_init" t="F"/>
-<Call c="24" l="186" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="187" n="nolist_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="188" n="execute" p="fgl_zoom.4gl" t="F"/>
-<Call c="49" l="189" n="where_get" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="157" n="column_qbeforce_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="158" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="52" i="fgl_zoom" l="159" n="call" p="fgl_zoom.4gl" t="F"/>
+<Call c="23" i="fgl_zoom" l="163" n="init" p="fgl_zoom_custom.4gl" t="F"/>
+<Call c="23" i="fgl_zoom" l="164" n="cancelvalue_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="23" i="fgl_zoom" l="165" n="sql_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="23" i="fgl_zoom" l="166" n="column_auto_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="23" i="fgl_zoom" l="167" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="47" i="fgl_zoom" l="168" n="call" p="fgl_zoom.4gl" t="F"/>
+<Call c="15" l="172" n="base_init" t="F"/>
+<Call c="24" i="fgl_zoom" l="173" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="174" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="175" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="55" i="fgl_zoom" l="176" n="call" p="fgl_zoom.4gl" t="F"/>
+<Call c="15" l="180" n="base_init" t="F"/>
+<Call c="24" i="fgl_zoom" l="181" n="column_excludeqbe_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="182" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="53" i="fgl_zoom" l="183" n="call" p="fgl_zoom.4gl" t="F"/>
+<Call c="15" l="187" n="base_init" t="F"/>
+<Call c="24" i="fgl_zoom" l="188" n="column_excludelist_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="189" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="54" i="fgl_zoom" l="190" n="call" p="fgl_zoom.4gl" t="F"/>
 <Call c="15" l="194" n="base_init" t="F"/>
-<Call c="24" l="195" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="196" n="multiplerow_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="197" n="execute" p="fgl_zoom.4gl" t="F"/>
-<Call c="46" l="198" n="qbe_get" p="fgl_zoom.4gl" t="F"/>
-<Call c="15" l="205" n="base_init" t="F"/>
-<Call c="24" l="206" n="sql_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="207" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="208" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="209" n="column_excludeqbe_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="48" l="210" n="call" p="fgl_zoom.4gl" t="F"/>
-<Call c="15" l="216" n="base_init" t="F"/>
-<Call c="24" l="217" n="sql_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="218" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="219" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="24" l="220" n="column_excludeqbe_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="51" l="221" n="call" p="fgl_zoom.4gl" t="F"/>
-<Call c="18" l="229" n="base_init" t="F"/>
-<Call c="27" l="230" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="231" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="233" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="234" n="execute" p="fgl_zoom.4gl" t="F"/>
-<Call c="66" l="235" n="result_get" p="fgl_zoom.4gl" t="F"/>
-<Call c="66" l="236" n="result_get" p="fgl_zoom.4gl" t="F"/>
-<Call c="18" l="242" n="base_init" t="F"/>
-<Call c="27" l="243" n="multiplerow_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="244" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="245" n="execute" p="fgl_zoom.4gl" t="F"/>
-<Call c="35" l="247" n="result_length_get" p="fgl_zoom.4gl" t="F"/>
-<Call c="61" l="248" n="result_get" p="fgl_zoom.4gl" t="F"/>
-<Call c="18" l="256" n="base_init" t="F"/>
-<Call c="27" l="257" n="multiplerow_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="258" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="259" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="260" n="title_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="27" l="261" n="execute" p="fgl_zoom.4gl" t="F"/>
-<Call c="35" l="263" n="result_length_get" p="fgl_zoom.4gl" t="F"/>
-<Call c="63" l="264" n="result_get" p="fgl_zoom.4gl" t="F"/>
-<Call c="65" l="265" n="result_get" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="195" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="196" n="nolist_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="197" n="execute" p="fgl_zoom.4gl" t="F"/>
+<Call c="49" i="fgl_zoom" l="198" n="where_get" p="fgl_zoom.4gl" t="F"/>
+<Call c="15" l="203" n="base_init" t="F"/>
+<Call c="24" i="fgl_zoom" l="204" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="205" n="multiplerow_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="206" n="execute" p="fgl_zoom.4gl" t="F"/>
+<Call c="46" i="fgl_zoom" l="207" n="qbe_get" p="fgl_zoom.4gl" t="F"/>
+<Call c="15" l="214" n="base_init" t="F"/>
+<Call c="24" i="fgl_zoom" l="215" n="sql_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="216" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="217" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="218" n="column_excludeqbe_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="48" i="fgl_zoom" l="219" n="call" p="fgl_zoom.4gl" t="F"/>
+<Call c="15" l="225" n="base_init" t="F"/>
+<Call c="24" i="fgl_zoom" l="226" n="sql_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="227" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="228" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="24" i="fgl_zoom" l="229" n="column_excludeqbe_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="51" i="fgl_zoom" l="230" n="call" p="fgl_zoom.4gl" t="F"/>
+<Call c="18" l="238" n="base_init" t="F"/>
+<Call c="27" i="fgl_zoom" l="239" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="240" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="242" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="243" n="execute" p="fgl_zoom.4gl" t="F"/>
+<Call c="66" i="fgl_zoom" l="244" n="result_get" p="fgl_zoom.4gl" t="F"/>
+<Call c="66" i="fgl_zoom" l="245" n="result_get" p="fgl_zoom.4gl" t="F"/>
+<Call c="18" l="251" n="base_init" t="F"/>
+<Call c="27" i="fgl_zoom" l="252" n="multiplerow_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="253" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="254" n="execute" p="fgl_zoom.4gl" t="F"/>
+<Call c="35" i="fgl_zoom" l="256" n="result_length_get" p="fgl_zoom.4gl" t="F"/>
+<Call c="61" i="fgl_zoom" l="257" n="result_get" p="fgl_zoom.4gl" t="F"/>
+<Call c="18" l="265" n="base_init" t="F"/>
+<Call c="27" i="fgl_zoom" l="266" n="multiplerow_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="267" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="268" n="column_includeinresult_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="269" n="title_set" p="fgl_zoom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom" l="270" n="execute" p="fgl_zoom.4gl" t="F"/>
+<Call c="35" i="fgl_zoom" l="272" n="result_length_get" p="fgl_zoom.4gl" t="F"/>
+<Call c="63" i="fgl_zoom" l="273" n="result_get" p="fgl_zoom.4gl" t="F"/>
+<Call c="65" i="fgl_zoom" l="274" n="result_get" p="fgl_zoom.4gl" t="F"/>
 </Fct>
-<Fct c="18" el="316" l="289" n="base_init()" t="F">
-<Call c="18" l="290" n="init" t="F"/>
-<Call c="18" l="291" n="sql_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="18" l="292" n="cancelvalue_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="18" l="295" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="18" l="298" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="18" l="301" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="18" l="302" n="column_format_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="18" l="303" n="column_justify_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="18" l="306" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="18" l="307" n="column_justify_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="18" l="310" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="18" l="311" n="column_format_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="18" l="313" n="column_quick_set" p="fgl_zoom.4gl" t="F"/>
-<Call c="18" l="314" n="column_format_set" p="fgl_zoom.4gl" t="F"/>
-</Fct>
-<Fct c="18" el="57" l="55" n="exception()" t="F"/>
 <Fct c="10" el="67" l="62" n="init()" t="F"/>
+<Fct c="18" el="57" l="55" n="exception()" t="F"/>
 </File>
-<File m="" n="fgl_zoom_test_custom.per" ts="20151023153013000"/>
-<File m="" n="fgl_zoom_test_example.per" ts="20151023153013000"/>
-<File m="" n="fgl_zoom_test_functiontest.per" ts="20151023153013000"/>
-<File m="fgl_zoom_testdata" n="fgl_zoom_testdata.4gl" ts="20151023153013000">
+<File m="" n="fgl_zoom_test_custom.per" ts="20160414121902000"/>
+<File m="" n="fgl_zoom_test_example.per" ts="20160413104847000"/>
+<File m="" n="fgl_zoom_test_functiontest.per" ts="20160414122300000"/>
+<File m="fgl_zoom_testdata" n="fgl_zoom_testdata.4gl" ts="20170822164544837">
+<Fct c="10" el="565" l="556" n="testdata_created()" t="F"/>
+<Fct c="18" el="554" l="522" n="populate_fgl_zoom_customer()" t="F"/>
+<Fct c="18" el="520" l="501" n="populate_fgl_zoom_store()" t="F"/>
+<Fct c="18" el="497" l="240" n="populate_fgl_zoom_country()" t="F"/>
+<Fct c="18" el="238" l="182" n="populate_fgl_zoom_state()" t="F"/>
+<Fct c="18" el="180" l="154" n="populate_fgl_zoom_test()" t="F"/>
+<Fct c="18" el="150" l="137" n="truncate()" t="F"/>
 <Fct c="11" el="135" l="121" n="populate()" t="F">
 <Call c="12" l="123" n="populate_fgl_zoom_test" t="F"/>
 <Call c="12" l="124" n="populate_fgl_zoom_country" t="F"/>
@@ -381,37 +414,31 @@
 <Call c="12" l="126" n="populate_fgl_zoom_store" t="F"/>
 <Call c="12" l="127" n="populate_fgl_zoom_customer" t="F"/>
 </Fct>
-<Fct c="18" el="150" l="137" n="truncate()" t="F"/>
-<Fct c="10" el="565" l="556" n="testdata_created()" t="F"/>
-<Fct c="18" el="238" l="182" n="populate_fgl_zoom_state()" t="F"/>
-<Fct c="10" el="100" l="41" n="create()" t="F"/>
-<Fct c="18" el="497" l="240" n="populate_fgl_zoom_country()" t="F"/>
-<Fct c="18" el="520" l="501" n="populate_fgl_zoom_store()" t="F"/>
 <Fct c="18" el="119" l="102" n="drop()" t="F"/>
-<Fct c="18" el="554" l="522" n="populate_fgl_zoom_customer()" t="F"/>
-<Fct c="18" el="180" l="154" n="populate_fgl_zoom_test()" t="F"/>
+<Fct c="10" el="100" l="41" n="create()" t="F"/>
+<Todo l="243" t="check code values, may have inadvertently lost a digit when adding quotes&#13;"/>
 </File>
-<File m="fgl_zoom_test" n="fgl_zoom_test.4gl" ts="20151023153013000">
-<Dep t="fgl_zoom_example.4gl"/>
+<File m="fgl_zoom_test" n="fgl_zoom_test.4gl" ts="20170321152945237">
 <Dep t="fgl_zoom_custom.4gl"/>
+<Dep t="fgl_zoom_example.4gl"/>
 <Dep t="fgl_zoom_functionaltest.4gl"/>
 <Dep t="fgl_zoom_testdata.4gl"/>
 <Fct c="1" el="92" l="41" n="main()" t="F">
 <Call c="29" l="51" n="fgl_zoom_test_error" t="F"/>
-<Call c="30" l="58" n="create" p="fgl_zoom_testdata.4gl" t="F"/>
+<Call c="30" i="fgl_zoom_testdata" l="58" n="create" p="fgl_zoom_testdata.4gl" t="F"/>
 <Call c="14" l="59" n="fgl_zoom_test_error" t="F"/>
-<Call c="30" l="62" n="populate" p="fgl_zoom_testdata.4gl" t="F"/>
+<Call c="30" i="fgl_zoom_testdata" l="62" n="populate" p="fgl_zoom_testdata.4gl" t="F"/>
 <Call c="14" l="63" n="fgl_zoom_test_error" t="F"/>
-<Call c="26" l="69" n="init" p="fgl_zoom_example.4gl" t="F"/>
-<Call c="27" l="70" n="init" p="fgl_zoom_example.4gl" t="F"/>
-<Call c="34" l="71" n="init" p="fgl_zoom_example.4gl" t="F"/>
-<Call c="46" l="82" n="test" p="fgl_zoom_example.4gl" t="F"/>
-<Call c="47" l="84" n="test" p="fgl_zoom_example.4gl" t="F"/>
-<Call c="54" l="86" n="test" p="fgl_zoom_example.4gl" t="F"/>
+<Call c="26" i="fgl_zoom_custom" l="69" n="init" p="fgl_zoom_custom.4gl" t="F"/>
+<Call c="27" i="fgl_zoom_example" l="70" n="init" p="fgl_zoom_custom.4gl" t="F"/>
+<Call c="34" i="fgl_zoom_functionaltest" l="71" n="init" p="fgl_zoom_custom.4gl" t="F"/>
+<Call c="46" i="fgl_zoom_custom" l="82" n="test" p="fgl_zoom_custom.4gl" t="F"/>
+<Call c="47" i="fgl_zoom_example" l="84" n="test" p="fgl_zoom_custom.4gl" t="F"/>
+<Call c="54" i="fgl_zoom_functionaltest" l="86" n="test" p="fgl_zoom_custom.4gl" t="F"/>
 </Fct>
 <Fct c="10" el="99" l="96" n="fgl_zoom_test_error()" t="F">
-<Call c="9" l="97" n="fgl_winMessage" t="F"/>
+<Call c="9" i="fgldialog" l="97" n="fgl_winMessage" t="F"/>
 </Fct>
 </File>
-<File m="" n="fgl_zoom_test.per" ts="20151023153013000"/>
+<File m="" n="fgl_zoom_test.per" ts="20160714100732000"/>
 </WorkspaceDatabase>

@@ -74,7 +74,7 @@ DEFINE l_mode STRING
     LET w = ui.Window.getCurrent()
     LET f = w.getForm()   
 
-    LET l_mode = "custom"
+    LET l_mode = "example"
    
     WHILE l_mode != "exit"
         CASE l_mode

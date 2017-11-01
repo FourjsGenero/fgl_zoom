@@ -1245,7 +1245,7 @@ DEFINE d_c ui.Dialog
                 IF m_zoom.nolist THEN
                     -- Leave the accept text as OK
                 ELSE
-                    CALL action_text_set("accept", %"fgl_zoom.action.accept.text.alternate")
+                    CALL d_c.setActionText("accept",  %"fgl_zoom.action.accept.text.alternate")
                 END IF
                 MESSAGE %"fgl_zoom.before_construct"
             
@@ -1339,7 +1339,7 @@ END FUNCTION
 PRIVATE FUNCTION zoom_list()
 DEFINE i INTEGER
 DEFINE l_sql STRING
-DEFINE dnd ui.DragDrop
+--DEFINE dnd ui.DragDrop
 DEFINE ok INTEGER
 DEFINE l_selected DYNAMIC ARRAY OF BOOLEAN
 DEFINE l_maxrow_flg BOOLEAN
@@ -1352,7 +1352,6 @@ DEFINE l_row, l_column INTEGER
 
 DEFINE d_da ui.Dialog
 DEFINE l_event STRING
-DEFINE l_frontend STRING
 
     LET d_da = NULL
     CALL m_data.clear()
@@ -1454,20 +1453,8 @@ DEFINE l_frontend STRING
                         CALL d_da.setSelectionRange("data",1,-1,1)
                         LET l_datatocopy =  d_da.selectionToString("data")
 
-                        LET l_frontend = ui.Interface.getFrontEndName()
-                        CASE
-                            WHEN l_frontend = "GDC"
-                                -- For GDC, use frontcall to populate clipboard
-                                CALL ui.Interface.frontCall("standard","cbset",l_datatocopy,ok)
-                            WHEN l_frontend = "GWC" OR l_frontend = "GBC"
-                                -- For GWC can't write to clipboard, use the technique of putting 
-                                -- in an editable textedit where user can select and copy
-                                OPEN WINDOW clip WITH FORM "fgl_zoom_webcopy" ATTRIBUTES(STYLE="fgl_zoom", TEXT="Select All and Copy to Clipboard")
-                                INPUT BY NAME l_datatocopy ATTRIBUTES(WITHOUT DEFAULTS=TRUE, ACCEPT=FALSE)
-                                LET int_flag = 0
-                                CLOSE WINDOW clip
-                        END CASE
-                
+                        CALL ui.Interface.frontCall("standard","cbset",l_datatocopy,ok)
+                        
                         CALL d_da.setSelectionRange("data",1,-1,0)
                         IF m_zoom.multiplerow THEN
                             -- restore previously selected rows
@@ -1765,29 +1752,10 @@ DEFINE l_style STRING
 END FUNCTION
 
 
-
-#+ Change the text attribute of an action
-PRIVATE FUNCTION action_text_set(l_action, l_text)
-DEFINE l_action STRING
-DEFINE l_text STRING
-
-DEFINE w ui.Window
-DEFINE f ui.Form
-
-DEFINE n om.DomNode
-
-   LET w = ui.Window.getCurrent()
-   LET f = w.getForm()
-   LET n = w.findNode("Action",l_action)
-   CALL n.setAttribute("text", l_text)
-END FUNCTION
-
-
-
         
 PRIVATE FUNCTION zoom_print()
-DEFINE grw om.saxDocumentHandler
-DEFINE i INTEGER
+--DEFINE grw om.saxDocumentHandler
+--DEFINE i INTEGER
 
     #TODO check this now generic fields in use
     CALL FGL_WINMESSAGE("Info","Not implemented yet","stop")

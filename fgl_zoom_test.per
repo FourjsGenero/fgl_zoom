@@ -11,14 +11,15 @@ END -- ACTION DEFAULTS
 
 LAYOUT (TEXT=%"fgl_zoom() Test")
 FOLDER 
+    PAGE pageexample(ACTION=example, TEXT=%"Example")
+        FORM "fgl_zoom_test_example"
+    END -- PAGE
     PAGE pagecustom(ACTION=custom, TEXT=%"Custom")
         FORM "fgl_zoom_test_custom"
     END -- PAGE
     PAGE pagefunctionaltest(ACTION=functionaltest, TEXT=%"Functional Test")
         FORM "fgl_zoom_test_functiontest"
     END -- PAGE
-    PAGE pageexample(ACTION=example, TEXT=%"Example")
-        FORM "fgl_zoom_test_example"
-    END -- PAGE
+   
 END -- FOLDER
 END -- LAYOUT
