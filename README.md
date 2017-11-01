@@ -131,6 +131,6 @@ Add IMPORT FGL fgl_zoom
 
 CALL fgl_zoom.init() to clear the paramters.
 
-Add the required fgl_zoom.\* methods to set the indivial parameter options.
+Add the required fgl_zoom.\* methods to set the individual parameter options.
 
 Add LET value = fgl_zoom.call() to return the select value.
