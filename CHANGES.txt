@@ -1,3 +1,9 @@
+- make example screen first one seen in test program
+
+- removed webcopy form as cbset frontcall now works in GBC
+
+- upgraded to Genero 3.10
+
 - added column_auto_set() function
 
 - create form in memory, no fgl_zoom.per

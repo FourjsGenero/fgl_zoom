@@ -13,9 +13,9 @@ specified files by the fglrun.localization.file settings in FGLPROFILE
 
 Refer to fgl_zoom_example.4gl for examples of intended structure
 
-Refer to fgl_zoom_sample.4gl for ideas on what each option can be used for.
-Also refer to documentation in fgl_zoom.4gl for details on each options and
-methods available.
+Refer to fgl_zoom_functionaltest.4gl for ideas on what each option can be used 
+for.  Also refer to documentation in fgl_zoom.4gl for details on each options 
+and methods available.
 
 Refer to fgl_zoom_custom.4gl for a sandbox where you can try other various
 options with your data.

@@ -39,9 +39,4 @@ Add option to run from XML configuration file
 
 Add option to read configuration from database table(s)
 
-See if this technique allows to copy entire table in Web Env
-function copyToClipboard (text) {
-  window.prompt ("Copy to clipboard: Ctrl+C, Enter", text);
-}
-
 Any other suggestions, please send to rb@4js.com
