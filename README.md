@@ -47,17 +47,25 @@ Illustrates potential uses.  Click on the BUTTONEDIT button and note the window 
 <img alt="Auto Example" src="" width="50%" /><img alt="Source Example" src="" width="50%" />
 
 ### Functional Test
-fgl_zoom has a number of configuration parameters.  The functional test tab is used to test each of these in isolation.
-<img alt="Functional Test Screenshot" src="" width="50%" />
+fgl_zoom has a number of configuration parameters.  The functional test tab is used to test each of these parameters in isolation.  You can also look at the source to see the function name and expected parameters. 
+<img alt="Functional Test Screenshot" src="https://user-images.githubusercontent.com/13615993/32301120-6c2c39f0-bfc1-11e7-981b-5ba19384dea7.png" width="50%" />
 
 ### Custom
-The custom tab allows you to experiment and create some fgl_zoom code.  Enter the appropriate parameters, click Execute to run the zoom window, click View Source to see the 4gl source required in your program.
+The custom tab allows you to experiment and create some fgl_zoom code.  
 
-<img alt="Example Screen" src="" width="50%" />
+Enter the appropriate parameter 
 
-<img alt="Example Screen" src="" width="50%" />
+<img alt="Custom Initial Screen" src="https://user-images.githubusercontent.com/13615993/32301118-6bf1e016-bfc1-11e7-8fdb-a597c80244a6.png" width="50%" />
 
-<img alt="Example Screen" src="" width="50%" />
+Click Execute to run the resultant zoom window(s)
+
+<img alt="Custom QBE Screen" src="https://user-images.githubusercontent.com/13615993/32301116-6ba46304-bfc1-11e7-8e7c-531323da4362.png" width="50%" />
+
+<img alt="Custom List Screen" src="https://user-images.githubusercontent.com/13615993/32301115-6b69af0c-bfc1-11e7-9852-47e80d49d881.png" width="50%" />
+
+View Source to see the 4gl source required in your program.
+
+<img alt="Custom View Source" src="https://user-images.githubusercontent.com/13615993/32301114-6b332676-bfc1-11e7-99c0-a0779e27f8a2.png" width="50%" />
 
 ## Options
 
