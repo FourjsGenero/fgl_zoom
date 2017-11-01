@@ -3,9 +3,30 @@ fgl_zoom is a Genero library you can use to code all your zoom windows.  What is
 
 We typically see such usage when entering what is a foreign key to another table.  The BUTTONEDIT requires entry of the key field and the zoom window allows you to list the key and data fields of the referenced table to select a value.  To narrow the list a QBE option may also be available.
 
-The screenshot illustrates a typical usage, the BUTTONEDIT is for state code, the zoom window displays list of states, and the user selects a state that is in turn passed back to the BUTTONEDIT field
+These screenshot illustrates a typical usage,
 
-<img alt="Example Screen" src="" width="50%" />
+A BUTTONEDIT is used for the State code ...
+
+<img alt="BUTTONEDIT Before" src="https://user-images.githubusercontent.com/13615993/32300328-e806e524-bfbd-11e7-8ac8-462e1e3f0cc3.png" width="20%" />
+
+User clicks on the BUTTONEDIT button, a window appears with a list of values
+
+<img alt="BUTTONEDIT Before" src="https://user-images.githubusercontent.com/13615993/32300325-e7c75026-bfbd-11e7-9919-cd03c6d34b28.png" width="50%" />
+
+
+The user selects a state that is in turn passed back to the BUTTONEDIT field
+
+<img alt="BUTTONEDIT After" src="https://user-images.githubusercontent.com/13615993/32300324-e7880a92-bfbd-11e7-9e13-6dbfee2e7c9d.png" width="20%" />
+
+Sometimes you may even display a description as well
+
+<img alt="BUTTONEDIT After with description" src="https://user-images.githubusercontent.com/13615993/32300323-e74bc6c2-bfbd-11e7-9ca9-52b2ca83df9d.png" width="20%" />
+
+If the list of values is long, before you display the list, you may enter some QBE Criteria to reduce the number of values displayed in the list
+
+<img alt="QBE Window" src="https://user-images.githubusercontent.com/13615993/32300545-db563e78-bfbe-11e7-875b-3cd4d47463da.png" width="50%" />
+
+
 
 ## How to Use fgl_zoom
 
