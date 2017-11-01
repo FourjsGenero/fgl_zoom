@@ -1,7 +1,7 @@
 # fgl_zoom
-fgl_zoom is a Genero library you can use to code all your zoom windows.  What is a zoom window, a zoom window I have also seen called lookup windows, query windows is a window that appears when you click on a BUTTONEDIT button that allows you to select a value that will then be entered into the BUTTONEDIT field.
+fgl_zoom is a Genero library you can use to code all your zoom windows.  What is a zoom window, alternative names include lookup window, query window, pick list is a window that appears when you click on a BUTTONEDIT button that allows you to select a value that will then be entered into the BUTTONEDIT field.
 
-We typically see such usage when entering what is a foreign key to another table.  The BUTTONEDIT requires entry of the key field and the zoom window allows you to list the key and data fields of the referenced table to select a value.  To narrow the list a QBE option may also be available.
+We typically see this pattern when entering what is a foreign key to another table.  The BUTTONEDIT requires entry of the key field and the zoom window allows you to list the key and data fields of the referenced table to select a value.  To narrow the list, a QBE option may also be available.
 
 These screenshot illustrates a typical usage,
 
@@ -40,11 +40,11 @@ The fgl_zoom_test program consists of a form of three tabs
 
 Illustrates potential uses.  Click on the BUTTONEDIT button and note the window that appears.  To view the 4gl source, the Junior Developer code would require click on the View Source.  In most cases, it is less than a screenfull of 4gl source.  The state code example in the previous screenshot has the following source.
 
-<img alt="State Code Example" src="" width="50%" /><img alt="Source Example" src="" width="50%" />
+<img alt="State Code Example" src="https://user-images.githubusercontent.com/13615993/32302337-01c13ad8-bfc7-11e7-82c9-b765a240dd83.png" width="50%" /><img alt="Source Example" src="https://user-images.githubusercontent.com/13615993/32302336-018d7202-bfc7-11e7-8407-eb89ac8c4520.png" width="50%" />
 
-<img alt="More complex Customer Code Example" src="" width="50%" /><img alt="Source Example" src="" width="50%" />
+<img alt="More complex Customer Code Example" src="https://user-images.githubusercontent.com/13615993/32302335-0157e4a2-bfc7-11e7-99bd-52e742061c2b.png" width="50%" /><img alt="Source Example" src="https://user-images.githubusercontent.com/13615993/32302334-0122e004-bfc7-11e7-8e75-9138f509d66f.png" width="50%" />
 
-<img alt="Auto Example" src="" width="50%" /><img alt="Source Example" src="" width="50%" />
+<img alt="Auto Example" src="https://user-images.githubusercontent.com/13615993/32302333-00ebeb94-bfc7-11e7-90f5-34c592a48599.png" width="50%" /><img alt="Source Example" src="https://user-images.githubusercontent.com/13615993/32302332-00b4d4c4-bfc7-11e7-8225-0be7def2ec5c.png" width="50%" />
 
 ### Functional Test
 fgl_zoom has a number of configuration parameters.  The functional test tab is used to test each of these parameters in isolation.  You can also look at the source to see the function name and expected parameters. 
