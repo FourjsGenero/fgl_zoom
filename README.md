@@ -26,7 +26,11 @@ If the list of values is long, before you display the list, you may enter some Q
 
 <img alt="QBE Window" src="https://user-images.githubusercontent.com/13615993/32300545-db563e78-bfbe-11e7-875b-3cd4d47463da.png" width="50%" />
 
+## Why Use fgl_zoom
 
+For the pattern decribed previously, we would typically see for each these zoom windows, we would see a FUNCTION with a FOREACH to read the database, a DISPLAY ARRAY to list values, and an OPEN WINDOW, and .per for the UI.  We would see one of these for EACH zoom window and this code will typically be repetitive/duplicated making maintenance expensive.
+
+So say you had 100 zoom windows, instead of 100 functions, 100 forms, 100 database cursors, 100 display arrays, with fgl_zoom there is a single library with one lot of database code, one lot of UI code etc.  This ensures a consistent user interface and makes code maintenance a lot cheaper.
 
 ## How to Use fgl_zoom
 
