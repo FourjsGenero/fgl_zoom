@@ -1,7 +1,7 @@
 # fgl_zoom
-fgl_zoom is a Genero library you can use to code all your zoom windows.  What is a zoom window, alternative names include lookup window, query window, pick list is a window that appears when you click on a BUTTONEDIT button that allows you to select a value that will then be entered into the BUTTONEDIT field.
+fgl_zoom is a Genero library you can use to code all your zoom windows.  What is a zoom window, alternative names include lookup window, query window, pick list.  It is a window that appears when you click on a BUTTONEDIT button that allows you to select a value that will then be entered into the BUTTONEDIT field.
 
-We typically see this pattern when entering what is a foreign key to another table.  The BUTTONEDIT requires entry of the key field and the zoom window allows you to list the key and data fields of the referenced table to select a value.  To narrow the list, a QBE option may also be available.
+We typically see this pattern when entering what is a foreign key to another table.  The BUTTONEDIT requires entry of the key field and the zoom window allows you to list the key and data fields of the referenced table and to select a value.  To narrow the list, a QBE option may also be available.
 
 These screenshot illustrates a typical usage,
 
@@ -28,17 +28,17 @@ If the list of values is long, before you display the list, you may enter some Q
 
 ## Why Use fgl_zoom
 
-For the pattern decribed previously, we would typically see for each these zoom windows, we would see a FUNCTION with a FOREACH to read the database, a DISPLAY ARRAY to list values, and an OPEN WINDOW, and .per for the UI.  We would see one of these for EACH zoom window and this code will typically be repetitive/duplicated making maintenance expensive.
+For the pattern decribed previously, for each these zoom windows, we would typically see a FUNCTION with a FOREACH to read the database, a DISPLAY ARRAY to list values, and an OPEN WINDOW, and .per for the UI.  We would see one of these for EACH zoom window and this code will typically be repetitive/duplicated making maintenance expensive.
 
 So say you had 100 zoom windows, instead of 100 functions, 100 forms, 100 database cursors, 100 display arrays, with fgl_zoom there is a single library with one lot of database code, one lot of UI code etc.  This ensures a consistent user interface and makes code maintenance a lot cheaper.
 
-## How to Use fgl_zoom
+## How to Use fgl_zoom_test
 
 The fgl_zoom_test program consists of a form of three tabs
 
 ### Example
 
-Illustrates potential uses.  Click on the BUTTONEDIT button and note the window that appears.  To view the 4gl source, the Junior Developer code would require click on the View Source.  In most cases, it is less than a screenfull of 4gl source.  The state code example in the previous screenshot has the following source.
+Illustrates potential uses.  Click on the BUTTONEDIT button and note the window that appears.  To view the 4gl source the junior developer would require, click on the View Source button.  In most cases, it is less than a screenful of 4gl source.  In the following screenshots, the list on the left is coded by the code you see on the right.
 
 <img alt="State Code Example" src="https://user-images.githubusercontent.com/13615993/32302337-01c13ad8-bfc7-11e7-82c9-b765a240dd83.png" width="50%" /><img alt="Source Example" src="https://user-images.githubusercontent.com/13615993/32302336-018d7202-bfc7-11e7-8407-eb89ac8c4520.png" width="50%" />
 
@@ -105,15 +105,25 @@ Put a restriction on maximum number of rows returned.
 Allow a certian number of columns to be frozen so that they are always in view and not scrolled out
 
 ### Force QBE
-
 Set to TRUE if you want to force the user to enter at least one value in a QBE field
 
-### Column - Column
+### Columns
+The remainging properties are duplicated for each column.  To quickly define column information, there are two functions which may help.
 
-Name of the database column. 
+If you call fgl_zoom.column_auto_set(), it will derive all the column data from the columns you enter in the sql_set() function.  In this instance, title is replaced by the column name with _ turned to spaces and the first letter of each word capitalised.
+
+The other function which can aid developer productivity is the column_quick_set() function.  Called once for each column, it takes 5 parameters...
+an index integer
+column name
+a one character code c,d,f,i for the database type, char, date, float, integer respectively
+a width
+a title
+... and saves typing each of these functions.
+
+### Column - Column
+Name of the database column as used in SQL statement.
 
 ### Column - Title
-
 Title of the column, appears as the column header.
 
 ### Column - Width
