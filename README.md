@@ -153,7 +153,7 @@ Initial value to be used in the QBE field.
 ### Column - Force
 Require the user to enter a value in the QBE for that column.
 
-## Compatability
+## Compatibility
 
 The use of Dynamic Dialogs will make it difficult to port this code to Genero versions prior to 3.00.  The module was originally written using Genero 2.30 so if you use GitHub to retrieve old versions of the code, you can probably put something together but I would suggest you upgrade to at least 3.00.
 
