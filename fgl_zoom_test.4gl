@@ -53,8 +53,9 @@ DEFINE l_mode STRING
     CALL STARTLOG("fgl_zoom_test.log")
 
     CALL ui.Interface.loadStyles("fgl_zoom_test")
+    CALL ui.Interface.setText("fgl_zoom Test Program")
 
-    CONNECT TO ":memory:+driver='dbmsqt'" 
+    CONNECT TO ":memory:+driver='dbmsqt'"
     IF NOT fgl_zoom_testdata.create() THEN
         CALL fgl_zoom_test_error()
         EXIT PROGRAM 1
