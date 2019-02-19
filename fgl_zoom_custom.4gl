@@ -166,7 +166,8 @@ END FUNCTION
 FUNCTION test()
 DEFINE l_mode STRING
 DEFINE i INTEGER
-DEFINE l_new_row_idx INTEGER
+DEFINE l_new_row_idx integer
+define l_zoom fgl_zoom.zoomType
 
    DIALOG ATTRIBUTES(UNBUFFERED)
       INPUT BY NAME m_custom_rec.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
@@ -191,52 +192,57 @@ DEFINE l_new_row_idx INTEGER
 
       INPUT BY NAME m_custom_result.*
          ON CHANGE selected_row
-            LET m_custom_result.value = fgl_zoom.result_get(m_custom_result.selected_row, m_custom_result.selected_column)
+            LET m_custom_result.value = l_zoom.result[m_custom_result.selected_row, m_custom_result.selected_column]
             
          ON CHANGE selected_column
-            LET m_custom_result.value = fgl_zoom.result_get(m_custom_result.selected_row, m_custom_result.selected_column)
+            LET m_custom_result.value = l_zoom.result[m_custom_result.selected_row, m_custom_result.selected_column]
       END INPUT
 
       ON ACTION execute
-         CALL fgl_zoom.init()
-         CALL fgl_zoom.sql_set(m_custom_rec.sql)
+         CALL l_zoom.init()
+         LET l_zoom.sql = m_custom_rec.sql
          IF m_custom_rec.auto THEN
-                CALL fgl_zoom.column_auto_set()
+                CALL l_zoom.column_auto_set()
          END IF
-         CALL fgl_zoom.title_set(m_custom_rec.title2)
-         CALL fgl_zoom.cancelvalue_set(m_custom_rec.cancelvalue)
-         CALL fgl_zoom.noqbe_set(m_custom_rec.noqbe2)
-         CALL fgl_zoom.nolist_set(m_custom_rec.nolist2)
-         CALL fgl_zoom.gotolist_set(m_custom_rec.gotolist)
-         CALL fgl_zoom.autoselect_set(m_custom_rec.autoselect)
-         CALL fgl_zoom.multiplerow_set(m_custom_rec.multiplerow)
-         CALL fgl_zoom.maxrow_set(m_custom_rec.maxrow)
-         CALL fgl_zoom.freezeleft_set(m_custom_rec.freezeleft)
-         CALL fgl_zoom.freezeright_set(m_custom_rec.freezeright)
-         CALL fgl_zoom.qbeforce_set(m_custom_rec.qbeforce)
+         LET l_zoom.title = m_custom_rec.title2
+         LET l_zoom.cancelvalue = m_custom_rec.cancelvalue
+         LET l_zoom.noqbe = m_custom_rec.noqbe2
+         LET l_zoom.nolist = m_custom_rec.nolist2
+         LET l_zoom.gotolist = m_custom_rec.gotolist
+         LET l_zoom.autoselect = m_custom_rec.autoselect
+         LET l_zoom.multiplerow = m_custom_rec.multiplerow
+         LET l_zoom.maxrow = m_custom_rec.maxrow
+         LET l_zoom.freezeleft = m_custom_rec.freezeleft
+         LET l_zoom.freezeright = m_custom_rec.freezeright
+         LET l_zoom.qbeforce = m_custom_rec.qbeforce
          
          FOR i = 1 TO m_custom_arr.getLength()
-            CALL fgl_zoom.column_columnname_set(i,m_custom_arr[i].columnname)
-            CALL fgl_zoom.column_title_set(i,m_custom_arr[i].title3)
-            CALL fgl_zoom.column_width_set(i,m_custom_arr[i].width)
-            CALL fgl_zoom.column_format_set(i,m_custom_arr[i].format)
-            CALL fgl_zoom.column_datatypec_set(i,m_custom_arr[i].datatypec)
-            CALL fgl_zoom.column_justify_set(i, m_custom_arr[i].justify)
-            CALL fgl_zoom.column_excludeqbe_set(i, m_custom_arr[i].excludeqbe2)
-            CALL fgl_zoom.column_excludelist_set(i, m_custom_arr[i].excludelist2)
-            CALL fgl_zoom.column_includeinresult_set(i, m_custom_arr[i].includeinresult)
-            CALL fgl_zoom.column_qbedefault_set(i, m_custom_arr[i].qbedefault)
-            CALL fgl_zoom.column_qbeforce_set(i, m_custom_arr[i].qbeforce2)
+            LET l_zoom.column[i].columnname = m_custom_arr[i].columnname
+            LET l_zoom.column[i].title = m_custom_arr[i].title3
+            LET l_zoom.column[i].width = m_custom_arr[i].width
+            LET l_zoom.column[i].format = m_custom_arr[i].format
+            LET l_zoom.column[i].datatypec = m_custom_arr[i].datatypec
+            LET l_zoom.column[i].justify = m_custom_arr[i].justify
+            LET l_zoom.column[i].excludeqbe = m_custom_arr[i].excludeqbe2
+            LET l_zoom.column[i].excludelist = m_custom_arr[i].excludelist2
+            LET l_zoom.column[i].includeinresult = m_custom_arr[i].includeinresult
+            LET l_zoom.column[i].qbedefault = m_custom_arr[i].qbedefault
+            LET l_zoom.column[i].qbeforce = m_custom_arr[i].qbeforce2
          END FOR
-         CALL fgl_zoom.execute()
+         CALL l_zoom.execute()
          -- populate selected_row, selected_get combobox
          LET m_custom_result.selected_row = 1
          LET m_custom_result.selected_column =1
-         LET m_custom_result.value = fgl_zoom.result_get(m_custom_result.selected_row, m_custom_result.selected_column)
-         LET m_custom_result.where_clause = fgl_zoom.where_get()
-         CALL populate_selected_row()
-         CALL populate_selected_column()
+         LET m_custom_result.value = l_zoom.result[m_custom_result.selected_row, m_custom_result.selected_column]
+         LET m_custom_result.where_clause = l_zoom.where
+         CALL comboinit_selected_row(l_zoom.result.getLength())
+         if l_zoom.result.getLength() > 0 then
+            CALL comboinit_selected_column(l_zoom.result[1].getLength())
+        else
+            call comboinit_selected_column(0)
+        end if
          CONTINUE DIALOG
+
 
       ON ACTION functionaltest
          LET l_mode = "functionaltest"
@@ -277,88 +283,85 @@ DEFINE l_continue SMALLINT
    LET l_columns_returned = 0
 
    LET sb = base.StringBuffer.create()
-   CALL sb.append("--Initializer")
-   CALL sb.append("\nCALL fgl_zoom.init()")
+   call sb.append("IMPORT FGL fgl_zoom")
+   call sb.append("\n\nDEFINE l_zoom fgl_zoom.zoomType")
+   CALL sb.append("\n\n--Initializer")
+   CALL sb.append("\nCALL l_zoom.init()")
 
    CALL sb.append("\n\n--Setter")
    IF m_custom_rec.sql.getLength() > 0 THEN
-      CALL sb.append(SFMT("\nCALL fgl_zoom.sql_set(\"%1\")", m_custom_rec.sql))
+      CALL sb.append(SFMT("\nLET l_zoom.sql = \"%1\"", m_custom_rec.sql))
    END IF
    IF m_custom_rec.auto THEN
-    CALL sb.append("\nCALL fgl_zoom.column_auto_set()")
+    CALL sb.append("\nLET l_zoom.column_auto = true")
    END IF
    IF m_custom_rec.title2.getLength() > 0 THEN
-      CALL sb.append(SFMT("\nCALL fgl_zoom.title_set(\"%1\")", m_custom_rec.title2))
+      CALL sb.append(SFMT("\nLET l_zoom.title_set(\"%1\")", m_custom_rec.title2))
    END IF
    IF m_custom_rec.cancelvalue.getLength() > 0 THEN
-      CALL sb.append(SFMT("\nCALL fgl_zoom.cancelvalue_set(\"%1\")", m_custom_rec.cancelvalue))
+      CALL sb.append(SFMT("\nLET l_zoom.cancelvalue_set(\"%1\")", m_custom_rec.cancelvalue))
    END IF
    IF m_custom_rec.noqbe2 THEN
-      CALL sb.append("\nCALL fgl_zoom.noqbe_set(TRUE)")
+      CALL sb.append("\nLET l_zoom.noqbe = TRUE")
    END IF
    IF m_custom_rec.nolist2 THEN
-      CALL sb.append("\nCALL fgl_zoom.nolist_set(TRUE)")
+      CALL sb.append("\nLET l_zoom.nolist = TRUE")
    END IF
    IF m_custom_rec.gotolist THEN
-      CALL sb.append("\nCALL fgl_zoom.gotolist_set(TRUE)")
+      CALL sb.append("\nLET l_zoom.gotolist = TRUE")
    END IF
    IF m_custom_rec.autoselect THEN
-      CALL sb.append("\nCALL fgl_zoom.autoselect_set(TRUE)")
+      CALL sb.append("\nLET l_zoom.autoselect = TRUE")
    END IF
    IF m_custom_rec.multiplerow THEN
-      CALL sb.append("\nCALL fgl_zoom.multiplerow_set(TRUE)")
+      CALL sb.append("\nLET l_zoom.multiplerow = true")
    END IF
    IF m_custom_rec.maxrow > 0 THEN
-      CALL sb.append(SFMT("\nCALL fgl_zoom.maxrow_set(%1)", m_custom_rec.maxrow))
+      CALL sb.append(SFMT("\nLET l_zoom.maxrow = %1", m_custom_rec.maxrow))
    END IF
    IF m_custom_rec.freezeleft > 0 THEN
-      CALL sb.append(SFMT("\nCALL fgl_zoom.freezeleft(%1)", m_custom_rec.freezeleft))
+      CALL sb.append(SFMT("\nLET l_zoom.freezeleft = %1", m_custom_rec.freezeleft))
    END IF
    IF m_custom_rec.freezeright > 0 THEN
-      CALL sb.append(SFMT("\nCALL fgl_zoom.freezeright(%1)", m_custom_rec.freezeright))
+      CALL sb.append(SFMT("\nLET l_zoom.freezeright = %1", m_custom_rec.freezeright))
    END IF
    IF m_custom_rec.qbeforce THEN
-      CALL sb.append(SFMT("\nCALL fgl_zoom.qbeforce(TRUE)", m_custom_rec.qbeforce))
+      CALL sb.append(SFMT("\nLET l_zoom.qbeforce = true", m_custom_rec.qbeforce))
    END IF
 
    FOR i = 1 TO m_custom_arr.getLength()
       CALL sb.append("\n")
-      CALL sb.append(SFMT("\nCALL fgl_zoom.column_quick_set(%1,\"%2\",\"%3\",%4,\"%5\")", i USING "<<",m_custom_arr[i].columnname,m_custom_arr[i].datatypec, m_custom_arr[i].width USING "<<", m_custom_arr[i].title3))   
+      CALL sb.append(SFMT("\nCALL l_zoom.column[%1].quick_set(\"%2\",%6,\"%3\",%4,\"%5\")", i USING "<<",m_custom_arr[i].columnname,m_custom_arr[i].datatypec, m_custom_arr[i].width USING "<<", m_custom_arr[i].title3, IIF(m_custom_arr[i].includeinresult, "true","false")))   
 
       IF m_custom_arr[i].format.getLength() THEN
-         CALL sb.append(SFMT("\nCALL fgl_zoom.column_format_set(%1,\"%2\")", i USING "<<", m_custom_arr[i].format))
+         CALL sb.append(SFMT("\nLET l_zoom.column[%1].format = \"%2\"", i USING "<<", m_custom_arr[i].format))
       END IF
       IF m_custom_arr[i].justify.getLength() > 0 THEN
          IF m_custom_arr[i].datatypec MATCHES "[fi]" THEN
             IF m_custom_arr[i].justify != "right" THEN
-               CALL sb.append(SFMT("\nCALL fgl_zoom.column_justify_set(%1,\"%2\")", i USING "<<", m_custom_arr[i].justify))
+               CALL sb.append(SFMT("\LET l_zoom.column[%1].justify = \"%2\"", i USING "<<", m_custom_arr[i].justify))
             END IF
          END IF
          IF m_custom_arr[i].datatypec MATCHES "[cd]" THEN
             IF m_custom_arr[i].justify != "left" THEN
-               CALL sb.append(SFMT("\nCALL fgl_zoom.column_justify_set(%1,\"%2\")", i USING "<<", m_custom_arr[i].justify))
+               CALL sb.append(SFMT("\nLET l_zoom.column[%1].justify = \"%2\"", i USING "<<", m_custom_arr[i].justify))
             END IF
          END IF
       END IF
 
       IF m_custom_arr[i].excludeqbe2 THEN
-         CALL sb.append(SFMT("\nCALL fgl_zoom.excludeqbe_set(%1,TRUE)", i USING "<<"))
+         CALL sb.append(SFMT("\nLET l_zoom.column[%1].excludeqbe = TRUE", i USING "<<"))
       END IF
       IF m_custom_arr[i].excludelist2 THEN
-         CALL sb.append(SFMT("\nCALL fgl_zoom.excludelist_set(%1,TRUE)", i USING "<<"))
+         CALL sb.append(SFMT("\nLET l_zoom.column[%1].excludelist = TRUE", i USING "<<"))
       END IF
       IF m_custom_arr[i].qbedefault.getLength() THEN
-         CALL sb.append(SFMT("\nCALL fgl_zoom.column_qbedefault_set(%1,\"%2\")", i USING "<<", m_custom_arr[i].qbedefault))
+         CALL sb.append(SFMT("\nLET l_zoom.column[%1].qbedefault = \"%2\"", i USING "<<", m_custom_arr[i].qbedefault))
       END IF
       IF m_custom_arr[i].qbeforce2 THEN
-         CALL sb.append(SFMT("\nCALL fgl_zoom.column_qbeforce_set(%1,TRUE)", i USING "<<"))
+         CALL sb.append(SFMT("\nLET l_zoom.column[%1].qbeforce = TRUE", i USING "<<"))
       END IF
-      IF i = 1 AND NOT m_custom_arr[i].includeinresult THEN
-         CALL sb.append(SFMT("\nCALL fgl_zoom.includeinresult_set(%1,FALSE)", i USING "<<"))
-      END IF
-      IF i > 1 AND m_custom_arr[i].includeinresult THEN
-         CALL sb.append(SFMT("\nCALL fgl_zoom.includeinresult_set(%1,TRUE)", i USING "<<"))
-      END IF
+     
       IF m_custom_arr[i].includeinresult THEN
          LET l_columns_returned = l_columns_returned + 1
       END IF
@@ -368,29 +371,29 @@ DEFINE l_continue SMALLINT
             
    CALL sb.append("\n\n--Execute")
    IF l_columns_returned = 1 AND NOT m_custom_rec.multiplerow THEN
-      CALL sb.append("\nLET l_result = fgl_zoom.call()")
+      CALL sb.append("\nLET l_result = l_zoom.call()")
    ELSE
-      CALL sb.append("\nCALL fgl_zoom.execute()")
+      CALL sb.append("\nCALL l_zoom.execute()")
    END IF
 
    CALL sb.append("\n\n--Getter")
    IF NOT m_custom_rec.noqbe2 THEN
-      CALL sb.append("\nLET l_where_clause = fgl_zoom.where_get()")
+      CALL sb.append("\nLET l_where_clause = l_zoom.where")
    END IF
    IF l_columns_returned = 1 AND m_custom_rec.multiplerow THEN
-      CALL sb.append("\nLET l_qbe_clause = fgl_zoom.qbe_get()")
+      CALL sb.append("\nLET l_qbe_clause = l_zoom.qbe")
    END IF
    CASE
       WHEN l_columns_returned = 1 AND NOT m_custom_rec.multiplerow 
          # do nothing, use fgl_zoom.call instead
       WHEN l_columns_returned = 1 AND m_custom_rec.multiplerow 
-         CALL sb.append("\nFOR l_row = 1 TO fgl_zoom.result_length_get()")
-         CALL sb.append("\n   LET l_value[l_row] = fgl_zoom.result_get(l_row, 1)")
+         CALL sb.append("\nFOR l_row = 1 TO l_zoom.result.getLength()")
+         CALL sb.append("\n   LET l_value[l_row] = l_zoom.result[l_row, 1]")
          CALL sb.append("\nEND FOR")
       OTHERWISE
-         CALL sb.append("\nFOR l_row = 1 TO fgl_zoom.result_length_get()")
-         CALL sb.append("\n   FOR l_col = 1 TO fgl_zoom.result_rowlength_get(l_row)")
-         CALL sb.append("\n      LET l_value[l_row,l_col] = fgl_zoom.result_get(l_row, l_col)")
+         CALL sb.append("\nFOR l_row = 1 TO l_zoom.result.getLength()")
+         CALL sb.append("\n   FOR l_col = 1 TO l_zoom.result[1].getLength()")
+         CALL sb.append("\n      LET l_value[l_row,l_col] = l_zoom.result[l_row, l_col]")
          CALL sb.append("\n   END FOR")
          CALL sb.append("\nEND FOR")
    END CASE
@@ -411,32 +414,26 @@ END FUNCTION
 
 
 
-PRIVATE FUNCTION populate_selected_column()
+PRIVATE FUNCTION comboinit_selected_column(l_col_count integer)
 DEFINE cb ui.ComboBox
-DEFINE i, l_length INTEGER
+DEFINE i INTEGER
 
    LET cb = ui.ComboBox.forName("selected_column")
    CALL cb.clear()
-   IF fgl_zoom.result_length_get() > 0 THEN
-      LET l_length = fgl_zoom.result_rowlength_get(1)
-   ELSE
-      LET l_length = 0
-   END IF
-   FOR i = 1 TO l_length
+   FOR i = 1 TO l_col_count
       CALL cb.addItem(i,i)
-   END FOR
+   END for
 END FUNCTION
 
 
 
-PRIVATE FUNCTION populate_selected_row()
+PRIVATE FUNCTION comboinit_selected_row(l_row_count integer)
 DEFINE cb ui.ComboBox
-DEFINE i, l_length INTEGER
+DEFINE i INTEGER
 
    LET cb = ui.ComboBox.forName("selected_row")
    CALL cb.clear()
-   LET l_length = fgl_zoom.result_length_get()
-   FOR i = 1 TO l_length
+   FOR i = 1 to l_row_count
       CALL cb.addItem(i,i)
    END FOR
 END FUNCTION

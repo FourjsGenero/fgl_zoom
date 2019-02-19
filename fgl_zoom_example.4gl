@@ -139,44 +139,45 @@ END FUNCTION
 #+ the goto functionality
 PRIVATE FUNCTION zoom_state(l_current_value)
 DEFINE l_current_value STRING
+DEFINE state_zoom fgl_zoom.zoomType
 
-    CALL fgl_zoom.init()
-    CALL fgl_zoom.noqbe_set(TRUE)
-    CALL fgl_zoom.cancelvalue_set(l_current_value)
-    CALL fgl_zoom.title_set("Select State")
-    CALL fgl_zoom.sql_set("SELECT state_name, state_code FROM fgl_zoom_state ORDER BY state_name")
+    CALL state_zoom.init()
+    LET state_zoom.noqbe =TRUE
+    LET state_zoom.cancelvalue = l_current_value
+    LET state_zoom.title = "Select State"
+    LET state_zoom.sql ="SELECT state_name, state_code FROM fgl_zoom_state ORDER BY state_name"
    
-    CALL fgl_zoom.column_quick_set(1,"state_name","c",20, "State")
-    CALL fgl_zoom.column_includeinresult_set(1,FALSE)
+    CALL state_zoom.column[1].quick_set("state_name", FALSE, "c",20, "State")
    
-    CALL fgl_zoom.column_quick_set(2,"state_code","c", 0, "Code")
-    CALL fgl_zoom.column_excludelist_set(2,TRUE)
-    CALL fgl_zoom.column_includeinresult_set(2,TRUE)
+    CALL state_zoom.column[2].quick_set("state_code", TRUE, "c", 0, "Code")
+    LET state_zoom.column[2].excludelist = TRUE
    
-    RETURN fgl_zoom.call()
+    RETURN state_zoom.call()
 END FUNCTION
 
 
 
-#+ A simple zoom window to select the customer number
-PRIVATE FUNCTION zoom_store(l_current_value)
-DEFINE l_current_value STRING
 
-    CALL fgl_zoom.init()
-    CALL fgl_zoom.cancelvalue_set(l_current_value)
-    CALL fgl_zoom.title_set("Select Store Code")
-    CALL fgl_zoom.sql_set("SELECT %2 FROM fgl_zoom_store WHERE %1 ORDER BY store_num")
+#+ A simple zoom window to select the store code
+PRIVATE FUNCTION zoom_store(l_current_value)
+DEFINE l_current_value string
+define store_zoom fgl_zoom.zoomType
+
+    CALL store_zoom.init()
+    LET store_zoom.cancelvalue = l_current_value
+    LET store_zoom.title = "Select Store Code"
+    LET store_zoom.sql = "SELECT %2 FROM fgl_zoom_store WHERE %1 ORDER BY store_num"
    
-    CALL fgl_zoom.column_quick_set(1, "store_num", "i", 4, "Number")
-    CALL fgl_zoom.column_quick_set(2, "store_name", "c", 20, "Name")
-    CALL fgl_zoom.column_quick_set(3, "addr", "c", 20, "Address 1")
-    CALL fgl_zoom.column_quick_set(4, "addr2", "c", 20, "Address 2")
-    CALL fgl_zoom.column_quick_set(5, "city", "c", 15, "City")
-    CALL fgl_zoom.column_quick_set(6, "state", "c", 2, "State")
-    CALL fgl_zoom.column_quick_set(7, "zipcode", "c", 5, "Zipcode")
-    CALL fgl_zoom.column_quick_set(8, "phone", "c", 18, "Phone")
+    CALL store_zoom.column[1].quick_set("store_num", true, "i", 4, "Number")
+    CALL store_zoom.column[2].quick_set("store_name", false, "c", 20, "Name")
+    CALL store_zoom.column[3].quick_set("addr", false,"c", 20, "Address 1")
+    CALL store_zoom.column[4].quick_set("addr2", false, "c", 20, "Address 2")
+    CALL store_zoom.column[5].quick_set("city",false, "c", 15, "City")
+    CALL store_zoom.column[6].quick_set("state",false, "c", 2, "State")
+    CALL store_zoom.column[7].quick_set("zipcode",false, "c", 5, "Zipcode")
+    CALL store_zoom.column[8].quick_set("phone",false, "c", 18, "Phone")
    
-    RETURN fgl_zoom.call()
+    RETURN store_zoom.call()
 END FUNCTION
 
  
@@ -186,44 +187,47 @@ END FUNCTION
 #+ This example concatentates some of the fields together so that name, address 
 #+ etc. are displayed as one column each.
 PRIVATE FUNCTION zoom_customer(l_current_value)
-DEFINE l_current_value STRING
+DEFINE l_current_value string
+define customer_zoom zoomType
 
-    CALL fgl_zoom.init()
-    CALL fgl_zoom.cancelvalue_set(l_current_value)
-    CALL fgl_zoom.title_set("Select Customer Code")
-    CALL fgl_zoom.sql_set("SELECT customer_num, trim(lname) ||', '||trim(fname),  company, trim(address1)||' '||trim(address2), city, state FROM fgl_zoom_customer WHERE %1 ORDER BY customer_num")
 
-    CALL fgl_zoom.column_quick_set(1, "customer_num", "i", 4, "Code")
-    CALL fgl_zoom.column_quick_set(2, "(trim(lname) ||', '||trim(fname))", "c", 10, "Name")
-    CALL fgl_zoom.column_quick_set(3, "company", "c", 10, "Company")
-    CALL fgl_zoom.column_quick_set(4, "(trim(address1)||' '||trim(address2))", "c", 20, "Address")
-    CALL fgl_zoom.column_quick_set(5, "city", "c", 10, "City")
-    CALL fgl_zoom.column_quick_set(6, "state", "c", 5, "State")
+    CALL customer_zoom.init()
+    LET customer_zoom.cancelvalue =l_current_value
+    LET customer_zoom.title ="Select Customer Code"
+    LET customer_zoom.sql = "SELECT %2 FROM fgl_zoom_customer WHERE %1 ORDER BY customer_num"
 
-    CALL fgl_zoom.freezeleft_set(1)
+    CALL customer_zoom.column[1].quick_set("customer_num", true, "i", 4, "Code")
+    CALL customer_zoom.column[2].quick_set("(trim(lname) ||', '||trim(fname))", false, "c", 10, "Name")
+    CALL customer_zoom.column[3].quick_set("company", false, "c", 10, "Company")
+    CALL customer_zoom.column[4].quick_set("(trim(address1)||' '||trim(address2))", false, "c", 20, "Address")
+    CALL customer_zoom.column[5].quick_set("city", false, "c", 10, "City")
+    CALL customer_zoom.column[6].quick_set("state", false, "c", 5, "State")
+
+    LET customer_zoom.freezeleft = 1
    
-    RETURN fgl_zoom.call()
+    RETURN customer_zoom.call()
+    RETURN NULL
 END FUNCTION
 
 
 #+ A simple zoom window to select a country code.
 PRIVATE FUNCTION zoom_country(l_current_value)
-DEFINE l_current_value STRING
+DEFINE l_current_value string
+define country_zoom zoomType
 
-    CALL fgl_zoom.init()
-    CALL fgl_zoom.cancelvalue_set(l_current_value)
-    CALL fgl_zoom.title_set("Select Country")
+
+    CALL country_zoom.init()
+    LET country_zoom.cancelvalue = l_current_value
+    LET country_zoom.title = "Select Country"
    
-    CALL fgl_zoom.sql_set("select %2 FROM fgl_zoom_country WHERE %1 ORDER BY country_3letter")
+    LET country_zoom.sql = "select %2 FROM fgl_zoom_country WHERE %1 ORDER BY country_3letter"
         
-    CALL fgl_zoom.gotolist_set(TRUE)
+    LET country_zoom.gotolist =TRUE
    
-    CALL fgl_zoom.column_quick_set(1,"country_3letter","c",3,"Code")
-    CALL fgl_zoom.column_quick_set(2,"country_name","c",30,"Name")
-    CALL fgl_zoom.column_includeinresult_set(1,TRUE)
-    CALL fgl_zoom.column_includeinresult_set(2,TRUE)
+    CALL country_zoom.column[1].quick_set("country_3letter", true, "c",3,"Code")
+    CALL country_zoom.column[2].quick_set("country_name", false, "c",30,"Name")
 
-    RETURN fgl_zoom.call()
+    RETURN country_zoom.call()
 END FUNCTION
 
 
@@ -235,14 +239,16 @@ END FUNCTION
 #+ the goto functionality
 PRIVATE FUNCTION zoom_auto(l_current_value)
 DEFINE l_current_value STRING
+DEFINE auto_zoom fgl_zoom.zoomType
 
-    CALL fgl_zoom.init()
-    CALL fgl_zoom.cancelvalue_set(l_current_value)
-    CALL fgl_zoom.title_set("Select Value")
-    CALL fgl_zoom.sql_set("SELECT id, desc, date_created, time_created, quantity, price FROM fgl_zoom_test WHERE %1 ORDER BY id")
-    CALL fgl_zoom.column_auto_set()
+    CALL auto_zoom.init()
+    LET auto_zoom.noqbe =TRUE
+    LET auto_zoom.cancelvalue = l_current_value
+    LET auto_zoom.title = "Select Value"
+    LET auto_zoom.sql ="SELECT id, desc, date_created, time_created, quantity, price FROM fgl_zoom_test WHERE %1 ORDER BY id"
+    CALL auto_zoom.column_auto_set()
     
-    RETURN fgl_zoom.call()
+    RETURN auto_zoom.call()
 END FUNCTION
 
 
@@ -255,24 +261,24 @@ END FUNCTION
 PRIVATE FUNCTION zoom_state_label()
 DEFINE l_state_code CHAR(2)
 DEFINE l_state_name CHAR(20)
+define state_label_zoom zoomType
 
-    CALL fgl_zoom.init()
-    CALL fgl_zoom.noqbe_set(TRUE)
-    CALL fgl_zoom.title_set("Select State")
-    CALL fgl_zoom.sql_set("SELECT state_code, state_name FROM fgl_zoom_state ORDER BY state_name")
+ 
+    CALL state_label_zoom.init()
+    LET state_label_zoom.noqbe = TRUE
+    LET state_label_zoom.title = "Select State"
+    LET state_label_zoom.sql = "SELECT state_code, state_name FROM fgl_zoom_state ORDER BY state_name"
    
-    CALL fgl_zoom.column_quick_set(1,"state_code","c",2, "Code")
-    CALL fgl_zoom.column_includeinresult_set(1,TRUE)
-   
-    CALL fgl_zoom.column_quick_set(2,"state_name","c", 20, "Name")
-    CALL fgl_zoom.column_includeinresult_set(2,TRUE)
+    CALL state_label_zoom.column[1].quick_set("state_code", true, "c",2, "Code")   
+    CALL state_label_zoom.column[2].quick_set("state_name", true, "c", 20, "Name")
 
-    CALL fgl_zoom.execute()
-    IF fgl_zoom.ok() THEN
-        LET l_state_code = fgl_zoom.result_get(1,1)
-        LET l_state_name = fgl_zoom.result_get(1,2)
+    CALL state_label_zoom.execute()
+    IF state_label_zoom.ok() THEN
+        LET l_state_code = state_label_zoom.result[1,1]
+        LET l_state_name = state_label_zoom.result[1,2]
     END IF
     RETURN l_state_code, l_state_name
+
 END FUNCTION
 
 

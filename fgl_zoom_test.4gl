@@ -39,8 +39,6 @@ IMPORT FGL fgl_zoom_functionaltest
 IMPORT FGL fgl_zoom_testdata
 
 MAIN
-DEFINE w ui.Window
-DEFINE f ui.Form
 DEFINE l_mode STRING
  
     DEFER INTERRUPT 
@@ -72,11 +70,8 @@ DEFINE l_mode STRING
     CALL fgl_zoom_functionaltest.init()
 
     OPEN WINDOW fgl_zoom_test WITH FORM "fgl_zoom_test"
-    LET w = ui.Window.getCurrent()
-    LET f = w.getForm()   
-
-    LET l_mode = "example"
    
+    LET l_mode = "example"
     WHILE l_mode != "exit"
         CASE l_mode
             WHEN "custom"           
