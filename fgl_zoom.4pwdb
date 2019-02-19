@@ -72,15 +72,15 @@
 <Fct c="10" el="162" l="81" n="init()" t="F" v="pub"/>
 <Fct c="18" el="77" l="75" n="exception()" t="F" v="prv"/>
 </File>
-<File m="fgl_zoom_example" n="fgl_zoom_example.4gl" s="3" ts="20190219080809180">
+<File m="fgl_zoom_example" n="fgl_zoom_example.4gl" s="3" ts="20190220123825241">
 <Dep t="fgl_zoom.4gl"/>
-<Fct c="18" el="321" l="287" n="show_function_source(l_function STRING)" t="F" v="prv">
-<Call c="10" l="320" n="FGL_WINMESSAGE" t="F"/>
+<Fct c="18" el="320" l="286" n="show_function_source(l_function STRING)" t="F" v="prv">
+<Call c="10" l="319" n="FGL_WINMESSAGE" t="F"/>
 </Fct>
-<Fct c="18" el="282" l="261" n="zoom_state_label()" t="F" v="prv"/>
-<Fct c="18" el="252" l="240" n="zoom_auto(l_current_value STRING)" t="F" v="prv"/>
-<Fct c="18" el="231" l="214" n="zoom_country(l_current_value STRING)" t="F" v="prv"/>
-<Fct c="18" el="210" l="189" n="zoom_customer(l_current_value STRING)" t="F" v="prv"/>
+<Fct c="18" el="281" l="260" n="zoom_state_label()" t="F" v="prv"/>
+<Fct c="18" el="251" l="239" n="zoom_auto(l_current_value STRING)" t="F" v="prv"/>
+<Fct c="18" el="230" l="213" n="zoom_country(l_current_value STRING)" t="F" v="prv"/>
+<Fct c="18" el="209" l="189" n="zoom_customer(l_current_value STRING)" t="F" v="prv"/>
 <Fct c="18" el="181" l="162" n="zoom_store(l_current_value STRING)" t="F" v="prv"/>
 <Fct c="18" el="156" l="140" n="zoom_state(l_current_value STRING)" t="F" v="prv"/>
 <Fct c="10" el="131" l="67" n="test()" t="F" v="pub">

@@ -29,7 +29,7 @@
 
 #+ Controlling program for tests of generic zoom
 #+
-#+ Allows testing of the generic zoom routine.  
+#+ Allows testing of the generic zoom routine.
 
 IMPORT FGL fgldialog
 
@@ -39,15 +39,15 @@ IMPORT FGL fgl_zoom_functionaltest
 IMPORT FGL fgl_zoom_testdata
 
 MAIN
-DEFINE l_mode STRING
- 
-    DEFER INTERRUPT 
+    DEFINE l_mode STRING
+
+    DEFER INTERRUPT
     DEFER QUIT
-    OPTIONS INPUT WRAP 
+    OPTIONS INPUT WRAP
     OPTIONS FIELD ORDER FORM
 
     WHENEVER ANY ERROR CALL fgl_zoom_test_error
-   
+
     CALL STARTLOG("fgl_zoom_test.log")
 
     CALL ui.Interface.loadStyles("fgl_zoom_test")
@@ -70,26 +70,24 @@ DEFINE l_mode STRING
     CALL fgl_zoom_functionaltest.init()
 
     OPEN WINDOW fgl_zoom_test WITH FORM "fgl_zoom_test"
-   
+
     LET l_mode = "example"
     WHILE l_mode != "exit"
         CASE l_mode
-            WHEN "custom"           
+            WHEN "custom"
                 LET l_mode = fgl_zoom_custom.test()
-            WHEN "example"          
+            WHEN "example"
                 LET l_mode = fgl_zoom_example.test()
-            WHEN "functionaltest"   
+            WHEN "functionaltest"
                 LET l_mode = fgl_zoom_functionaltest.test()
-            OTHERWISE                
+            OTHERWISE
                 LET l_mode = "exit"
         END CASE
     END WHILE
     CLOSE WINDOW fgl_zoom_test
 END MAIN
 
-
-
 FUNCTION fgl_zoom_test_error()
-   CALL FGL_WINMESSAGE("Error","An error has occured with fgl_zoom_test","stop")
-   EXIT PROGRAM 1
+    CALL FGL_WINMESSAGE("Error", "An error has occured with fgl_zoom_test", "stop")
+    EXIT PROGRAM 1
 END FUNCTION
