@@ -206,7 +206,6 @@ define customer_zoom zoomType
     LET customer_zoom.freezeleft = 1
    
     RETURN customer_zoom.call()
-    RETURN NULL
 END FUNCTION
 
 
