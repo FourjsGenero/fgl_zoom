@@ -1,7 +1,7 @@
 # fgl_zoom
 
 # :warning: UPGRADED to Genero 3.20 :warning:
-# If you wish to use this with Genero 3.10, use the commits and take the repository before 20th February 2019
+# If you wish to use this with Genero 3.10, use the commits history and take the repository before 20th February 2019
 
 fgl_zoom is a Genero library you can use to code all your zoom windows.  What is a zoom window, alternative names include lookup window, query window, pick list.  It is a window that appears when you click on a BUTTONEDIT button that allows you to select a value that will then be entered into the BUTTONEDIT field.
 
@@ -185,12 +185,13 @@ a series of fgl_zoom calls e.g.
     IMPORT FGL fgl_zoom
 
     FUNCTION zoom_tabid()
+        DEFINE z fgl_zoom.zoomType
         DEFINE tabid INTEGER
-        CALL fgl_zoom.init()
-        CALL fgl_zoom.sql_set("SELECT tabid, tabname FROM systables WHERE %1")
-        CALL fgl_zoom.column_quick_set(1,"tabid","i",4,"ID")  
-        CALL fgl_zoom.column_quick_set(2,"tabname","c",20,"Name")
-        CALL fgl_zoom.call() RETURNING tabid
+        CALL z.init()
+        LET z.sql = "SELECT tabid, tabname FROM systables WHERE %1"
+        CALL z.column[1].quick_set("tabid",true,"i",4,"ID")  
+        CALL z.column[2].quick_set("tabname",false,"c",20,"Name")
+        CALL z.call() RETURNING tabid
         RETURN tabid
     END FUNCTION
 
@@ -201,70 +202,71 @@ and you would call your wrapper routine from your DIALOG statements e.g.
 
 Intended usage would follow this broad pattern.
 
+Define a variable for the zoom window
+
+    DEFINE z fgl_zoom.zoomType
+
 To clear the fgl_zoom settings, use the following call
 
-    CALL fgl_zoom.init()
+    CALL z.init()
 
 To configure, you can use one or more of the following functions
 
-    CALL fgl_zoom.sql_set(sql)                - define the SQL used in the zoom.  This SQL should have %1 where the where clause will be substituted with the result of the QBE.  Optionally you can also include a %2 in place of the columns e.g. SELECT %2, and the columns will be populated from the additional column definition functions.
-    CALL fgl_zoom.title_set(STRING)           - set the title of the zoom window
-    CALL fgl_zoom.cancelvalue_set(STRING)     - the value to return if user cancels 
-    CALL fgl_zoom.noqbe_set(BOOLEAN)          - set to true if you dont want the QBE window to appear
-    CALL fgl_zoom.nolist_set(BOOLEAN)         - set to true if you dont want the List of results to appear
-    CALL fgl_zoom.gotolist_set(BOOLEAN)       - set to true to dislay the results first without initially doing a QBE
-    CALL fgl_zoom.autoselect_set(BOOLEAN)     - set to true if you want the window to return immediately if only row is found
-    CALL fgl_zoom.multiplerow_set(BOOLEAN)    - set to true to allow the user to select multiple row
+    LET z.sql =sql                 - define the SQL used in the zoom.  This SQL should have %1 where the where clause will be substituted with the result of the QBE.  Optionally you can also include a %2 in place of the columns e.g. SELECT %2, and the columns will be populated from the additional column definition functions.
+    LET z.title = STRING           - set the title of the zoom window
+    LET z.cancelvalue = STRING     - the value to return if user cancels 
+    LET z.noqbe = BOOLEAN          - set to true if you dont want the QBE window to appear
+    LET z.nolist = BOOLEAN         - set to true if you dont want the List of results to appear
+    LET z.gotolist = BOOLEAN       - set to true to dislay the results first without initially doing a QBE
+    LET z.autoselect = BOOLEAN     - set to true if you want the window to return immediately if only row is found
+    LET z.multiplerow = BOOLEAN    - set to true to allow the user to select multiple row
 
 For each column specified in the call to fgl_zoom.sql_set() you would specify one or more of the following functions
 
-    CALL fgl_zoom.column_column_set(COLUMN, STRING)           - The SQL column name
-    CALL fgl_zoom.column_title_set(COLUMN, STRING)            - The title of the column
-    CALL fgl_zoom.column_format_set(COLUMN, STRING)           - The format to display the column
-    CALL fgl_zoom.column_datatypec_set(COLUMN, ["c"|"d"|"f"|"i"]) - Set the datatype of the column, (c)har, (d)ate, (f)loat, (i)nteger
-    CALL fgl_zoom.column_width_set(COLUMN, INTEGER)           - The width of the column
-    CALL fgl_zoom.column_justify_set(COLUMN, ["left"|"right"|"center"]) - Set the justification of the column
-    CALL fgl_zoom.column_excludeqbe_set(COLUMN, BOOLEAN)      - Set to true to exclude column from QBE
-    CALL fgl_zoom.column_excludelist_set(COLUMN, BOOLEAN)     - Set to true to exclude column from result list)
-    CALL fgl_zoom.column_includeinresult_set(COLUMN, BOOLEAN) - Set to true to include column in return values
-    CALL fgl_zoom.column_qbedefault_set(COLUMN, STRING)       - Default expression to set in QBE field
+    LET z.column[COLUMN].column = STRING           - The SQL column name
+    LET z.column[COLUMN].title = STRING            - The title of the column
+    LET z.column[COLUMN].format = STRING           - The format to display the column
+    LET z.column[COLUMN].datatypec = ["c"|"d"|"f"|"i"] - Set the datatype of the column, (c)har, (d)ate, (f)loat, (i)nteger
+    LET z.column[COLUMN].width = INTEGER           - The width of the column
+    LET z.column[COLUMN].justify = ["left"|"right"|"center"] - Set the justification of the column
+    LET z.column[COLUMN].excludeqbe = BOOLEAN      - Set to true to exclude column from QBE
+    LET z.column[COLUMN].excludelist = BOOLEAN     - Set to true to exclude column from result list)
+    LET z.column[COLUMN].includeinresult = BOOLEAN - Set to true to include column in return values
+    LET z.column[COLUMN].qbedefault =STRING)       - Default expression to set in QBE field
 
 To ease programming an ease of access function is provided to set a column 
 quickly in one line
 
-    CALL fgl_zoom.column_quick_set(COLUMN,column_name, datatypec, width, title)
+    CALL z.column[COLUMN].quick_set(column_name, includeinresult, datatypec, width, title)
 
-This calls column_column_set, column_datatypec_set, column_width_set, 
-column_title_set as well as callling column_justify_set(right) if it is a 
-numeric field.  It also sets includeinresult_set to TRUE for the first column, FALSE
-for the other columns
+This sets the column_name, include in result flag, datatype indicator, width of column, and the title of a column.  THis is considered minimm required to be set.   It will also set jusitfy=right for a numeric column.   Typically you would set includeinresult flag to true for the first column, false otherwise
 
 To execute the zoom window, there is a choice of 2 methods
 
-    CALL fgl_zoom.call() RETURNING STRING - Execute the zoom window and return the value in the first column of the first row selected
+    CALL z.call() RETURNING STRING - Execute the zoom window and return the value in the first column of the first row selected
 
 OR
 
-    CALL fgl_zoom.execute()               - Execute the zoom window
+    CALL z.execute()               - Execute the zoom window
 
-You then make one or more of the following calls to get the values selected and additional info
+You then refer to one of the following variables to get the selected info
 
-    CALL fgl_zoom.result_get(ROW,COLUMN) RETURNING STRING  - Return the value in the specified ROW,COLUMN of the selected rows
-    CALL fgl_zoom.result_length_get() RETURNING INTEGER    - Return the number of rows selected
+    z.result[ROW,COLUMN]            - Return the value in the specified ROW,COLUMN of the selected rows
+    z.result.getLengt()             - Return the number of rows selected
 
-    CALL fgl_zoom.where_get() RETURNING STRING             - Return the QBE clause generated in the QBE screen
-    CALL fgl_zoom.qbe_get() RETURNING STRING               - Return the selected values pipe delimited suitable for inclusion in a CONSTRUCT field
-    CALL fgl_zoom.result_rowlength_get() RETURNING INTEGER - Return the number of columns in the result selected
+    z.where                         - Return the QBE clause generated in the QBE screen
+    z.qbe                           - Return the selected values pipe delimited suitable for inclusion in a CONSTRUCT field
+    z.result[1].getLength()         - Return the number of columns in the result selected
 
 
 
 The following is an examle of a simple zoom window call
 
-    CALL fgl_zoom.init()
-    CALL fgl_zoom.sql_set("SELECT tabid, tabname FROM systables WHERE %1")
-    CALL fgl_zoom.column_quick_set(1,"tabid","i",4,"ID")  
-    CALL fgl_zoom.column_quick_set(2,"tabname","c",20,"Name")
-    CALL fgl_zoom.call() RETURNING tabid
+    CALL z.init()
+    LET z.sql = "SELECT tabid, tabname FROM systables WHERE %1"
+    CALL z.column[1].quick("tabid",true,"i",4,"ID")  
+    CALL z.column[2].quick("tabname",false,"c",20,"Name")
+    CALL z.call() RETURNING tabid
 
 ## Inspiration
 
