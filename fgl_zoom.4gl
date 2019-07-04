@@ -85,7 +85,7 @@ END FUNCTION
 
 #+ Return the version number
 PRIVATE FUNCTION version()
-    RETURN "3.10.00"
+    RETURN "3.20.00"
 END FUNCTION
 
 #+ Initialize module
