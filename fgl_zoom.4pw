@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Project defaultApplication="46209009" gstVersion="31402" version="3.3">
+<Project defaultApplication="46209009" gstVersion="31403" version="3.3">
   <Settings>
     <DynamicProperties version="2">
       <DynamicProperty description="Accent color (Android 5.0 and later)" initialValue="#9575CD" isDefaultInherited="false" isHidden="false" label="Accent color" name="gma-accent-color" readOnly="false" type="COLOR"/>
@@ -83,7 +83,7 @@
     </Library>
   </Group>
   <Group id="-144845644" label="fgl_zoom_test" language="Genero" targetDirectory="$(ProjectDir)">
-    <Application binaryName="fgl_zoom_test" dependencies="-155249488,-33975760" environment="valuelist:FGLCOV=1,value:FGLTRACE_FUNCTIONS=call,value:FGLSQLDEBUG=0,filelist:FGLPROFILE=fgl_zoom_test.prf;$(FGLPROFILE)" id="46209009" label="fgl_zoom_test">
+    <Application binaryName="fgl_zoom_test" dependencies="-155249488,-33975760" environment="valuelist:FGLCOV=1,value:FGLTRACE_FUNCTIONS=call,filelist:FGLPROFILE=fgl_zoom_test.prf;$(FGLPROFILE)" id="46209009" label="fgl_zoom_test">
       <VirtualFolder label="Documentation">
         <File filePath="CHANGES.txt"/>
         <File filePath="TODO.txt"/>

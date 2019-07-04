@@ -75,7 +75,6 @@ PRIVATE FUNCTION exception()
 END FUNCTION
 
 FUNCTION init()
-
     INITIALIZE m_custom_rec.* TO NULL
     LET m_custom_rec.sql = "SELECT %2 FROM fgl_zoom_test WHERE %1"
     LET m_custom_rec.auto = FALSE
