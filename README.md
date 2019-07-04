@@ -1,8 +1,5 @@
 # fgl_zoom
 
-# :warning: UPGRADED to Genero 3.20 :warning:
-# If you wish to use this with Genero 3.10, use the commits history and take the repository before 20th February 2019
-
 fgl_zoom is a Genero library you can use to code all your zoom windows.  What is a zoom window, alternative names include lookup window, query window, pick list.  It is a window that appears when you click on a BUTTONEDIT button that allows you to select a value that will then be entered into the BUTTONEDIT field.
 
 We typically see this pattern when entering what is a foreign key to another table.  The BUTTONEDIT requires entry of the key field and the zoom window allows you to list the key and data fields of the referenced table and to select a value.  To narrow the list, a QBE option may also be available.
