@@ -268,7 +268,7 @@ The following is an examle of a simple zoom window call
 ## Inspiration
 
 The routines here are based on Quanta's query_win().  This can be found in
-the IIUG repository (http://www.iiug.org/software/index_I4GL.html)
+the IIUG repository (https://sourceforge.net/projects/iiug-software-repository/files/Informix4GL-Tools/query_win/)
 
 Century also had a similar routine that ran off database entries.  It would be
 possible to implement these routines to run off some database or XML 
