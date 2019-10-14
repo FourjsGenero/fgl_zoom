@@ -43,6 +43,7 @@ fgl_zoom.validate.column_X_width_valid = "Column %1 width must be greater than z
 fgl_zoom.validate.column_X_datatype_valid = "datatype parameter for column %1 must be valid"
 fgl_zoom.validate.column_X_justify_valid = "justify parameter for column %1 must be valid"
 fgl_zoom.validate.wrapper = "Error with fgl_zoom parameters\n%1\nContact your local support"
+fgl_zoom.validate.gotorow_negative = "Goto Row must be greater than or equal to -1"
 
 fgl_zoom.error.qbeforce = "QBE Criteria must be entered into at least one field"
 fgl_zoom.error.column.qbeforce = "QBE Criteria must be entered into this field"
@@ -63,7 +64,7 @@ fgl_zoom.field.current_sort_column.comment = "Restrict search to the current sor
 
 
 fgl_zoom.action.copy.text = "Copy"
-fgl_zoom.action.copyall.text = "Copy" 
+fgl_zoom.action.copyall.text = "Copy All Rows" 
 fgl_zoom.action.find.text = "Find"
 fgl_zoom.action.findhide.text = "Hide Find"
 fgl_zoom.action.findnext.text = "Find Next"

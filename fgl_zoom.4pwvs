@@ -11,10 +11,13 @@
     <Node path="fgl_zoom.4pw/fgl_zoom_test/fgl_zoom_test/ImportFGL" type="pm/virtual-folder"/>
   </ExpandedNodes>
   <OpenDocuments>
-    <Document container="true" filePath="CHANGES.txt" locator="1:1" module="mod-ce3">
+    <Document container="true" filePath="fgl_zoom_example.4gl" locator="159:5" module="mod-ce3">
       <Data name="8" value="UTF-8"/>
     </Document>
-    <Document container="true" filePath="fgl_zoom_example.4gl" locator="209:1" module="mod-ce3">
+    <Document container="true" filePath="fgl_zoom.4ad" locator="1:1" module="mod-ce3">
+      <Data name="8" value="ANSI_X3.4-1968"/>
+    </Document>
+    <Document container="true" filePath="fgl_zoom.str" locator="66:46" module="mod-ce3">
       <Data name="8" value="UTF-8"/>
     </Document>
   </OpenDocuments>

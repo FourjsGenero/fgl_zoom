@@ -62,6 +62,7 @@ PUBLIC TYPE zoomType RECORD -- The parameters controlling the behaviour of the z
     freezeleft INTEGER, -- Number of columns to freeze from left
     freezeright INTEGER, -- Number of columns to freeze from right
     qbeforce BOOLEAN, -- Set to TRUE if at least one field must have some QBE criteria entered
+    gotorow INTEGER, -- Puts cursor on selected row, -1 will go to last row
     column DYNAMIC ARRAY OF zoomColumnType,
     -- return values
     result DYNAMIC ARRAY WITH DIMENSION 2 OF STRING, -- The values selected by the user to return to the calling program
@@ -106,6 +107,7 @@ FUNCTION(this zoomType) init()
     LET this.freezeleft = 0
     LET this.freezeright = 0
     LET this.qbeforce = FALSE
+    LET this.gotorow = 0
 END FUNCTION
 
 -- Setters
@@ -150,6 +152,8 @@ FUNCTION(this zoomType) set(l_property STRING, l_value STRING) RETURNS(BOOLEAN)
             LET this.freezeright = l_value
         WHEN "qbeforce"
             LET this.qbeforce = l_value
+        WHEN "gotorow"
+            LET this.gotorow = l_value
         OTHERWISE
             RETURN FALSE
     END CASE
@@ -735,6 +739,7 @@ PRIVATE FUNCTION(this zoomType) list()
         IF this.maxrow > 0 THEN
             IF l_row_count > this.maxrow THEN
                 LET l_maxrow_flg = TRUE
+                LET l_row_count = this.maxrow
                 EXIT WHILE
             END IF
         END IF
@@ -788,6 +793,16 @@ PRIVATE FUNCTION(this zoomType) list()
                         CALL d_da.setActionActive("selectall", this.multiplerow)
                         CALL d_da.setActionActive("selectnone", this.multiplerow)
 
+                        DISPLAY d_da.getArrayLength("data")
+                        CASE
+                            WHEN this.gotorow = -1 
+                                CALL d_da.setCurrentRow("data", d_da.getArrayLength("data"))
+                             WHEN this.gotorow > 0 
+                                CALL d_da.setCurrentRow("data", this.gotorow)
+                            OTHERWISE
+                                CALL d_da.setCurrentRow("data", 1)
+                        END CASE
+                            
                         IF l_maxrow_flg THEN
                             CALL FGL_WINMESSAGE(% "fgl_zoom.window.title.zoom", SFMT(% "fgl_zoom.max_rows_hit", this.maxrow), "info")
                         END IF
@@ -936,6 +951,9 @@ PRIVATE FUNCTION(this zoomType) normalise()
     IF this.freezeright IS NULL THEN
         LET this.freezeright = 0
     END IF
+    IF this.gotorow IS NULL THEN
+        LET this.gotorow = 0
+    END IF
 
     FOR i = 1 TO this.column.getLength()
         LET this.column[i].columnname = this.column[i].columnname.trim()
@@ -1043,6 +1061,9 @@ PRIVATE FUNCTION(this zoomType) validate() RETURNS(BOOLEAN, STRING)
     END IF
     IF this.column.getLength() > 9 THEN
         RETURN FALSE, % "fgl_zoom.validate.column_defined_max"
+    END IF
+    IF this.gotorow < -1 THEN
+        RETURN FALSE, %"fgl_zoom.validate.gotorow_negative"
     END IF
 
     FOR i = 1 TO this.column.getLength()

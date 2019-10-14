@@ -15,6 +15,7 @@ GRID
  [label12    ][freezeleft       ]
  [label13    ][freezeright      ]
  [label33    ][q]
+ [label34    ][gotorow          ]
  <T table1                                                                                    >
  [columnname|title3    |width     |format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
  [columnname|title3    |width     |format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
@@ -48,6 +49,7 @@ LABEL label9:Label9, TEXT="Maximum Rows Returned";
 LABEL label12:Label12, TEXT="Freeze Columns (Left)";
 LABEL label13:Label13, TEXT="Freeze Columns (Right)";
 LABEL label33:Label33, TEXT="Force QBE";
+LABEL label34:Label34, TEXT="Goto Row (-1 Last)";
 
 TEXTEDIT sql=formonly.sql, COMMENT="Enter the SQL";
 CHECKBOX auto=formonly.auto, NOT NULL, VALUECHECKED=1, VALUEUNCHECKED=0, COMMENT="Select to derive column parameter values automatically from the SQL";
@@ -62,6 +64,7 @@ EDIT maxrow=formonly.maxrow, COMMENT="Enter the maximum number of rows to return
 SPINEDIT freezeleft=formonly.freezeleft, step=1, COMMENT="Enter the number of columns to freeze from left", VALUEMIN=0, VALUEMAX=8;
 SPINEDIT freezeright=formonly.freezeright, step=1, COMMENT="Enter the number of columns to freeze from right", VALUEMIN=0, VALUEMAX=8;
 CHECKBOX q=formonly.qbeforce, text=%"", NOT NULL, REQUIRED, VALUECHECKED = 1, VALUEUNCHECKED = 0;
+SPINEDIT gotorow=formonly.gotorow, STEP=1, COMMENT="Enter the row to give focus to, -1 for last row", VALUEMIN=-1; 
 
 
 

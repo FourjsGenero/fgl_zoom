@@ -1,167 +1,85 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <WorkspaceDatabase fileContentsEncoding="UTF-8" version="3.0">
-<File m="fgl_zoom" n="fgl_zoom.4gl" s="0" ts="">
-<Fct c="19" el="1330" l="1316" n="init_fields(z RECORD INOUT)" t="F" v="prv"/>
-<Fct c="19" el="1312" l="1232" n="create_form(z RECORD INOUT)" t="F" v="prv">
-<Call c="12" l="1311" n="append_freeze_style" t="F"/>
-</Fct>
-<Fct c="19" el="1169" l="1141" n="print(z RECORD INOUT)" t="F" v="prv">
-<Call c="10" i="fgldialog" l="1146" n="fgl_winMessage" t="F"/>
-</Fct>
-<Fct c="19" el="1137" l="1124" n="append_freeze_style(z RECORD INOUT)" t="F" v="prv"/>
-<Fct c="19" el="1119" l="1108" n="columnlist_get(z RECORD INOUT)" t="F" v="prv"/>
-<Fct c="19" el="1090" l="1035" n="validate(z RECORD INOUT)" t="F" v="prv"/>
-<Fct c="19" el="1031" l="941" n="normalise(z RECORD INOUT)" t="F" v="prv"/>
-<Fct c="20" el="936" l="922" n="show_hide_columns(z RECORD INOUT,l_mode STRING)" t="F" v="prv"/>
-<Fct c="19" el="917" l="906" n="add_row_to_result(z RECORD INOUT,l_row INTEGER)" t="F" v="prv"/>
-<Fct c="19" el="902" l="726" n="list(z RECORD INOUT)" t="F" v="prv">
-<Call c="40" l="746" n="columnlist_get" t="F"/>
-<Call c="18" i="fgldialog" l="776" n="fgl_winMessage" t="F"/>
-<Call c="20" l="784" n="add_row_to_result" t="F"/>
-<Call c="34" i="fgldialog" l="818" n="fgl_winMessage" t="F"/>
-<Call c="32" l="856" n="print" t="F"/>
-<Call c="48" l="884" n="add_row_to_result" t="F"/>
-<Call c="40" l="888" n="add_row_to_result" t="F"/>
-</Fct>
-<Fct c="19" el="714" l="605" n="qbe(z RECORD INOUT)" t="F" v="prv"/>
-<Fct c="11" el="595" l="591" n="ok(z RECORD INOUT)" t="F" v="pub"/>
-<Fct c="11" el="571" l="556" n="qbe_get(z RECORD INOUT)" t="F" v="pub"/>
-<Fct c="11" el="531" l="521" n="call(z RECORD INOUT)" t="F" v="pub">
-<Call c="12" l="524" n="execute" t="F"/>
-</Fct>
-<Fct c="11" el="500" l="441" n="execute(z RECORD INOUT)" t="F" v="pub">
-<Call c="12" l="463" n="normalise" t="F"/>
-<Call c="12" l="464" n="validate" t="F"/>
-<Call c="14" i="fgldialog" l="467" n="fgl_winMessage" t="F"/>
-<Call c="12" l="473" n="create_form" t="F"/>
-<Call c="16" l="493" n="show_hide_columns" t="F"/>
-<Call c="31" l="495" n="qbe" t="F"/>
-<Call c="32" l="496" n="list" t="F"/>
-</Fct>
-<Fct c="18" el="422" l="386" n="columnname_to_title(l_name STRING)" t="F" v="prv"/>
-<Fct c="18" el="382" l="260" n="datatype_to_columnparam(l_datatype STRING)" t="F" v="prv"/>
-<Fct c="11" el="256" l="224" n="column_auto_set(z RECORD INOUT)" t="F" v="pub">
-<Call c="14" l="250" n="datatype_to_columnparam" t="F"/>
-<Call c="14" l="251" n="columnname_to_title" t="F"/>
-<Call c="26" l="253" n="quick_set" t="F"/>
-</Fct>
-<Fct c="12" el="211" l="199" n="quick_set(zc RECORD INOUT,l_column_name STRING,l_includeinresult BOOLEAN,l_datatypec CHAR(1),l_width INTEGER,l_title STRING)" t="F" v="pub"/>
-<Fct c="11" el="180" l="162" n="set(z RECORD INOUT,l_property STRING,l_value STRING)" t="F" v="pub"/>
-<Fct c="11" el="143" l="133" n="init(z RECORD INOUT)" t="F" v="pub"/>
-<Fct c="18" el="101" l="99" n="version()" t="F" v="prv"/>
-<Fct c="18" el="94" l="92" n="exception()" t="F" v="prv"/>
-<Todo l="272" t="test all possibilities, refine width values"/>
-<Todo l="401" t="test this bit"/>
-<Todo l="1145" t="check this now generic fields in use"/>
-<Todo l="1322" t="consider removing one character shortcut and force use of full datatype name"/>
-<![CDATA[Project database error : IMPORT FGL 'fgldialog' not found.]]>
+<File n="fgl_zoom.4gl" s="2" ts="20190704171954611">
+<Fct c="18" el="406" l="370" n="columnname_to_title(l_name STRING)" t="F" v="prv"/>
+<Fct c="18" el="368" l="232" n="datatype_to_columnparam(l_datatype STRING)" t="F" v="prv"/>
+<Fct c="18" el="89" l="87" n="version()" t="F" v="prv"/>
+<Fct c="18" el="84" l="82" n="exception()" t="F" v="prv"/>
+<Todo l="244" t="test all possibilities, refine width values"/>
+<Todo l="385" t="test this bit"/>
+<Todo l="1121" t="check this now generic fields in use"/>
+<Todo l="1291" t="consider removing one character shortcut and force use of full datatype name"/>
 </File>
-<File m="fgl_zoom_custom" n="fgl_zoom_custom.4gl" s="3" ts="20190218234732317">
+<File n="fgl_zoom_custom.4gl" s="1" ts="20190916135233641">
 <Dep t="fgl_zoom.4gl"/>
-<Fct c="18" el="439" l="430" n="comboinit_selected_row(l_row_count INTEGER)" t="F" v="prv"/>
-<Fct c="18" el="426" l="417" n="comboinit_selected_column(l_col_count INTEGER)" t="F" v="prv"/>
-<Fct c="18" el="413" l="277" n="viewsource()" t="F" v="prv"/>
-<Fct c="10" el="274" l="166" n="test()" t="F" v="pub">
-<Call c="20" l="176" n="FGL_WINQUESTION" t="F"/>
-<Call c="15" l="238" n="comboinit_selected_row" t="F"/>
-<Call c="18" l="240" n="comboinit_selected_column" t="F"/>
-<Call c="18" l="242" n="comboinit_selected_column" t="F"/>
-<Call c="15" l="256" n="viewsource" t="F"/>
-<Call c="15" l="266" n="init" t="F"/>
-</Fct>
-<Fct c="10" el="162" l="81" n="init()" t="F" v="pub"/>
-<Fct c="18" el="77" l="75" n="exception()" t="F" v="prv"/>
+<![CDATA[An error occurred during the project database update: the file 'fgl_zoom_custom.4gl' contains errors]]>
 </File>
-<File m="fgl_zoom_example" n="fgl_zoom_example.4gl" s="3" ts="20190220123825241">
+<File n="fgl_zoom_example.4gl" s="1" ts="20191014145843350">
 <Dep t="fgl_zoom.4gl"/>
-<Fct c="18" el="320" l="286" n="show_function_source(l_function STRING)" t="F" v="prv">
-<Call c="10" l="319" n="FGL_WINMESSAGE" t="F"/>
-</Fct>
-<Fct c="18" el="281" l="260" n="zoom_state_label()" t="F" v="prv"/>
-<Fct c="18" el="251" l="239" n="zoom_auto(l_current_value STRING)" t="F" v="prv"/>
-<Fct c="18" el="230" l="213" n="zoom_country(l_current_value STRING)" t="F" v="prv"/>
-<Fct c="18" el="209" l="189" n="zoom_customer(l_current_value STRING)" t="F" v="prv"/>
-<Fct c="18" el="181" l="162" n="zoom_store(l_current_value STRING)" t="F" v="prv"/>
-<Fct c="18" el="156" l="140" n="zoom_state(l_current_value STRING)" t="F" v="prv"/>
-<Fct c="10" el="131" l="67" n="test()" t="F" v="pub">
-<Call c="44" l="76" n="zoom_state" t="F"/>
-<Call c="47" l="79" n="zoom_customer" t="F"/>
-<Call c="44" l="82" n="zoom_store" t="F"/>
-<Call c="46" l="85" n="zoom_country" t="F"/>
-<Call c="43" l="88" n="zoom_auto" t="F"/>
-<Call c="22" l="91" n="zoom_state_label" t="F"/>
-<Call c="22" l="107" n="show_function_source" t="F"/>
-<Call c="22" l="110" n="show_function_source" t="F"/>
-<Call c="22" l="113" n="show_function_source" t="F"/>
-<Call c="22" l="116" n="show_function_source" t="F"/>
-<Call c="22" l="119" n="show_function_source" t="F"/>
-<Call c="22" l="122" n="show_function_source" t="F"/>
-</Fct>
-<Fct c="10" el="62" l="60" n="init()" t="F" v="pub"/>
-<Fct c="18" el="55" l="53" n="exception()" t="F" v="prv"/>
+<![CDATA[An error occurred during the project database update: the file 'fgl_zoom_example.4gl' contains errors]]>
 </File>
-<File m="fgl_zoom_functionaltest" n="fgl_zoom_functionaltest.4gl" s="3" ts="20190215162127452">
+<File n="fgl_zoom_functionaltest.4gl" s="3" ts="20190220125343871">
 <Dep t="fgl_zoom.4gl"/>
-<Fct c="18" el="335" l="308" n="base_init(z RECORD INOUT)" t="F" v="prv"/>
-<Fct c="10" el="303" l="76" n="test()" t="F" v="pub">
-<Call c="15" l="86" n="base_init" t="F"/>
-<Call c="15" l="94" n="base_init" t="F"/>
-<Call c="15" l="108" n="base_init" t="F"/>
-<Call c="15" l="115" n="base_init" t="F"/>
-<Call c="15" l="123" n="base_init" t="F"/>
-<Call c="15" l="132" n="base_init" t="F"/>
-<Call c="15" l="142" n="base_init" t="F"/>
-<Call c="15" l="150" n="base_init" t="F"/>
-<Call c="15" l="158" n="base_init" t="F"/>
-<Call c="15" l="174" n="base_init" t="F"/>
-<Call c="15" l="183" n="base_init" t="F"/>
-<Call c="15" l="190" n="base_init" t="F"/>
-<Call c="15" l="197" n="base_init" t="F"/>
-<Call c="15" l="206" n="base_init" t="F"/>
-<Call c="15" l="217" n="base_init" t="F"/>
-<Call c="15" l="228" n="base_init" t="F"/>
-<Call c="18" l="241" n="base_init" t="F"/>
-<Call c="18" l="255" n="base_init" t="F"/>
-<Call c="18" l="272" n="base_init" t="F"/>
+<Fct c="18" el="344" l="317" n="base_init(z RECORD INOUT)" t="F" v="prv"/>
+<Fct c="10" el="314" l="86" n="test()" t="F" v="pub">
+<Call c="22" l="96" n="base_init" t="F"/>
+<Call c="22" l="104" n="base_init" t="F"/>
+<Call c="22" l="118" n="base_init" t="F"/>
+<Call c="22" l="125" n="base_init" t="F"/>
+<Call c="22" l="133" n="base_init" t="F"/>
+<Call c="22" l="142" n="base_init" t="F"/>
+<Call c="22" l="152" n="base_init" t="F"/>
+<Call c="22" l="160" n="base_init" t="F"/>
+<Call c="22" l="168" n="base_init" t="F"/>
+<Call c="22" l="185" n="base_init" t="F"/>
+<Call c="22" l="194" n="base_init" t="F"/>
+<Call c="22" l="201" n="base_init" t="F"/>
+<Call c="22" l="208" n="base_init" t="F"/>
+<Call c="22" l="217" n="base_init" t="F"/>
+<Call c="22" l="227" n="base_init" t="F"/>
+<Call c="22" l="239" n="base_init" t="F"/>
+<Call c="22" l="253" n="base_init" t="F"/>
+<Call c="22" l="267" n="base_init" t="F"/>
+<Call c="22" l="283" n="base_init" t="F"/>
 </Fct>
-<Fct c="10" el="67" l="62" n="init()" t="F" v="pub"/>
-<Fct c="18" el="57" l="55" n="exception()" t="F" v="prv"/>
+<Fct c="10" el="79" l="74" n="init()" t="F" v="pub"/>
+<Fct c="18" el="71" l="69" n="exception()" t="F" v="prv"/>
 </File>
-<File m="" n="fgl_zoom_test_custom.per" s="7471220" ts=""/>
-<File m="" n="fgl_zoom_test_example.per" s="7143541" ts=""/>
-<File m="" n="fgl_zoom_test_functiontest.per" s="7143541" ts=""/>
-<File m="fgl_zoom_testdata" n="fgl_zoom_testdata.4gl" s="3" ts="20181212113256318">
-<Fct c="10" el="565" l="556" n="testdata_created()" t="F" v="pub"/>
-<Fct c="18" el="554" l="522" n="populate_fgl_zoom_customer()" t="F" v="prv"/>
-<Fct c="18" el="520" l="501" n="populate_fgl_zoom_store()" t="F" v="prv"/>
-<Fct c="18" el="497" l="240" n="populate_fgl_zoom_country()" t="F" v="prv"/>
-<Fct c="18" el="238" l="182" n="populate_fgl_zoom_state()" t="F" v="prv"/>
-<Fct c="18" el="180" l="154" n="populate_fgl_zoom_test()" t="F" v="prv"/>
-<Fct c="18" el="150" l="137" n="truncate()" t="F" v="prv"/>
-<Fct c="11" el="135" l="121" n="populate()" t="F" v="pub">
-<Call c="12" l="123" n="populate_fgl_zoom_test" t="F"/>
-<Call c="12" l="124" n="populate_fgl_zoom_country" t="F"/>
-<Call c="12" l="125" n="populate_fgl_zoom_state" t="F"/>
-<Call c="12" l="126" n="populate_fgl_zoom_store" t="F"/>
-<Call c="12" l="127" n="populate_fgl_zoom_customer" t="F"/>
+<File n="fgl_zoom_test_custom.per" s="7471220" ts=""/>
+<File n="fgl_zoom_test_example.per" s="7143541" ts=""/>
+<File n="fgl_zoom_test_functiontest.per" s="7143541" ts=""/>
+<File n="fgl_zoom_testdata.4gl" s="2" ts="20190704164535092">
+<Fct c="10" el="677" l="668" n="testdata_created()" t="F" v="pub"/>
+<Fct c="18" el="666" l="525" n="populate_fgl_zoom_customer()" t="F" v="prv"/>
+<Fct c="18" el="523" l="480" n="populate_fgl_zoom_store()" t="F" v="prv"/>
+<Fct c="18" el="478" l="224" n="populate_fgl_zoom_country()" t="F" v="prv"/>
+<Fct c="18" el="222" l="166" n="populate_fgl_zoom_state()" t="F" v="prv"/>
+<Fct c="18" el="164" l="136" n="populate_fgl_zoom_test()" t="F" v="prv"/>
+<Fct c="18" el="134" l="121" n="truncate()" t="F" v="prv"/>
+<Fct c="10" el="119" l="105" n="populate()" t="F" v="pub">
+<Call c="14" l="107" n="populate_fgl_zoom_test" t="F"/>
+<Call c="14" l="108" n="populate_fgl_zoom_country" t="F"/>
+<Call c="14" l="109" n="populate_fgl_zoom_state" t="F"/>
+<Call c="14" l="110" n="populate_fgl_zoom_store" t="F"/>
+<Call c="14" l="111" n="populate_fgl_zoom_customer" t="F"/>
 </Fct>
-<Fct c="18" el="119" l="102" n="drop()" t="F" v="prv"/>
-<Fct c="10" el="100" l="41" n="create()" t="F" v="pub"/>
-<Todo l="243" t="check code values, may have inadvertently lost a digit when adding quotes&#13;"/>
+<Fct c="18" el="103" l="86" n="drop()" t="F" v="prv"/>
+<Fct c="10" el="84" l="38" n="create()" t="F" v="pub"/>
+<Todo l="227" t="check code values, may have inadvertently lost a digit when adding quotes"/>
 </File>
-<File m="fgl_zoom_test" n="fgl_zoom_test.4gl" s="0" ts="">
+<File n="fgl_zoom_test.4gl" s="2" ts="20190704164535024">
 <Dep t="fgl_zoom_custom.4gl"/>
 <Dep t="fgl_zoom_example.4gl"/>
 <Dep t="fgl_zoom_functionaltest.4gl"/>
 <Dep t="fgl_zoom_testdata.4gl"/>
-<Fct c="10" el="95" l="92" n="fgl_zoom_test_error()" t="F" v="pub">
-<Call c="9" i="fgldialog" l="93" n="fgl_winMessage" t="F"/>
+<Fct c="10" el="93" l="90" n="fgl_zoom_test_error()" t="F" v="pub">
+<Call c="10" i="fgldialog" l="91" n="fgl_winMessage" t="F"/>
 </Fct>
 <Fct c="1" el="88" l="41" n="main()" t="F" v="pub">
 <Call c="29" l="49" n="fgl_zoom_test_error" t="F"/>
-<Call c="30" i="fgl_zoom_testdata" l="57" n="create" p="fgl_zoom_testdata.4gl" t="F"/>
+<Call c="30" i="fgl_zoom_testdata" l="57" n="create" t="F"/>
 <Call c="14" l="58" n="fgl_zoom_test_error" t="F"/>
-<Call c="30" i="fgl_zoom_testdata" l="61" n="populate" p="fgl_zoom_testdata.4gl" t="F"/>
+<Call c="30" i="fgl_zoom_testdata" l="61" n="populate" t="F"/>
 <Call c="14" l="62" n="fgl_zoom_test_error" t="F"/>
 <Call c="26" i="fgl_zoom_custom" l="68" n="init" t="F"/>
 <Call c="27" i="fgl_zoom_example" l="69" n="init" t="F"/>
@@ -170,7 +88,6 @@
 <Call c="47" i="fgl_zoom_example" l="80" n="test" t="F"/>
 <Call c="54" i="fgl_zoom_functionaltest" l="82" n="test" t="F"/>
 </Fct>
-<![CDATA[Project database error : IMPORT FGL 'fgldialog' not found.]]>
 </File>
-<File m="" n="fgl_zoom_test.per" s="582352896" ts=""/>
+<File n="fgl_zoom_test.per" s="582352896" ts=""/>
 </WorkspaceDatabase>

@@ -48,7 +48,8 @@ DEFINE m_custom_rec RECORD
     maxrow INTEGER,
     freezeleft INTEGER,
     freezeright INTEGER,
-    qbeforce BOOLEAN
+    qbeforce BOOLEAN,
+    gotorow INTEGER
 END RECORD
 DEFINE m_custom_arr DYNAMIC ARRAY OF RECORD
     columnname STRING,
@@ -86,6 +87,7 @@ FUNCTION init()
     LET m_custom_rec.multiplerow = FALSE
     LET m_custom_rec.maxrow = 0
     LET m_custom_rec.qbeforce = FALSE
+    LET m_custom_rec.gotorow = 0
 
     LET m_custom_arr[1].columnname = "id"
     LET m_custom_arr[1].datatypec = "i"
@@ -210,6 +212,7 @@ FUNCTION test()
             LET l_zoom.freezeleft = m_custom_rec.freezeleft
             LET l_zoom.freezeright = m_custom_rec.freezeright
             LET l_zoom.qbeforce = m_custom_rec.qbeforce
+            LET l_zoom.gotorow = m_custom_rec.gotorow
 
             FOR i = 1 TO m_custom_arr.getLength()
                 LET l_zoom.column[i].columnname = m_custom_arr[i].columnname
@@ -289,10 +292,10 @@ PRIVATE FUNCTION viewsource()
         CALL sb.append("\nLET l_zoom.column_auto = true")
     END IF
     IF m_custom_rec.title2.getLength() > 0 THEN
-        CALL sb.append(SFMT("\nLET l_zoom.title_set(\"%1\")", m_custom_rec.title2))
+        CALL sb.append(SFMT("\nLET l_zoom.title(\"%1\")", m_custom_rec.title2))
     END IF
     IF m_custom_rec.cancelvalue.getLength() > 0 THEN
-        CALL sb.append(SFMT("\nLET l_zoom.cancelvalue_set(\"%1\")", m_custom_rec.cancelvalue))
+        CALL sb.append(SFMT("\nLET l_zoom.cancelvalue(\"%1\")", m_custom_rec.cancelvalue))
     END IF
     IF m_custom_rec.noqbe2 THEN
         CALL sb.append("\nLET l_zoom.noqbe = TRUE")
@@ -320,6 +323,9 @@ PRIVATE FUNCTION viewsource()
     END IF
     IF m_custom_rec.qbeforce THEN
         CALL sb.append(SFMT("\nLET l_zoom.qbeforce = true", m_custom_rec.qbeforce))
+    END IF
+     IF m_custom_rec.gotorow >0 OR m_custom_rec.gotorow = -1  THEN
+        CALL sb.append(SFMT("\nLET l_zoom.gotorow = %1", m_custom_rec.gotorow))
     END IF
 
     FOR i = 1 TO m_custom_arr.getLength()

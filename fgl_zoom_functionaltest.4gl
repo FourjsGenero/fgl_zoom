@@ -49,7 +49,9 @@ DEFINE m_functionaltest RECORD
             maxrow20,
             qbeforce3,
             qbeforce4,
-            auto2
+            auto2,
+            gotop,
+            goton
         INTEGER,
     nolist, qbe, choosecolumn STRING
 END RECORD
@@ -179,6 +181,22 @@ FUNCTION test()
                     "SELECT id, desc, date_created, time_created, quantity, price FROM fgl_zoom_test WHERE %1 ORDER BY id"
                 CALL l_zoom.column_auto_set()
                 LET m_functionaltest.auto2 = l_zoom.call()
+
+            -- A zoom that puts focus on second row
+            ON ACTION zoom INFIELD gotop
+                CALL base_init(l_zoom)
+                LET l_zoom.title = "Goto second row"
+                LET l_zoom.cancelvalue = FGL_DIALOG_GETBUFFER()
+                LET l_zoom.gotorow = 2
+                LET m_functionaltest.gotop = l_zoom.call()
+
+            -- A zoom that puts focus on last row
+            ON ACTION zoom INFIELD goton
+                CALL base_init(l_zoom)
+                LET l_zoom.title = "Goto last row"
+                LET l_zoom.cancelvalue = FGL_DIALOG_GETBUFFER()
+                LET l_zoom.gotorow = -1
+                LET m_functionaltest.gotop = l_zoom.call()
 
                 -- Control what column is returned
             ON ACTION zoom INFIELD choosecolumn

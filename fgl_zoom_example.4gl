@@ -156,6 +156,8 @@ PRIVATE FUNCTION zoom_store(l_current_value)
     LET store_zoom.title = "Select Store Code"
     LET store_zoom.sql = "SELECT %2 FROM fgl_zoom_store WHERE %1 ORDER BY store_num"
 
+    LET store_zoom.multiplerow = TRUE
+
     CALL store_zoom.column[1].quick_set("store_num", TRUE, "i", 4, "Number")
     CALL store_zoom.column[2].quick_set("store_name", FALSE, "c", 20, "Name")
     CALL store_zoom.column[3].quick_set("addr", FALSE, "c", 20, "Address 1")
@@ -245,6 +247,8 @@ PRIVATE FUNCTION zoom_state_label()
     LET state_label_zoom.noqbe = TRUE
     LET state_label_zoom.title = "Select State"
     LET state_label_zoom.sql = "SELECT state_code, state_name FROM fgl_zoom_state ORDER BY state_name"
+
+
 
     CALL state_label_zoom.column[1].quick_set("state_code", TRUE, "c", 2, "Code")
     CALL state_label_zoom.column[2].quick_set("state_name", TRUE, "c", 20, "Name")
