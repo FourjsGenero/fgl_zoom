@@ -49,7 +49,8 @@ DEFINE m_custom_rec RECORD
     freezeleft INTEGER,
     freezeright INTEGER,
     qbeforce BOOLEAN,
-    gotorow INTEGER
+    gotorow INTEGER,
+    header BOOLEAN
 END RECORD
 DEFINE m_custom_arr DYNAMIC ARRAY OF RECORD
     columnname STRING,
@@ -88,6 +89,7 @@ FUNCTION init()
     LET m_custom_rec.maxrow = 0
     LET m_custom_rec.qbeforce = FALSE
     LET m_custom_rec.gotorow = 0
+    LET m_custom_rec.header = TRUE
 
     LET m_custom_arr[1].columnname = "id"
     LET m_custom_arr[1].datatypec = "i"
@@ -213,6 +215,7 @@ FUNCTION test()
             LET l_zoom.freezeright = m_custom_rec.freezeright
             LET l_zoom.qbeforce = m_custom_rec.qbeforce
             LET l_zoom.gotorow = m_custom_rec.gotorow
+            LET l_zoom.header = m_custom_rec.header
 
             FOR i = 1 TO m_custom_arr.getLength()
                 LET l_zoom.column[i].columnname = m_custom_arr[i].columnname
@@ -326,6 +329,11 @@ PRIVATE FUNCTION viewsource()
     END IF
      IF m_custom_rec.gotorow >0 OR m_custom_rec.gotorow = -1  THEN
         CALL sb.append(SFMT("\nLET l_zoom.gotorow = %1", m_custom_rec.gotorow))
+    END IF
+    IF m_custom_rec.header THEN
+        #OK
+    ELSE
+        CALL sb.append("\nLET l_zoom.header = false")
     END IF
 
     FOR i = 1 TO m_custom_arr.getLength()

@@ -36,22 +36,9 @@
 IMPORT FGL fgl_zoom
 
 DEFINE m_functionaltest RECORD
-    default,
-            qbedefault,
-            straight2list,
-            noqbe,
-            excludeqbe,
-            excludelist,
-            union,
-            subquery,
-            autoselect1,
-            autoselect2,
-            maxrow20,
-            qbeforce3,
-            qbeforce4,
-            auto2,
-            gotop,
-            goton
+    default, qbedefault, straight2list, noqbe, excludeqbe, excludelist, union,
+            subquery, autoselect1, autoselect2, maxrow20, qbeforce3, qbeforce4,
+            auto2, gotop, goton, nocolumnheader
         INTEGER,
     nolist, qbe, choosecolumn STRING
 END RECORD
@@ -91,7 +78,8 @@ FUNCTION test()
     DEFINE l_zoom zoomType
 
     DIALOG ATTRIBUTES(UNBUFFERED)
-        INPUT BY NAME m_functionaltest.* ATTRIBUTES(WITHOUT DEFAULTS = TRUE, NAME = "main")
+        INPUT BY NAME m_functionaltest.*
+            ATTRIBUTES(WITHOUT DEFAULTS = TRUE, NAME = "main")
 
             -- A zoom using the default options
             ON ACTION zoom INFIELD default
@@ -145,7 +133,8 @@ FUNCTION test()
                 LET l_zoom.title = "AutoSelect"
                 LET l_zoom.autoselect = TRUE
                 LET l_zoom.noqbe = TRUE
-                LET l_zoom.sql = "SELECT %2 FROM fgl_zoom_test WHERE %1 AND id=1"
+                LET l_zoom.sql =
+                    "SELECT %2 FROM fgl_zoom_test WHERE %1 AND id=1"
                 LET m_functionaltest.autoselect2 = l_zoom.call()
 
                 -- Limit the maximum number of rows that are returned.  Normally this also
@@ -182,7 +171,7 @@ FUNCTION test()
                 CALL l_zoom.column_auto_set()
                 LET m_functionaltest.auto2 = l_zoom.call()
 
-            -- A zoom that puts focus on second row
+                -- A zoom that puts focus on second row
             ON ACTION zoom INFIELD gotop
                 CALL base_init(l_zoom)
                 LET l_zoom.title = "Goto second row"
@@ -190,7 +179,7 @@ FUNCTION test()
                 LET l_zoom.gotorow = 2
                 LET m_functionaltest.gotop = l_zoom.call()
 
-            -- A zoom that puts focus on last row
+                -- A zoom that puts focus on last row
             ON ACTION zoom INFIELD goton
                 CALL base_init(l_zoom)
                 LET l_zoom.title = "Goto last row"
@@ -198,6 +187,14 @@ FUNCTION test()
                 LET l_zoom.gotorow = -1
                 LET m_functionaltest.gotop = l_zoom.call()
 
+                -- A zoom that has no column headings
+            ON ACTION zoom INFIELD nocolumnheader
+                CALL base_init(l_zoom)
+                LET l_zoom.title = "No Column Headers"
+                LET l_zoom.cancelvalue = FGL_DIALOG_GETBUFFER()
+                LET l_zoom.header = FALSE 
+                LET m_functionaltest.nocolumnheader = l_zoom.call()
+                
                 -- Control what column is returned
             ON ACTION zoom INFIELD choosecolumn
                 CALL base_init(l_zoom)
@@ -246,7 +243,8 @@ FUNCTION test()
                 LET l_zoom.title = "A UNION SQL"
                 LET l_zoom.sql =
                     "SELECT id, desc, date_created, time_created, quantity, price, '******' FROM fgl_zoom_test WHERE %1 AND quantity < 100 UNION SELECT id, desc, date_created, time_created, quantity, price, '' FROM fgl_zoom_test WHERE %1 AND quantity >= 100 ORDER BY 1"
-                CALL l_zoom.column[7].quick_set("(constant)", FALSE, "c", 6, "Low Stock")
+                CALL l_zoom.column[7]
+                    .quick_set("(constant)", FALSE, "c", 6, "Low Stock")
                 LET l_zoom.column[7].excludeqbe = TRUE
                 LET m_functionaltest.union = l_zoom.call()
 
@@ -258,7 +256,8 @@ FUNCTION test()
                 LET l_zoom.title = "A SQL with a sub-query"
                 LET l_zoom.sql =
                     "SELECT id, desc, date_created, time_created, quantity, price, 1+(SELECT COUNT(*) FROM fgl_zoom_test b WHERE %1 AND a.quantity < b.quantity) FROM fgl_zoom_test a WHERE %1 "
-                CALL l_zoom.column[7].quick_set("rank", FALSE, "i", 4, "Qty Rank")
+                CALL l_zoom.column[7]
+                    .quick_set("rank", FALSE, "i", 4, "Qty Rank")
                 LET l_zoom.column[7].excludeqbe = TRUE
                 LET m_functionaltest.subquery = l_zoom.call()
 
@@ -266,7 +265,8 @@ FUNCTION test()
 
         -- An example where 2 columns are returned from the zoom.  Normally used
         -- for composite keys
-        INPUT BY NAME m_functionaltest_twocolumn.* ATTRIBUTES(WITHOUT DEFAULTS = TRUE, NAME = "twocolumn")
+        INPUT BY NAME m_functionaltest_twocolumn.*
+            ATTRIBUTES(WITHOUT DEFAULTS = TRUE, NAME = "twocolumn")
             ON ACTION zoom
                 CALL base_init(l_zoom)
                 LET l_zoom.title = "Return first 2 columns in the result"
@@ -274,8 +274,10 @@ FUNCTION test()
                 LET l_zoom.column[2].includeinresult = TRUE
                 CALL l_zoom.execute()
                 IF l_zoom.ok() THEN
-                    LET m_functionaltest_twocolumn.twocolumn1 = l_zoom.result[1, 1]
-                    LET m_functionaltest_twocolumn.twocolumn2 = l_zoom.result[1, 2]
+                    LET m_functionaltest_twocolumn.twocolumn1 =
+                        l_zoom.result[1, 1]
+                    LET m_functionaltest_twocolumn.twocolumn2 =
+                        l_zoom.result[1, 2]
                 END IF
         END INPUT
 
@@ -308,8 +310,10 @@ FUNCTION test()
                 IF l_zoom.ok() THEN
                     CALL m_functionaltest_multiple.clear()
                     FOR i = 1 TO l_zoom.result.getLength()
-                        LET m_functionaltest_multiple[i].id = l_zoom.result[i, 1]
-                        LET m_functionaltest_multiple[i].desc = l_zoom.result[i, 2]
+                        LET m_functionaltest_multiple[i].id =
+                            l_zoom.result[i, 1]
+                        LET m_functionaltest_multiple[i].desc =
+                            l_zoom.result[i, 2]
                     END FOR
                 END IF
 

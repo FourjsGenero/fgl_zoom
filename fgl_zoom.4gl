@@ -63,6 +63,7 @@ PUBLIC TYPE zoomType RECORD -- The parameters controlling the behaviour of the z
     freezeright INTEGER, -- Number of columns to freeze from right
     qbeforce BOOLEAN, -- Set to TRUE if at least one field must have some QBE criteria entered
     gotorow INTEGER, -- Puts cursor on selected row, -1 will go to last row
+    header BOOLEAN,  -- TRUE if column header shown, FALSE otherwise
     column DYNAMIC ARRAY OF zoomColumnType,
     -- return values
     result DYNAMIC ARRAY WITH DIMENSION 2 OF STRING, -- The values selected by the user to return to the calling program
@@ -108,6 +109,7 @@ FUNCTION(this zoomType) init()
     LET this.freezeright = 0
     LET this.qbeforce = FALSE
     LET this.gotorow = 0
+    LET this.header = TRUE
 END FUNCTION
 
 -- Setters
@@ -154,6 +156,8 @@ FUNCTION(this zoomType) set(l_property STRING, l_value STRING) RETURNS(BOOLEAN)
             LET this.qbeforce = l_value
         WHEN "gotorow"
             LET this.gotorow = l_value
+        WHEN "header"
+            LET this.header = l_value
         OTHERWISE
             RETURN FALSE
     END CASE
@@ -793,7 +797,6 @@ PRIVATE FUNCTION(this zoomType) list()
                         CALL d_da.setActionActive("selectall", this.multiplerow)
                         CALL d_da.setActionActive("selectnone", this.multiplerow)
 
-                        DISPLAY d_da.getArrayLength("data")
                         CASE
                             WHEN this.gotorow = -1 
                                 CALL d_da.setCurrentRow("data", d_da.getArrayLength("data"))
@@ -953,6 +956,9 @@ PRIVATE FUNCTION(this zoomType) normalise()
     END IF
     IF this.gotorow IS NULL THEN
         LET this.gotorow = 0
+    END IF
+    IF this.header IS NULL THEN
+        LET this.header = TRUE
     END IF
 
     FOR i = 1 TO this.column.getLength()
@@ -1239,7 +1245,12 @@ PRIVATE FUNCTION(this zoomType) create_form()
     LET table_node = vbox_node.createChild("Table")
     CALL table_node.setAttribute("pageSize", 15)
     CALL table_node.setAttribute("name", "tablist")
-    CALL table_node.setAttribute("style", "fgl_zoom")
+    IF NOT this.header THEN
+        CALL table_node.setAttribute("style", "fgl_zoom noheader")
+    ELSE
+        CALL table_node.setAttribute("style", "fgl_zoom")
+    END IF
+
     CALL table_node.setAttribute("height", "15ln")
     CALL table_node.setAttribute("tabName", "data")
     CALL table_node.setAttribute("doubleClick", "accept")

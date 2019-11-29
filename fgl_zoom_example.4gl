@@ -247,7 +247,7 @@ PRIVATE FUNCTION zoom_state_label()
     LET state_label_zoom.noqbe = TRUE
     LET state_label_zoom.title = "Select State"
     LET state_label_zoom.sql = "SELECT state_code, state_name FROM fgl_zoom_state ORDER BY state_name"
-
+    LET state_label_zoom.header = FALSE
 
 
     CALL state_label_zoom.column[1].quick_set("state_code", TRUE, "c", 2, "Code")
