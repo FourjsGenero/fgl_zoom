@@ -64,6 +64,7 @@ PUBLIC TYPE zoomType RECORD -- The parameters controlling the behaviour of the z
     qbeforce BOOLEAN, -- Set to TRUE if at least one field must have some QBE criteria entered
     gotorow INTEGER, -- Puts cursor on selected row, -1 will go to last row
     header BOOLEAN,  -- TRUE if column header shown, FALSE otherwise
+    combobox BOOLEAN,   -- TRUE if window looks like combobox, FALSE otherwise
     column DYNAMIC ARRAY OF zoomColumnType,
     -- return values
     result DYNAMIC ARRAY WITH DIMENSION 2 OF STRING, -- The values selected by the user to return to the calling program
@@ -110,6 +111,7 @@ FUNCTION(this zoomType) init()
     LET this.qbeforce = FALSE
     LET this.gotorow = 0
     LET this.header = TRUE
+    LET this.combobox = FALSE
 END FUNCTION
 
 -- Setters
@@ -158,6 +160,8 @@ FUNCTION(this zoomType) set(l_property STRING, l_value STRING) RETURNS(BOOLEAN)
             LET this.gotorow = l_value
         WHEN "header"
             LET this.header = l_value
+        WHEN "combobox"
+            LET this.combobox = l_value
         OTHERWISE
             RETURN FALSE
     END CASE
@@ -460,7 +464,7 @@ FUNCTION(this zoomType) execute()
         RETURN
     END IF
 
-    OPEN WINDOW fgl_zoom WITH 1 ROWS, 1 COLUMNS ATTRIBUTES(STYLE = "fgl_zoom", TEXT = % "fgl_zoom.window.title")
+    OPEN WINDOW fgl_zoom WITH 1 ROWS, 1 COLUMNS ATTRIBUTES(STYLE = IIF(this.combobox, "combobox fgl_zoom","fgl_zoom"), TEXT = % "fgl_zoom.window.title")
     LET this.window = ui.Window.getCurrent()
     CALL this.create_form()
 
@@ -959,6 +963,14 @@ PRIVATE FUNCTION(this zoomType) normalise()
     END IF
     IF this.header IS NULL THEN
         LET this.header = TRUE
+    END IF
+    IF this.combobox IS NULL THEN
+        LET this.combobox = FALSE
+    END IF
+    IF this.combobox THEN
+        LET this.noqbe = TRUE
+        LET this.nolist = FALSE
+        LET this.header = FALSE
     END IF
 
     FOR i = 1 TO this.column.getLength()

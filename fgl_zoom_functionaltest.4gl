@@ -38,7 +38,7 @@ IMPORT FGL fgl_zoom
 DEFINE m_functionaltest RECORD
     default, qbedefault, straight2list, noqbe, excludeqbe, excludelist, union,
             subquery, autoselect1, autoselect2, maxrow20, qbeforce3, qbeforce4,
-            auto2, gotop, goton, nocolumnheader
+            auto2, gotop, goton, nocolumnheader, ascombobox
         INTEGER,
     nolist, qbe, choosecolumn STRING
 END RECORD
@@ -194,6 +194,18 @@ FUNCTION test()
                 LET l_zoom.cancelvalue = FGL_DIALOG_GETBUFFER()
                 LET l_zoom.header = FALSE 
                 LET m_functionaltest.nocolumnheader = l_zoom.call()
+
+            -- A zoom that looks like a ComboBox
+            ON ACTION zoom INFIELD ascombobox
+                CALL l_zoom.init()
+                LET l_zoom.sql = "SELECT %2 FROM fgl_zoom_test WHERE %1"
+                LET l_zoom.cancelvalue = FGL_DIALOG_GETBUFFER()
+                LET l_zoom.combobox = TRUE 
+                CALL l_zoom.column[1].quick_set("id", TRUE, "i", 4, "ID")
+                LET l_zoom.column[1].excludelist = TRUE
+                CALL l_zoom.column[2].quick_set("desc", FALSE, "c", 20, "Description")
+                
+                LET m_functionaltest.ascombobox = l_zoom.call()
                 
                 -- Control what column is returned
             ON ACTION zoom INFIELD choosecolumn

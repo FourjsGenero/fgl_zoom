@@ -244,11 +244,9 @@ PRIVATE FUNCTION zoom_state_label()
     DEFINE state_label_zoom zoomType
 
     CALL state_label_zoom.init()
-    LET state_label_zoom.noqbe = TRUE
-    LET state_label_zoom.title = "Select State"
     LET state_label_zoom.sql = "SELECT state_code, state_name FROM fgl_zoom_state ORDER BY state_name"
     LET state_label_zoom.header = FALSE
-
+    LET state_label_zoom.combobox = TRUE
 
     CALL state_label_zoom.column[1].quick_set("state_code", TRUE, "c", 2, "Code")
     CALL state_label_zoom.column[2].quick_set("state_name", TRUE, "c", 20, "Name")

@@ -17,6 +17,7 @@ GRID
  [label33    ][q]
  [label34    ][gotorow          ]
  [label35    ][r]
+ [label36    ][s]
  <T table1                                                                                    >
  [columnname|title3    |width     |format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
  [columnname|title3    |width     |format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
@@ -52,6 +53,7 @@ LABEL label13:Label13, TEXT="Freeze Columns (Right)";
 LABEL label33:Label33, TEXT="Force QBE";
 LABEL label34:Label34, TEXT="Goto Row (-1 Last)";
 LABEL label35:Label35, TEXT="Column Header";
+LABEL label36:Label36, TEXT="Render as ComboBox";
 
 TEXTEDIT sql=formonly.sql, COMMENT="Enter the SQL";
 CHECKBOX auto=formonly.auto, NOT NULL, VALUECHECKED=1, VALUEUNCHECKED=0, COMMENT="Select to derive column parameter values automatically from the SQL";
@@ -68,6 +70,7 @@ SPINEDIT freezeright=formonly.freezeright, step=1, COMMENT="Enter the number of 
 CHECKBOX q=formonly.qbeforce, text=%"", NOT NULL, REQUIRED, VALUECHECKED = 1, VALUEUNCHECKED = 0;
 SPINEDIT gotorow=formonly.gotorow, STEP=1, COMMENT="Enter the row to give focus to, -1 for last row", VALUEMIN=-1; 
 CHECKBOX r=formonly.header, TEXT=%"", NOT NULL, REQUIRED, VALUECHECKED=TRUE, VALUEUNCHECKED= FALSE, COMMENT="Select if Table Header shown";
+CHECKBOX s=formonly.combobox, TEXT=%"", NOT NULL, REQUIRED, VALUECHECKED=TRUE, VALUEUNCHECKED= FALSE, COMMENT="Select to render zoom like a ComboBox";
 
 
 EDIT columnname=formonly.columnname , TITLE="Column", SCROLL, COMMENT="Enter the column name";

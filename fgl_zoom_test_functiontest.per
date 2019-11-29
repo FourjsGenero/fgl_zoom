@@ -11,6 +11,7 @@ GRID
   [label36   ][autoc]
   [label37   ][gotop]     [label38   ][goton]
   [label39   ][heade]
+  [label40   ][combo]
  <                                                   >
  <G group2                                           >
   [label26   ][exclu]     [label27   ][excl1]
@@ -60,6 +61,7 @@ LABEL label36: Label36, TEXT="Derive Columns From SQL (Auto)";
 LABEL label37: Label37, TEXT="Goto Row (2)";
 LABEL label38: Label38, TEXT="GotoRow (-1)";
 LABEL label39: Label39, TEXT="No Column Header";
+LABEL label40: Label40, TEXT="Render As ComboBox";
 
 BUTTONEDIT defau=formonly.default, ACTION=zoom, COMMENT="Zoom illustrating default settings";
 BUTTONEDIT qbede=formonly.qbedefault, ACTION=zoom, COMMENT="Zoom with defaults in the QBE Window";
@@ -75,6 +77,7 @@ BUTTONEDIT autoc=formonly.auto2, ACTION=zoom, COMMENT="Zoom where the column def
 BUTTONEDIT gotop = formonly.gotop, ACTION=zoom, COMMENT="Zoom, focus second row";
 BUTTONEDIT goton = formonly.goton, ACTION=zoom, COMMENT="Zoom, focus last row";
 BUTTONEDIT heade = formonly.nocolumnheader, ACTION=zoom, COMMENT="Zoom with no table header";
+BUTTONEDIT combo = formonly.ascombobox, ACTION=zoom, IMAGE="fa-chevron-down", COMMENT="Zoom rendered as ComboBox";
 
 GROUP group2:Group2, TEXT="Exclude columns from output";
 LABEL label26:Label26, TEXT="Exclude QBE";

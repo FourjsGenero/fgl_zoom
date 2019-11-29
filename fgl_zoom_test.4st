@@ -28,8 +28,8 @@ fgl_zoom_test.4st
 
 January 2011 Reuben Barclay reuben@4js.com.au
 -->
-
 <StyleList>
+
     <!-- - First two entries are copied from latest version of FGLDIR/lib/default.4st -->
     <Style name="Window">
         <StyleAttribute name="windowType" value="normal"/>
@@ -124,5 +124,17 @@ January 2011 Reuben Barclay reuben@4js.com.au
     </Style>
     <Style name="Table.noheader">
         <StyleAttribute name="headerHidden" value="yes"/>
+    </Style>
+    <Style name="Window.combobox">
+        <StyleAttribute name="border" value="none"/>
+        <StyleAttribute name="windowSystemsMenu" value="no"/>
+        <StyleAttribute name="windowOptionClose" value="no"/>
+        <StyleAttribute name="windowOptionMinimize" value="no"/>
+        <StyleAttribute name="windowOptionMaximize" value="no"/>
+        <StyleAttribute name="sizable" value="no"/>
+        <StyleAttribute name="actionPanelPosition" value="none"/>
+        <StyleAttribute name="ringMenuPosition" value="none"/>
+        <StyleAttribute name="toolBarPosition" value="none"/>
+        <StyleAttribute name="statusBarType" value="none"/>
     </Style>
 </StyleList>
