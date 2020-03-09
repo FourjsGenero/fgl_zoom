@@ -128,8 +128,7 @@ END FUNCTION
 #+ This example displays only the sname field and returns the state code
 #+ It is ordered sname before code so that the visible sname column is used by
 #+ the goto functionality
-PRIVATE FUNCTION zoom_state(l_current_value)
-    DEFINE l_current_value STRING
+PRIVATE FUNCTION zoom_state(l_current_value STRING)
     DEFINE state_zoom fgl_zoom.zoomType
 
     CALL state_zoom.init()
@@ -147,8 +146,7 @@ PRIVATE FUNCTION zoom_state(l_current_value)
 END FUNCTION
 
 #+ A simple zoom window to select the store code
-PRIVATE FUNCTION zoom_store(l_current_value)
-    DEFINE l_current_value STRING
+PRIVATE FUNCTION zoom_store(l_current_value STRING)
     DEFINE store_zoom fgl_zoom.zoomType
 
     CALL store_zoom.init()
@@ -174,8 +172,7 @@ END FUNCTION
 #+
 #+ This example concatentates some of the fields together so that name, address
 #+ etc. are displayed as one column each.
-PRIVATE FUNCTION zoom_customer(l_current_value)
-    DEFINE l_current_value STRING
+PRIVATE FUNCTION zoom_customer(l_current_value STRING)
     DEFINE customer_zoom zoomType
 
     CALL customer_zoom.init()
@@ -196,8 +193,7 @@ PRIVATE FUNCTION zoom_customer(l_current_value)
 END FUNCTION
 
 #+ A simple zoom window to select a country code.
-PRIVATE FUNCTION zoom_country(l_current_value)
-    DEFINE l_current_value STRING
+PRIVATE FUNCTION zoom_country(l_current_value STRING)
     DEFINE country_zoom zoomType
 
     CALL country_zoom.init()
@@ -219,8 +215,7 @@ END FUNCTION
 #+ This example displays only the sname field and returns the state code
 #+ It is ordered sname before code so that the visible sname column is used by
 #+ the goto functionality
-PRIVATE FUNCTION zoom_auto(l_current_value)
-    DEFINE l_current_value STRING
+PRIVATE FUNCTION zoom_auto(l_current_value STRING)
     DEFINE auto_zoom fgl_zoom.zoomType
 
     CALL auto_zoom.init()
