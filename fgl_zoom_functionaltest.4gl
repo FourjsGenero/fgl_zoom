@@ -34,11 +34,12 @@
 #+ of which highlight an individual configurations setting
 
 IMPORT FGL fgl_zoom
+IMPORT FGL view_source
 
 DEFINE m_functionaltest RECORD
     default, qbedefault, straight2list, noqbe, excludeqbe, excludelist, union,
             subquery, autoselect1, autoselect2, maxrow20, qbeforce3, qbeforce4,
-            auto2, gotop, goton, nocolumnheader, ascombobox
+            auto2, gotop, goton, nocolumnheader, ascombobox, stretch2
         INTEGER,
     nolist, qbe, choosecolumn STRING
 END RECORD
@@ -87,6 +88,9 @@ FUNCTION test()
                 LET l_zoom.title = "Default Values"
                 LET m_functionaltest.default = l_zoom.call()
 
+            ON ACTION view_source INFIELD default
+                CALL show_option_source("default")
+
                 -- A zoom where some QBE defaults are specified.
                 -- Use these where the data table has a large number of rows
                 -- and you don't want all rows searched if the user simply presses ENTER
@@ -102,6 +106,9 @@ FUNCTION test()
                 LET l_zoom.column[6].qbedefault = ">100"
                 LET m_functionaltest.qbedefault = l_zoom.call()
 
+            ON ACTION view_source INFIELD qbedefault
+                CALL show_option_source("qbedefault")
+
                 -- A zoom that goes straight to list
                 -- Use this when you know the number of rows is not too large
             ON ACTION zoom INFIELD straight2list
@@ -110,12 +117,18 @@ FUNCTION test()
                 LET l_zoom.gotolist = TRUE
                 LET m_functionaltest.straight2list = l_zoom.call()
 
+            ON ACTION view_source INFIELD straight2list
+                CALL show_option_source("straight2list")
+
                 -- Disable the QBE button
             ON ACTION zoom INFIELD noqbe
                 CALL base_init(l_zoom)
                 LET l_zoom.title = "No QBE"
                 LET l_zoom.noqbe = TRUE
                 LET m_functionaltest.noqbe = l_zoom.call()
+
+            ON ACTION view_source INFIELD noqbe
+                CALL show_option_source("noqbe")
 
                 -- If the QBE results in one row being selected, return straight away
                 -- Don't force the user to select the only row
@@ -125,6 +138,9 @@ FUNCTION test()
                 LET l_zoom.autoselect = TRUE
                 LET l_zoom.column[1].qbedefault = "1"
                 LET m_functionaltest.autoselect1 = l_zoom.call()
+
+            ON ACTION view_source INFIELD autoselect1
+                CALL show_option_source("autoselect1")
 
                 -- Similar to above, but there is no QBE so it looks like it the zoom
                 -- populates the value straight away
@@ -137,6 +153,9 @@ FUNCTION test()
                     "SELECT %2 FROM fgl_zoom_test WHERE %1 AND id=1"
                 LET m_functionaltest.autoselect2 = l_zoom.call()
 
+            ON ACTION view_source INFIELD autoselect2
+                CALL show_option_source("autoselect2")
+
                 -- Limit the maximum number of rows that are returned.  Normally this also
                 -- forces the user to enter some appropriate QBE parameters
             ON ACTION zoom INFIELD maxrow20
@@ -144,6 +163,9 @@ FUNCTION test()
                 LET l_zoom.title = "Max 20 rows returned"
                 LET l_zoom.maxrow = 20
                 LET m_functionaltest.maxrow20 = l_zoom.call()
+
+            ON ACTION view_source INFIELD maxrow20
+                CALL show_option_source("maxrow20")
 
                 -- A zoom that forces the user to enter some QBE criteria
                 -- Use this
@@ -153,6 +175,9 @@ FUNCTION test()
                 LET l_zoom.qbeforce = TRUE
                 LET m_functionaltest.qbeforce3 = l_zoom.call()
 
+            ON ACTION view_source INFIELD qbeforce3
+                CALL show_option_source("qbeforce3")
+
                 -- A zoom that forces the user to enter some QBE criteria
                 -- Use this
             ON ACTION zoom INFIELD qbeforce4
@@ -160,6 +185,9 @@ FUNCTION test()
                 LET l_zoom.title = "Force QBE in first column"
                 LET l_zoom.column[1].qbeforce = TRUE
                 LET m_functionaltest.qbeforce4 = l_zoom.call()
+
+            ON ACTION view_source INFIELD qbeforce4
+                CALL show_option_source("qbeforce4")
 
                 -- A zoom that derives the columns from the SQL string
             ON ACTION zoom INFIELD auto2
@@ -171,6 +199,9 @@ FUNCTION test()
                 CALL l_zoom.column_auto_set()
                 LET m_functionaltest.auto2 = l_zoom.call()
 
+            ON ACTION view_source INFIELD auto2
+                CALL show_option_source("auto2")
+
                 -- A zoom that puts focus on second row
             ON ACTION zoom INFIELD gotop
                 CALL base_init(l_zoom)
@@ -178,6 +209,9 @@ FUNCTION test()
                 LET l_zoom.cancelvalue = FGL_DIALOG_GETBUFFER()
                 LET l_zoom.gotorow = 2
                 LET m_functionaltest.gotop = l_zoom.call()
+
+            ON ACTION view_source INFIELD gotop
+                CALL show_option_source("gotop")
 
                 -- A zoom that puts focus on last row
             ON ACTION zoom INFIELD goton
@@ -187,6 +221,9 @@ FUNCTION test()
                 LET l_zoom.gotorow = -1
                 LET m_functionaltest.gotop = l_zoom.call()
 
+            ON ACTION view_source INFIELD goton
+                CALL show_option_source("goton")
+
                 -- A zoom that has no column headings
             ON ACTION zoom INFIELD nocolumnheader
                 CALL base_init(l_zoom)
@@ -194,6 +231,9 @@ FUNCTION test()
                 LET l_zoom.cancelvalue = FGL_DIALOG_GETBUFFER()
                 LET l_zoom.header = FALSE 
                 LET m_functionaltest.nocolumnheader = l_zoom.call()
+
+            ON ACTION view_source INFIELD nocolumnheader
+                CALL show_option_source("nocolumnheader")
 
             -- A zoom that looks like a ComboBox
             ON ACTION zoom INFIELD ascombobox
@@ -206,6 +246,24 @@ FUNCTION test()
                 CALL l_zoom.column[2].quick_set("desc", FALSE, "c", 20, "Description")
                 
                 LET m_functionaltest.ascombobox = l_zoom.call()
+
+            ON ACTION view_source INFIELD ascombobox
+                CALL show_option_source("ascombobox")
+
+            ON ACTION zoom INFIELD stretch2
+                CALL base_init(l_zoom)
+                LET l_zoom.title = "Stretch=X"
+                -- By default second column only is stretched, add stretch to all columns except first
+                LET l_zoom.column[1].stretch = FALSE
+                LET l_zoom.column[2].stretch = TRUE
+                LET l_zoom.column[3].stretch = TRUE
+                LET l_zoom.column[4].stretch = TRUE
+                LET l_zoom.column[5].stretch = TRUE
+                LET l_zoom.column[6].stretch = TRUE
+                LET m_functionaltest.default = l_zoom.call()
+
+            ON ACTION view_source INFIELD stretch2
+                CALL show_option_source("stretch2")
                 
                 -- Control what column is returned
             ON ACTION zoom INFIELD choosecolumn
@@ -216,6 +274,9 @@ FUNCTION test()
                 LET l_zoom.column[2].includeinresult = TRUE
                 LET m_functionaltest.choosecolumn = l_zoom.call()
 
+            ON ACTION view_source INFIELD choosecolumn
+                CALL show_option_source("choosecolumn")
+
                 -- Exclude a column from the QBE, but display it in the list
             ON ACTION zoom INFIELD excludeqbe
                 CALL base_init(l_zoom)
@@ -223,12 +284,18 @@ FUNCTION test()
                 LET l_zoom.column[1].excludeqbe = TRUE
                 LET m_functionaltest.excludeqbe = l_zoom.call()
 
+            ON ACTION view_source INFIELD excludeqbe
+                CALL show_option_source("excludeqbe")
+
                 -- Exclude a column from the list, but display it in the QBE
             ON ACTION zoom INFIELD excludelist
                 CALL base_init(l_zoom)
                 LET l_zoom.title = "Exclude a column from the list"
                 LET l_zoom.column[1].excludelist = TRUE
                 LET m_functionaltest.excludelist = l_zoom.call()
+
+            ON ACTION view_source INFIELD excludelist
+                CALL show_option_source("excludelist")
 
                 -- Only show the QBE.  Use as a generic way to enter a where clause
             ON ACTION zoom INFIELD nolist
@@ -238,6 +305,9 @@ FUNCTION test()
                 CALL l_zoom.execute()
                 LET m_functionaltest.nolist = l_zoom.where
 
+            ON ACTION view_source INFIELD nolist
+                CALL show_option_source("nolist")
+
                 -- For use with a CONSTRUCT statement, return the QBE construct clause
                 -- that could be used to select the selected values i.e pipe delimited
             ON ACTION zoom INFIELD qbe
@@ -246,6 +316,9 @@ FUNCTION test()
                 LET l_zoom.multiplerow = TRUE
                 CALL l_zoom.execute()
                 LET m_functionaltest.qbe = l_zoom.qbe_get()
+
+            ON ACTION view_source INFIELD qbe
+                CALL show_option_source("qbe ")
 
                 -- An example with a UNION clause in the SQL
                 -- The important thing to consider is should the WHERE clause be added
@@ -260,6 +333,9 @@ FUNCTION test()
                 LET l_zoom.column[7].excludeqbe = TRUE
                 LET m_functionaltest.union = l_zoom.call()
 
+            ON ACTION view_source INFIELD union
+                CALL show_option_source("union")
+
                 -- An example with a subquery in the SQL
                 -- The important thing to consider is where should the where clause be
                 -- added
@@ -273,12 +349,16 @@ FUNCTION test()
                 LET l_zoom.column[7].excludeqbe = TRUE
                 LET m_functionaltest.subquery = l_zoom.call()
 
+            ON ACTION view_source INFIELD subquery
+                CALL show_option_source("subquery")
+
         END INPUT
 
         -- An example where 2 columns are returned from the zoom.  Normally used
         -- for composite keys
         INPUT BY NAME m_functionaltest_twocolumn.*
             ATTRIBUTES(WITHOUT DEFAULTS = TRUE, NAME = "twocolumn")
+            # ON ACTION zoom INFIELD m_functionaltest_twocolumn.*  Needed to give view_source somewhere to attach
             ON ACTION zoom
                 CALL base_init(l_zoom)
                 LET l_zoom.title = "Return first 2 columns in the result"
@@ -291,10 +371,14 @@ FUNCTION test()
                     LET m_functionaltest_twocolumn.twocolumn2 =
                         l_zoom.result[1, 2]
                 END IF
+
+             ON ACTION view_source 
+                CALL show_option_source("m_functionaltest_twocolumn")
         END INPUT
 
         -- An example where the user can select multiple rows in the zoom window.
         DISPLAY ARRAY m_functionaltest_single TO single.*
+            #ON ACTION zoom INFIELD single.* Needed to give view source somewhere to attach
             ON ACTION zoom
                 CALL base_init(l_zoom)
                 LET l_zoom.title = "Return multiple rows"
@@ -306,11 +390,15 @@ FUNCTION test()
                         LET m_functionaltest_single[i].id = l_zoom.result[i, 1]
                     END FOR
                 END IF
+                
+            ON ACTION view_source 
+                CALL show_option_source("single")
         END DISPLAY
 
         -- An example where 2 columns are returned, and the user can select
         -- multiple rows in the same window
         DISPLAY ARRAY m_functionaltest_multiple TO multiple.*
+            # ON ACTION zoom INFIELD multiple.* Needed to give view source somewhere to attach
             ON ACTION zoom
                 CALL base_init(l_zoom)
                 LET l_zoom.title = "Return multiple rows and columns"
@@ -328,6 +416,9 @@ FUNCTION test()
                             l_zoom.result[i, 2]
                     END FOR
                 END IF
+                
+            ON ACTION view_source 
+                CALL show_option_source("multiple")
 
         END DISPLAY
 
@@ -375,4 +466,47 @@ PRIVATE FUNCTION base_init(z zoomType INOUT)
 
     CALL z.column[6].quick_set("price", FALSE, "f", 11, "Price")
     LET z.column[6].format = "----,-$&.&&"
+END FUNCTION
+
+
+
+#+ show the option source
+PRIVATE FUNCTION show_option_source(l_fieldname)
+    DEFINE l_fieldname STRING
+    DEFINE ch base.Channel
+    DEFINE l_line STRING
+    DEFINE sb base.StringBuffer
+    DEFINE l_read BOOLEAN
+    DEFINE l_pos INTEGER
+
+    LET l_read = FALSE
+
+    LET sb = base.StringBuffer.create()
+    LET ch = base.Channel.create()
+    CALL ch.openFile("fgl_zoom_functionaltest.4gl", "r")
+    WHILE TRUE
+        LET l_line = ch.readLine()
+        IF ch.isEof() THEN
+            EXIT WHILE
+        END IF
+        IF NOT l_read THEN
+            IF l_line MATCHES SFMT("*ON ACTION zoom INFIELD %1*", l_fieldname) THEN
+                LET l_read = TRUE
+                LET l_pos = l_line.getIndexOf("ON ACTION", 1)
+            END IF
+        END IF
+        IF l_read THEN
+            IF l_line NOT MATCHES "*ON ACTION *" THEN
+                IF sb.getLength() > 0 THEN
+                    CALL sb.append("\n")
+                END IF
+                CALL sb.append(l_line.substring(l_pos, l_line.getLength()))
+            END IF
+        END IF
+        IF l_read AND l_line MATCHES "*ON ACTION view_source*" THEN
+            EXIT WHILE
+        END IF
+    END WHILE
+
+    CALL view_source.show(sb.toString())
 END FUNCTION

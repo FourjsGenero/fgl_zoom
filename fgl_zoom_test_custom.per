@@ -18,14 +18,14 @@ GRID
  [label34    ][gotorow          ]
  [label35    ][r]
  [label36    ][s]
- <T table1                                                                                    >
- [columnname|title3    |width     |format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
- [columnname|title3    |width     |format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
- [columnname|title3    |width     |format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
- [columnname|title3    |width     |format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
- [columnname|title3    |width     |format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
+ <T table1                                                                                        >
+ [columnname|title3    |width     |str|format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
+ [columnname|title3    |width     |str|format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
+ [columnname|title3    |width     |str|format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
+ [columnname|title3    |width     |str|format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
+ [columnname|title3    |width     |str|format    |datatypec |justify   |exc|ex1|inc|qbedefault|qbe]
 
- <                                                                                            >
+ <                                                                                                >
   [clea:rest:execute                                                 :view:            ]
   [label14    ][selec]
   [label15    ][sele1]
@@ -74,8 +74,9 @@ CHECKBOX s=formonly.combobox, TEXT=%"", NOT NULL, REQUIRED, VALUECHECKED=TRUE, V
 
 
 EDIT columnname=formonly.columnname , TITLE="Column", SCROLL, COMMENT="Enter the column name";
-EDIT title3=formonly.title3, TITLE="Title", SCROLL, COMMENT="Enter the column prompt";
+EDIT title3=formonly.title3, TITLE="Title", SCROLL, COMMENT="Enter the column prompt", STRETCH=X;
 SPINEDIT width=formonly.width, TITLE="Width", COMMENT="Enter the column width", VALUEMIN=0;
+CHECKBOX str = formonly.STRETCH, TITLE="Stretch", NOT NULL, VALUECHECKED=1, VALUEUNCHECKED=0, COMMENT="Select to allow column to stretch" ;
 EDIT format=formonly.format, TITLE="Format", SCROLL, COMMENT="Enter the column format";
 COMBOBOX datatypec=formonly.datatypec, TITLE="Datatype", NOT NULL, COMMENT="Select the datatype", ITEMS=(("c", "Char"),("d", "Date"),("i", "Integer"),("f", "Float/Decimal"));
 COMBOBOX justify=formonly.justify, TITLE="Justify", NOT NULL, COMMENT="Select the justification/alignment", ITEMS=(("left", "Left"),("right", "Right"),("center", "Center"));
@@ -104,5 +105,5 @@ TEXTEDIT where_clause=formonly.where_clause, NOENTRY ;
 
 
 INSTRUCTIONS
-SCREEN RECORD custom_scr(formonly.columnname, formonly.title3, formonly.width, formonly.format, formonly.datatypec, formonly.JUSTIFY, formonly.excludeqbe2, formonly.excludelist2, formonly.includeinresult, formonly.qbedefault2, formonly.qbeforce2)
+SCREEN RECORD custom_scr(formonly.columnname, formonly.title3, formonly.width, formonly.stretch, formonly.format, formonly.datatypec, formonly.JUSTIFY, formonly.excludeqbe2, formonly.excludelist2, formonly.includeinresult, formonly.qbedefault2, formonly.qbeforce2)
 END

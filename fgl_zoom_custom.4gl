@@ -34,6 +34,7 @@
 #+ output values
 
 IMPORT FGL fgl_zoom
+IMPORT FGL view_source
 
 DEFINE m_custom_rec RECORD
     sql STRING,
@@ -57,6 +58,7 @@ DEFINE m_custom_arr DYNAMIC ARRAY OF RECORD
     columnname STRING,
     title3 STRING,
     width INTEGER,
+    stretch BOOLEAN,
     format STRING,
     datatypec CHAR(1),
     justify STRING,
@@ -96,6 +98,7 @@ FUNCTION init()
     LET m_custom_arr[1].columnname = "id"
     LET m_custom_arr[1].datatypec = "i"
     LET m_custom_arr[1].width = 4
+    LET m_custom_arr[1].stretch = FALSE
     LET m_custom_arr[1].title3 = "ID"
     LET m_custom_arr[1].justify = "right"
     LET m_custom_arr[1].excludeqbe2 = FALSE
@@ -106,6 +109,7 @@ FUNCTION init()
     LET m_custom_arr[2].columnname = "desc"
     LET m_custom_arr[2].datatypec = "c"
     LET m_custom_arr[2].width = 20
+    LET m_custom_arr[2].stretch = TRUE
     LET m_custom_arr[2].title3 = "Description"
     LET m_custom_arr[2].justify = "left"
     LET m_custom_arr[2].excludeqbe2 = FALSE
@@ -115,7 +119,8 @@ FUNCTION init()
 
     LET m_custom_arr[3].columnname = "date_created"
     LET m_custom_arr[3].datatypec = "d"
-    LET m_custom_arr[3].width = 10
+    LET m_custom_arr[3].width = 10 
+    LET m_custom_arr[3].stretch = FALSE
     LET m_custom_arr[3].title3 = "Date Created"
     LET m_custom_arr[3].format = "dd/mm/yyyy"
     LET m_custom_arr[3].justify = "center"
@@ -127,6 +132,7 @@ FUNCTION init()
     LET m_custom_arr[4].columnname = "time_created"
     LET m_custom_arr[4].datatypec = "c"
     LET m_custom_arr[4].width = 8
+     LET m_custom_arr[4].stretch = FALSE
     LET m_custom_arr[4].title3 = "Time Created"
     LET m_custom_arr[4].format = ""
     LET m_custom_arr[4].justify = "center"
@@ -138,6 +144,7 @@ FUNCTION init()
     LET m_custom_arr[5].columnname = "quantity"
     LET m_custom_arr[5].datatypec = "f"
     LET m_custom_arr[5].width = 11
+     LET m_custom_arr[5].stretch = FALSE
     LET m_custom_arr[5].title3 = "Quantity"
     LET m_custom_arr[5].format = "----,--&.&&"
     LET m_custom_arr[5].justify = "right"
@@ -149,6 +156,7 @@ FUNCTION init()
     LET m_custom_arr[6].columnname = "price"
     LET m_custom_arr[6].datatypec = "f"
     LET m_custom_arr[6].width = 11
+     LET m_custom_arr[6].stretch = FALSE
     LET m_custom_arr[6].title3 = "Price"
     LET m_custom_arr[6].format = "----,-$&.&&"
     LET m_custom_arr[6].justify = "right"
@@ -185,6 +193,7 @@ FUNCTION test()
                 LET l_new_row_idx = DIALOG.getCurrentRow("custom_scr")
                 LET m_custom_arr[l_new_row_idx].datatypec = "c"
                 LET m_custom_arr[l_new_row_idx].justify = "left"
+                LET m_custom_arr[l_new_row_idx].stretch = FALSE
                 LET m_custom_arr[l_new_row_idx].excludeqbe2 = FALSE
                 LET m_custom_arr[l_new_row_idx].excludelist2 = FALSE
                 LET m_custom_arr[l_new_row_idx].includeinresult = TRUE
@@ -224,6 +233,7 @@ FUNCTION test()
                 LET l_zoom.column[i].columnname = m_custom_arr[i].columnname
                 LET l_zoom.column[i].title = m_custom_arr[i].title3
                 LET l_zoom.column[i].width = m_custom_arr[i].width
+                LET l_zoom.column[i].stretch = m_custom_arr[i].stretch
                 LET l_zoom.column[i].format = m_custom_arr[i].format
                 LET l_zoom.column[i].datatypec = m_custom_arr[i].datatypec
                 LET l_zoom.column[i].justify = m_custom_arr[i].justify
@@ -353,6 +363,9 @@ PRIVATE FUNCTION viewsource()
                 m_custom_arr[i].title3,
                 IIF(m_custom_arr[i].includeinresult, "true", "false")))
 
+        IF m_custom_arr[i].stretch THEN
+            CALL sb.append(SFMT("\nLET l_zoom.column[%1].stretch = TRUE", i USING "<<"))
+        END IF
         IF m_custom_arr[i].format.getLength() THEN
             CALL sb.append(SFMT("\nLET l_zoom.column[%1].format = \"%2\"", i USING "<<", m_custom_arr[i].format))
         END IF
@@ -417,18 +430,7 @@ PRIVATE FUNCTION viewsource()
             CALL sb.append("\nEND FOR")
     END CASE
 
-    LET l_continue = TRUE
-    WHILE l_continue
-        MENU "" ATTRIBUTES(STYLE = "dialog", COMMENT = sb.toString())
-            COMMAND "Copy to Clipboard"
-                CALL ui.Interface.frontCall("standard", "cbset", sb.toString(), [])
-            COMMAND "Exit"
-                LET l_continue = FALSE
-            ON ACTION CLOSE
-                LET l_continue = FALSE
-        END MENU
-    END WHILE
-
+    CALL view_source.show(sb.toString())
 END FUNCTION
 
 PRIVATE FUNCTION comboinit_selected_column(l_col_count INTEGER)

@@ -1,3 +1,7 @@
+- enabled text in toolbar
+
+- upgraded to Genero 4.00, added stretch functionality
+
 - added gotorow option
 
 - upgraded to Genero 3.20, refactored to use type methods

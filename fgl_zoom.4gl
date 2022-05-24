@@ -45,7 +45,8 @@ PUBLIC TYPE zoomColumnType RECORD
     excludelist BOOLEAN, -- TRUE if column is not displayed in List mode
     includeinresult BOOLEAN, -- TRUE if column is to be included in return values
     qbedefault STRING, -- Default setting to use for column in QBE
-    qbeforce BOOLEAN -- Set to TRUE if field must have QBE criteria entered
+    qbeforce BOOLEAN, -- Set to TRUE if field must have QBE criteria entered
+    stretch BOOLEAN -- Set to TRUE if stretch=X specified for column
 END RECORD
 
 PUBLIC TYPE zoomType RECORD -- The parameters controlling the behaviour of the zoom window
@@ -88,7 +89,7 @@ END FUNCTION
 
 #+ Return the version number
 PRIVATE FUNCTION version()
-    RETURN "3.20.00"
+    RETURN "4.01.00"
 END FUNCTION
 
 #+ Initialize module
@@ -196,6 +197,9 @@ FUNCTION(this zoomColumnType)
     IF l_datatypec MATCHES "[fi]" THEN
         LET this.justify = "right"
     END IF
+    IF l_datatypec = "c" AND l_width > 10 THEN
+        LET this.stretch = TRUE
+    END IF
 END FUNCTION
 
 #+ Automatically define the columns based on the SQL parameter
@@ -211,13 +215,7 @@ FUNCTION(this zoomType) column_auto_set()
     DEFINE l_sqlh base.SqlHandle
     DEFINE l_sql STRING
     DEFINE i INTEGER
-    DEFINE l_name STRING
-    DEFINE l_datatype STRING
-    DEFINE l_datatypec CHAR(1)
-    DEFINE l_width INTEGER
-    DEFINE l_title STRING
-    DEFINE l_includeinresult BOOLEAN
-
+   
     LET l_sqlh = base.SqlHandle.create()
 
     -- assumes SQL has been set, uses 1=0 to avoid returning rows
@@ -229,12 +227,14 @@ FUNCTION(this zoomType) column_auto_set()
 
     CALL l_sqlh.fetch()
     FOR i = 1 TO l_sqlh.getResultCount()
-        LET l_name = l_sqlh.getResultName(i)
-        LET l_includeinresult = (i == 1)
-        LET l_datatype = l_sqlh.getResultType(i)
+        VAR l_name = l_sqlh.getResultName(i)
+        VAR l_includeinresult = i==1
+        VAR l_datatype = l_sqlh.getResultType(i)
 
+        VAR l_datatypec CHAR(1)
+        VAR l_width INTEGER
         CALL datatype_to_columnparam(l_datatype) RETURNING l_datatypec, l_width
-        CALL columnname_to_title(l_name) RETURNING l_title
+        VAR l_title =  columnname_to_title(l_name) 
 
         CALL this.column[i].quick_set(l_name, l_includeinresult, l_datatypec, l_width, l_title)
     END FOR
@@ -379,7 +379,7 @@ PRIVATE FUNCTION datatype_to_columnparam(l_datatype)
     RETURN l_datatypec, l_width
 END FUNCTION
 
-PRIVATE FUNCTION columnname_to_title(l_name)
+PRIVATE FUNCTION columnname_to_title(l_name) RETURNS STRING
     DEFINE l_name STRING
 
     DEFINE sb base.StringBuffer
@@ -460,7 +460,7 @@ FUNCTION(this zoomType) execute()
     CALL this.validate() RETURNING ok, l_message
     IF NOT ok THEN
         LET this.mode = "cancel"
-        CALL FGL_WINMESSAGE(% "fgl_zoom.window.title.error", SFMT(% "fgl_zoom.validate.wrapper", l_message), "stop")
+        CALL zoom_error(SFMT(% "fgl_zoom.validate.wrapper", l_message), TRUE)
         RETURN
     END IF
 
@@ -591,13 +591,10 @@ END FUNCTION
 #+
 #+ CALL z.qbe()
 PRIVATE FUNCTION(this zoomType) qbe()
-    DEFINE i INTEGER
+    DEFINE d_c ui.Dialog
     DEFINE l_where_previous STRING
     DEFINE l_restore_previous BOOLEAN
-    DEFINE l_columns_with_qbe_entered SMALLINT
-    DEFINE l_current_field_qbe STRING
-    DEFINE d_c ui.Dialog
-
+    
     -- Clear the screen
     LET d_c = NULL
     CLEAR FORM
@@ -614,8 +611,9 @@ PRIVATE FUNCTION(this zoomType) qbe()
     CALL d_c.addTrigger("ON ACTION accept")
 
     WHILE TRUE
-        CASE d_c.nextEvent()
-            WHEN "BEFORE CONSTRUCT"
+        VAR l_next_event =  d_c.nextEvent()
+        CASE 
+            WHEN l_next_event = "BEFORE CONSTRUCT"
                 IF this.nolist THEN
                     -- Leave the accept text as OK
                 ELSE
@@ -623,6 +621,7 @@ PRIVATE FUNCTION(this zoomType) qbe()
                 END IF
                 MESSAGE % "fgl_zoom.before_construct"
 
+                VAR i INTEGER
                 FOR i = 1 TO this.column.getLength()
                     -- Display the default value, will have to figure out type as well
                     IF this.column[i].qbedefault IS NOT NULL THEN
@@ -630,18 +629,37 @@ PRIVATE FUNCTION(this zoomType) qbe()
                     END IF
                 END FOR
 
-            WHEN "ON ACTION close"
+            WHEN l_next_event = "ON ACTION close"
                 LET this.mode = "cancel"
                 EXIT WHILE
 
-            WHEN "ON ACTION list"
+            WHEN l_next_event = "ON ACTION list"
                 LET this.mode = "list"
                 LET l_restore_previous = TRUE
                 EXIT WHILE
 
-            WHEN "ON ACTION accept"
+            WHEN l_next_event MATCHES "AFTER FIELD*"
+                VAR v_after_field = d_c.getEventDescription().subString(13, d_c.getEventDescription().getLength())
+                VAR v_column_idx = this.fields.search("name", v_after_field)
+                IF v_column_idx > 0 THEN
+                    IF this.column[v_column_idx].qbeforce THEN
+                        IF d_c.getQueryFromField(v_after_field) IS NOT NULL THEN
+                            #OK
+                        ELSE
+                            CALL zoom_error(%"fgl_zoom.error.column.qbeforce", TRUE)
+                            CALL d_c.nextField(v_after_field)
+                            CONTINUE WHILE
+                        END IF
+                    END IF
+                ELSE
+                    -- Should not get here
+                END IF
+                
+
+            WHEN l_next_event = "ON ACTION accept"
                 -- test qbeforce
-                LET l_columns_with_qbe_entered = 0
+                VAR l_columns_with_qbe_entered = 0
+                VAR i INTEGER
                 FOR i = 1 TO this.column.getLength()
                     IF this.qbeforce OR this.column[i].qbeforce THEN
                         IF d_c.getQueryFromField(this.column[i].columnname) IS NOT NULL THEN
@@ -650,7 +668,7 @@ PRIVATE FUNCTION(this zoomType) qbe()
                             END IF
                         ELSE
                             IF this.column[i].qbeforce THEN
-                                ERROR % "fgl_zoom.error.column.qbeforce"
+                                CALL zoom_error(%"fgl_zoom.error.column.qbeforce", TRUE)
                                 CALL d_c.nextField(this.column[i].columnname)
                                 CONTINUE WHILE
                             END IF
@@ -658,7 +676,7 @@ PRIVATE FUNCTION(this zoomType) qbe()
                     END IF
                 END FOR
                 IF this.qbeforce AND l_columns_with_qbe_entered = 0 THEN
-                    ERROR % "fgl_zoom.error.qbeforce"
+                    CALL zoom_error(%"fgl_zoom.error.qbeforce", TRUE)
                     CALL d_c.nextField(d_c.getCurrentItem())
                     CONTINUE WHILE
                 END IF
@@ -671,8 +689,9 @@ PRIVATE FUNCTION(this zoomType) qbe()
 
                 -- Create SQL clause
                 LET this.where = NULL
+
                 FOR i = 1 TO this.fields.getLength()
-                    LET l_current_field_qbe = d_c.getQueryFromField(this.column[i].columnname)
+                    VAR l_current_field_qbe = d_c.getQueryFromField(this.column[i].columnname)
                     IF l_current_field_qbe IS NOT NULL THEN
                         IF this.where IS NULL THEN
                             LET this.where = l_current_field_qbe
@@ -710,57 +729,48 @@ END FUNCTION
 #+
 #+ CALL z.list()
 PRIVATE FUNCTION(this zoomType) list()
-    DEFINE i INTEGER
-    DEFINE l_sql STRING
---DEFINE dnd ui.DragDrop
-    DEFINE ok INTEGER
-    DEFINE l_selected DYNAMIC ARRAY OF BOOLEAN
-    DEFINE l_maxrow_flg BOOLEAN
-
-    DEFINE l_datatocopy STRING
-
-    DEFINE l_sqlh base.SqlHandle
-    DEFINE l_row_count INTEGER
-    DEFINE l_row, l_column INTEGER
-
     DEFINE d_da ui.Dialog
-    DEFINE l_event STRING
-
+    DEFINE l_sqlh base.SqlHandle
+    
     LET d_da = NULL
-    CALL this.data.clear()
+    VAR l_row_count = 0
+    VAR l_maxrow_flg = FALSE
 
-    LET l_sql = SFMT(this.sql, this.where, this.columnlist_get())
+    IF 1==1 THEN -- Get data
+        CALL this.data.clear()
 
-    LET l_sqlh = base.SqlHandle.create()
-    CALL l_sqlh.prepare(l_sql)
-    CALL l_sqlh.open()
+        VAR l_sql = SFMT(this.sql, this.where, this.columnlist_get())
 
-    LET l_maxrow_flg = FALSE
-    LET l_row_count = 0
-    WHILE TRUE
-        CALL l_sqlh.fetch()
-        IF SQLCA.SQLCODE = NOTFOUND THEN
-            EXIT WHILE
-        END IF
-        LET l_row_count = l_row_count + 1
+        LET l_sqlh = base.SqlHandle.create()
+        CALL l_sqlh.prepare(l_sql)
+        CALL l_sqlh.open()
 
-        IF this.maxrow > 0 THEN
-            IF l_row_count > this.maxrow THEN
-                LET l_maxrow_flg = TRUE
-                LET l_row_count = this.maxrow
+        WHILE TRUE
+            CALL l_sqlh.fetch()
+            IF SQLCA.SQLCODE = NOTFOUND THEN
                 EXIT WHILE
             END IF
-        END IF
+            LET l_row_count = l_row_count + 1
 
-        FOR l_column = 1 TO l_sqlh.getResultCount()
-            LET this.data[l_row_count, l_column] = l_sqlh.getResultValue(l_column)
-        END FOR
-    END WHILE
-    CALL l_sqlh.close()
+            IF this.maxrow > 0 THEN
+                IF l_row_count > this.maxrow THEN
+                    LET l_maxrow_flg = TRUE
+                    LET l_row_count = this.maxrow
+                    EXIT WHILE
+                END IF
+            END IF
+
+            VAR l_column_idx INTEGER
+            FOR l_column_idx = 1 TO l_sqlh.getResultCount()
+                LET this.data[l_row_count, l_column_idx] = l_sqlh.getResultValue(l_column_idx)
+            END FOR
+        END WHILE
+        CALL l_sqlh.close()
+    END IF
 
     CASE
         WHEN l_row_count = 0
-            CALL FGL_WINMESSAGE(% "fgl_zoom.window.title.zoom", % "fgl_zoom.no_records_found", "stop")
+            CALL zoom_error(% "fgl_zoom.no_records_found", TRUE)
             -- no records to display
             IF this.noqbe THEN
                 LET this.mode = "cancel"
@@ -777,22 +787,26 @@ PRIVATE FUNCTION(this zoomType) list()
             CALL d_da.addTrigger("ON ACTION qbe")
             CALL d_da.addTrigger("ON ACTION selectnone")
             CALL d_da.addTrigger("ON ACTION selectall")
+            CALL d_da.addTrigger("ON SORT")
             CALL d_da.addTrigger("ON ACTION print")
 
             CALL d_da.addTrigger("ON ACTION accept")
             CALL d_da.addTrigger("ON ACTION cancel")
             CALL d_da.addTrigger("ON ACTION close")
 
-            FOR l_row = 1 TO l_row_count
-                CALL d_da.setCurrentRow("data", l_row)
-                FOR l_column = 1 TO l_sqlh.getResultCount()
-                    CALL d_da.setFieldValue(this.fields[l_column].name, this.data[l_row, l_column])
+            IF 1==1 THEN -- Populdate dialog variable
+                VAR l_row_idx, l_column_idx INTEGER
+                FOR l_row_idx = 1 TO l_row_count
+                    CALL d_da.setCurrentRow("data", l_row_idx)
+                    FOR l_column_idx = 1 TO l_sqlh.getResultCount()
+                        CALL d_da.setFieldValue(this.fields[l_column_idx].name, this.data[l_row_idx, l_column_idx])
+                    END FOR
                 END FOR
-            END FOR
+            END IF
             CALL d_da.setCurrentRow("data", 1)
 
             WHILE TRUE
-                LET l_event = d_da.nextEvent()
+                VAR l_event = d_da.nextEvent()
                 CASE l_event
                     WHEN "BEFORE DISPLAY"
                         CALL d_da.setActionActive("accept", l_row_count > 0)
@@ -800,7 +814,7 @@ PRIVATE FUNCTION(this zoomType) list()
                         CALL d_da.setSelectionMode("data", this.multiplerow)
                         CALL d_da.setActionActive("selectall", this.multiplerow)
                         CALL d_da.setActionActive("selectnone", this.multiplerow)
-
+                        
                         CASE
                             WHEN this.gotorow = -1 
                                 CALL d_da.setCurrentRow("data", d_da.getArrayLength("data"))
@@ -811,38 +825,43 @@ PRIVATE FUNCTION(this zoomType) list()
                         END CASE
                             
                         IF l_maxrow_flg THEN
-                            CALL FGL_WINMESSAGE(% "fgl_zoom.window.title.zoom", SFMT(% "fgl_zoom.max_rows_hit", this.maxrow), "info")
+                            CALL zoom_info(SFMT(% "fgl_zoom.max_rows_hit", this.maxrow), TRUE)
                         END IF
                     WHEN "BEFORE ROW"
-                        MESSAGE SFMT(% "fgl_zoom.x_of_y", d_da.getCurrentRow("data"), l_row_count)
+                        CALL zoom_info( SFMT(% "fgl_zoom.x_of_y", d_da.arrayToVisualIndex( "data", d_da.getCurrentRow("data")), l_row_count), FALSE)
 
                         #ON DRAG_START (dnd)
                         #CALL dnd.setOperation("copy")
 
                     WHEN "ON ACTION copy"
-                        CALL ui.Interface.frontCall("standard", "cbset", d_da.selectionToString("data"), ok)
+                        VAR fc_result STRING
+                        CALL ui.Interface.frontCall("standard", "cbset", d_da.selectionToString("data"), fc_result)
 
                     WHEN "ON ACTION copyall"
+                        VAR l_selected DYNAMIC ARRAY OF BOOLEAN
+
                         -- if selectionmode=1 have to store away current values and reset
                         IF this.multiplerow THEN
                             -- save away current selected rows
                             CALL l_selected.clear()
-                            FOR i = 1 TO l_row_count
-                                LET l_selected[i] = d_da.isRowSelected("data", i)
+                            VAR l_row_idx INTEGER
+                            FOR l_row_idx = 1 TO l_row_count
+                                LET l_selected[l_row_idx] = d_da.isRowSelected("data", l_row_idx)
                             END FOR
                         ELSE
                             CALL d_da.setSelectionMode("data", 1)
                         END IF
                         CALL d_da.setSelectionRange("data", 1, -1, 1)
-                        LET l_datatocopy = d_da.selectionToString("data")
 
-                        CALL ui.Interface.frontCall("standard", "cbset", l_datatocopy, ok)
+                        VAR fc_result STRING
+                        CALL ui.Interface.frontCall("standard", "cbset", d_da.selectionToString("data"), fc_result)
 
                         CALL d_da.setSelectionRange("data", 1, -1, 0)
                         IF this.multiplerow THEN
                             -- restore previously selected rows
-                            FOR i = 1 TO l_row_count
-                                CALL d_da.setSelectionRange("data", i, i, l_selected[i])
+                            VAR l_row_idx INTEGER
+                            FOR l_row_idx = 1 TO l_row_count
+                                CALL d_da.setSelectionRange("data", l_row_idx, l_row_idx, l_selected[l_row_idx])
                             END FOR
                         ELSE
                             CALL d_da.setSelectionMode("data", 0)
@@ -856,6 +875,11 @@ PRIVATE FUNCTION(this zoomType) list()
 
                     WHEN "ON ACTION selectall"
                         CALL d_da.setSelectionRange("data", 1, l_row_count, TRUE)
+
+                    WHEN "ON SORT"
+                        -- Do we want to do anything on sort? -- how about move to current row
+                        CALL d_da.setCurrentRow("data", d_da.getCurrentRow("data"))
+                        MESSAGE SFMT(% "fgl_zoom.x_of_y", d_da.arrayToVisualIndex( "data", d_da.getCurrentRow("data")), l_row_count)
 
                     WHEN "ON ACTION cancel"
                         LET this.mode = "cancel"
@@ -875,9 +899,10 @@ PRIVATE FUNCTION(this zoomType) list()
                         LABEL lbl_accept:
                         IF this.mode = "list" THEN
                             IF this.multiplerow THEN
-                                FOR l_row = 1 TO l_row_count
-                                    IF d_da.isRowselected("data", l_row) THEN
-                                        CALL this.add_row_to_result(l_row)
+                                VAR l_row_idx INTEGER
+                                FOR l_row_idx = 1 TO l_row_count
+                                    IF d_da.isRowselected("data", l_row_idx) THEN
+                                        CALL this.add_row_to_result(l_row_idx)
                                     END IF
                                 END FOR
                             ELSE
@@ -1048,6 +1073,9 @@ PRIVATE FUNCTION(this zoomType) normalise()
         IF this.column[i].qbeforce IS NULL THEN
             LET this.column[i].qbeforce = FALSE
         END IF
+        IF this.column[i].stretch IS NULL THEN
+            LET this.column[i].stretch = FALSE
+        END IF
     END FOR
 
 END FUNCTION
@@ -1158,7 +1186,7 @@ PRIVATE FUNCTION(this zoomType) print()
 --DEFINE i INTEGER
 
     #TODO check this now generic fields in use
-    CALL FGL_WINMESSAGE("Info", "Not implemented yet", "stop")
+    CALL zoom_info("Not implemented yet", TRUE)
     RETURN
     {
       IF fgl_report_loadCurrentSettings("") THEN
@@ -1267,6 +1295,9 @@ PRIVATE FUNCTION(this zoomType) create_form()
     CALL table_node.setAttribute("tabName", "data")
     CALL table_node.setAttribute("doubleClick", "accept")
 
+    --TODO
+    -- CALL table_node.setAttribute("mediaAttribute",'{"small":{"flipped":true},"medium":{"flipped":true},"large":{"flipped":true}}')
+
     -- TableColumn nodes
     FOR i = 1 TO this.column.getLength()
 
@@ -1306,6 +1337,9 @@ PRIVATE FUNCTION(this zoomType) create_form()
         IF this.column[i].justify IS NOT NULL THEN
             CALL widget_node.setAttribute("justify", this.column[i].justify)
         END IF
+        IF this.column[i].stretch  THEN
+            CALL widget_node.setAttribute("stretch", "x")
+        END IF
     END FOR
 
     -- Create record view
@@ -1344,4 +1378,23 @@ PRIVATE FUNCTION(this zoomType) init_fields()
                 LET this.fields[i].type = "STRING"
         END CASE
     END FOR
+END FUNCTION
+
+
+PRIVATE FUNCTION zoom_info(info_text STRING, force_flag BOOLEAN)
+    IF force_flag THEN
+        CALL FGL_WINMESSAGE(%"fgl_zoom.window.title.info",info_text, "info")
+    ELSE
+        MESSAGE info_text 
+        CALL ui.Interface.refresh()
+    END IF
+END FUNCTION
+
+PRIVATE FUNCTION zoom_error(error_text STRING, force_flag BOOLEAN)
+    IF force_flag THEN
+        CALL FGL_WINMESSAGE(%"fgl_zoom.window.title.error",error_text, "stop")
+    ELSE
+        ERROR error_text 
+        CALL ui.Interface.refresh()
+    END IF
 END FUNCTION

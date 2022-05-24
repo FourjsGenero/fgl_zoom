@@ -37,6 +37,7 @@
 #+ zoom_state() function
 
 IMPORT FGL fgl_zoom
+IMPORT FGL view_source
 
 DEFINE m_example RECORD
     state_code CHAR(2),
@@ -141,6 +142,7 @@ PRIVATE FUNCTION zoom_state(l_current_value STRING)
 
     CALL state_zoom.column[2].quick_set("state_code", TRUE, "c", 0, "Code")
     LET state_zoom.column[2].excludelist = TRUE
+   
 
     RETURN state_zoom.call()
 END FUNCTION
@@ -181,8 +183,8 @@ PRIVATE FUNCTION zoom_customer(l_current_value STRING)
     LET customer_zoom.sql = "SELECT %2 FROM fgl_zoom_customer WHERE %1 ORDER BY customer_num"
 
     CALL customer_zoom.column[1].quick_set("customer_num", TRUE, "i", 4, "Code")
-    CALL customer_zoom.column[2].quick_set("(trim(lname) ||', '||trim(fname))", FALSE, "c", 10, "Name")
-    CALL customer_zoom.column[3].quick_set("company", FALSE, "c", 10, "Company")
+    CALL customer_zoom.column[2].quick_set("(trim(lname) ||', '||trim(fname))", FALSE, "c", 15, "Name")
+    CALL customer_zoom.column[3].quick_set("company", FALSE, "c", 15, "Company")
     CALL customer_zoom.column[4].quick_set("(trim(address1)||' '||trim(address2))", FALSE, "c", 20, "Address")
     CALL customer_zoom.column[5].quick_set("city", FALSE, "c", 10, "City")
     CALL customer_zoom.column[6].quick_set("state", FALSE, "c", 5, "State")
@@ -289,5 +291,5 @@ PRIVATE FUNCTION show_function_source(l_function)
         END IF
     END WHILE
 
-    CALL FGL_WINMESSAGE("Info", sb.toString(), "")
+    CALL view_source.show(sb.toString())
 END FUNCTION

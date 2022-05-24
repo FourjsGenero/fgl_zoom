@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ANSI_X3.4-1968"?>
 
- <ToolBar name="toolbar1" buttonTextHidden="1">
+ <ToolBar name="toolbar1" buttonTextHidden="0">
     <ToolBarItem name="qbe"/>
     <ToolBarItem name="list"/>
     <ToolBarSeparator name="toolbarseparator1"/>
