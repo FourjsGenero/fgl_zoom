@@ -53,23 +53,29 @@ MAIN
     CALL ui.Interface.loadStyles("fgl_zoom_test")
     CALL ui.Interface.setText("fgl_zoom Test Program")
 
-    CONNECT TO ":memory:+driver='dbmsqt'"
-    IF NOT fgl_zoom_testdata.create() THEN
-        CALL fgl_zoom_test_error()
-        EXIT PROGRAM 1
-    END IF
-    IF NOT fgl_zoom_testdata.populate() THEN
-        CALL fgl_zoom_test_error()
-        EXIT PROGRAM 1
-    END IF
-
     CLOSE WINDOW SCREEN
+    OPEN WINDOW fgl_zoom_test WITH FORM "fgl_zoom_test"
+
+    #CONNECT TO ":memory:+driver='dbmsqt'"  -- changed to use fglprofile to hold database instructions
+    CONNECT TO "fgl_zoom_test"
+    
+    IF fgl_zoom_testdata.testdata_created() THEN
+        MESSAGE "Test Data Exists"
+    ELSE
+        IF NOT fgl_zoom_testdata.create() THEN
+            CALL fgl_zoom_test_error()
+            EXIT PROGRAM 1
+        END IF
+        IF NOT fgl_zoom_testdata.populate() THEN
+            CALL fgl_zoom_test_error()
+            EXIT PROGRAM 1
+        END IF
+        MESSAGE "Test Data Created and Populated"
+    END IF
 
     CALL fgl_zoom_custom.init()
     CALL fgl_zoom_example.init()
     CALL fgl_zoom_functionaltest.init()
-
-    OPEN WINDOW fgl_zoom_test WITH FORM "fgl_zoom_test"
 
     LET l_mode = "example"
     WHILE l_mode != "exit"

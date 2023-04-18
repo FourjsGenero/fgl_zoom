@@ -281,6 +281,10 @@ FUNCTION test()
         ON ACTION CLOSE
             LET l_mode = "exit"
             EXIT DIALOG
+
+        ON ACTION cancel
+            LET l_mode = "exit"
+            EXIT DIALOG
     END DIALOG
 
     RETURN l_mode

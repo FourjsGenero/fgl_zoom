@@ -1,2 +1,6 @@
 fglrun.localization.file.count = 1
 fglrun.localization.file.1.name = "fgl_zoom"
+
+dbi.database.fgl_zoom_test.source   = ":memory:" 
+#dbi.database.fgl_zoom_test.source   = "fgl_zoom_test.db"
+dbi.database.fgl_zoom_test.driver   = "dbmsqt"
