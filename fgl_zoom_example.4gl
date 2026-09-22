@@ -183,11 +183,12 @@ PRIVATE FUNCTION zoom_customer(l_current_value STRING)
     LET customer_zoom.sql = "SELECT %2 FROM fgl_zoom_customer WHERE %1 ORDER BY customer_num"
 
     CALL customer_zoom.column[1].quick_set("customer_num", TRUE, "i", 4, "Code")
-    CALL customer_zoom.column[2].quick_set("(trim(lname) ||', '||trim(fname))", FALSE, "c", 15, "Name")
-    CALL customer_zoom.column[3].quick_set("company", FALSE, "c", 15, "Company")
-    CALL customer_zoom.column[4].quick_set("(trim(address1)||' '||trim(address2))", FALSE, "c", 20, "Address")
-    CALL customer_zoom.column[5].quick_set("city", FALSE, "c", 10, "City")
-    CALL customer_zoom.column[6].quick_set("state", FALSE, "c", 5, "State")
+    CALL customer_zoom.column[2].quick_set("lname", FALSE, "c", 15, "Last Name")
+    CALL customer_zoom.column[3].quick_set("fname", FALSE, "c", 15, "First Name")
+    CALL customer_zoom.column[4].quick_set("company", FALSE, "c", 15, "Company")
+    CALL customer_zoom.column[5].quick_set("address1", FALSE, "c", 20, "Address")
+    CALL customer_zoom.column[6].quick_set("city", FALSE, "c", 10, "City")
+    CALL customer_zoom.column[7].quick_set("state", FALSE, "c", 5, "State")
 
     LET customer_zoom.freezeleft = 1
 
